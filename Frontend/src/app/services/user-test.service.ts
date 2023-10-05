@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import {UserTest} from '../modules/user-test'
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/internal/Observable";
-import {EnvironmentSettings} from "../environments/environment";
-
-
+import {environment} from "src/environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +12,6 @@ export class UserTestService {
   constructor(private http: HttpClient) { }
 
   public getUserTests() : Observable<UserTest[]>{
-      return this.http.get<UserTest[]>(`${EnvironmentSettings.apiUrl}/${this.url}`);
+      return this.http.get<UserTest[]>(`${environment.apiUrl}/${this.url}`);
   }
 }
