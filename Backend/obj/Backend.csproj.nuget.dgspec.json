@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Adobe Marketplace\\Backend\\Backend.csproj": {}
+    "C:\\Users\\User\\Desktop\\BinPal\\Backend\\Backend.csproj": {}
   },
   "projects": {
-    "D:\\Adobe Marketplace\\Backend\\Backend.csproj": {
+    "C:\\Users\\User\\Desktop\\BinPal\\Backend\\Backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Adobe Marketplace\\Backend\\Backend.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Desktop\\BinPal\\Backend\\Backend.csproj",
         "projectName": "Backend",
-        "projectPath": "D:\\Adobe Marketplace\\Backend\\Backend.csproj",
-        "packagesPath": "C:\\Users\\dimap\\.nuget\\packages\\",
-        "outputPath": "D:\\Adobe Marketplace\\Backend\\obj\\",
+        "projectPath": "C:\\Users\\User\\Desktop\\BinPal\\Backend\\Backend.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\Desktop\\BinPal\\Backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\dimap\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -40,10 +38,6 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
-            "EntityFramework": {
-              "target": "Package",
-              "version": "[6.4.4, )"
-            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[7.0.9, )"
@@ -86,7 +80,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100-rc.1.23455.8\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }
