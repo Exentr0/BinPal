@@ -75,6 +75,21 @@ namespace Backend.Controllers
 
             return Ok(token);
         }
+        
+        [HttpPost("make-admin")]
+        [Authorize(Roles = "Admin")]
+        public ActionResult MakeAdmin(UserDto request)
+        {
+            if (user.Email == request.Email && BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
+            {
+                var identity = User.Identity as ClaimsIdentity;
+                identity?.AddClaim(new Claim(ClaimTypes.Role, "Admin"));
+
+                return Ok("User is now an Admin.");
+            }
+
+            return BadRequest("User not found or invalid password.");
+        }
 
         [HttpPost("refresh-token")]
         public async Task<ActionResult<string>> RefreshToken()
