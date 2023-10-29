@@ -34,14 +34,23 @@ namespace Backend.Controllers
         {
             return Ok(_userService.GetMyName());
         }
-
+        
         [HttpPost("register")]
-        public ActionResult<User> Register(UserDto request)
+        public async Task<ActionResult<User>> Register(UserDto request)
         {
+            // Перевірка, чи користувач з такою електронною адресою вже існує
+            if (user.Email == request.Email)
+            {
+                return BadRequest("User with the same email already exists.");
+            }
+
             string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
 
             user.Username = request.Username;
+            user.Email = request.Email;
             user.PasswordHash = passwordHash;
+
+            // Логіка для відправлення підтверджувального листа
 
             return Ok(user);
         }
@@ -49,7 +58,7 @@ namespace Backend.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<User>> Login(UserDto request)
         {
-            if (user.Username != request.Username)
+            if (user.Email != request.Email)
             {
                 return BadRequest("User not found.");
             }
