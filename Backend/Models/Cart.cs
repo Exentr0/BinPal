@@ -8,11 +8,9 @@ public class Cart
     [Key] 
     public int Id { get; set; }
     
-    [Required]
     [ForeignKey("UserId")] 
     public int UserId { get; set; }
     
-    [Required] 
     public User User { get; set; }
     
     [ForeignKey("CartItemId")]
