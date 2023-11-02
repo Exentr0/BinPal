@@ -1,8 +1,16 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
+import {RouterModule, Routes} from "@angular/router";
+import {ReactiveFormsModule} from "@angular/forms";
+
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { PasswordModule } from 'primeng/password';
+
 
 import {RegisterComponent} from "./components/register/regoster.component";
-import {RouterModule, Routes} from "@angular/router";
+
+
 
 
 const routes: Routes = [
@@ -14,8 +22,15 @@ const routes: Routes = [
 
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(routes)],
-  declarations: [RegisterComponent]
+  declarations: [RegisterComponent],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    InputTextModule,
+    PasswordModule,
+    ButtonModule,
+    ReactiveFormsModule
+  ]
 })
 
 export class AuthModule {
