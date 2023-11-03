@@ -30,8 +30,9 @@ BackendErrors are here
       />
     </fieldset>
 
-    <button type="submit">
+    <button type="submit" [disabled]="isSubmitting$ | async">
       Sign up
     </button>
+
   </fieldset>
 </form>

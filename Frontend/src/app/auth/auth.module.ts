@@ -9,6 +9,11 @@ import { PasswordModule } from 'primeng/password';
 
 
 import {RegisterComponent} from "./components/register/regoster.component";
+import {StoreModule} from "@ngrx/store";
+import {reducers} from "./store/reducers";
+import {AuthServise} from "./services/auth.servise";
+import {EffectsModule} from "@ngrx/effects";
+import {RegisterEffect} from "./store/effects/register.effect";
 
 
 
@@ -22,15 +27,19 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [RegisterComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     InputTextModule,
     PasswordModule,
     ButtonModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    StoreModule.forFeature('auth', reducers),
+    EffectsModule.forFeature([RegisterEffect])
+  ],
+  declarations: [RegisterComponent],
+  providers: [AuthServise]
+
 })
 
 export class AuthModule {
