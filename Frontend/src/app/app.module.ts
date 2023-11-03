@@ -5,6 +5,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {AppRoutingModule} from "./app-routing.module";
 import {AppComponent} from './app.component';
 import {AuthModule} from "./auth/auth.module";
+import {StoreModule} from "@ngrx/store";
+import {StoreDevtoolsModule} from "@ngrx/store-devtools";
+import {environment} from "src/environments/environment";
 
 @NgModule({
   declarations: [
@@ -14,7 +17,12 @@ import {AuthModule} from "./auth/auth.module";
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    AuthModule
+    AuthModule,
+    StoreModule.forRoot({}),
+    StoreDevtoolsModule.instrument({  //для розширення браузера, щоб моніторити NgRx
+      maxAge: 25, //максимальна кількість дозволених дій для збереження в дереві історії
+      logOnly: environment.production //працює тільки в режимі розробки
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
