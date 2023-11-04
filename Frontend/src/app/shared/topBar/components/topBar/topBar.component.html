@@ -1,0 +1,55 @@
+<nav>
+  <div>
+    <a [routerLink]="['/']">
+      Adobe MARKETPLACE
+    </a>
+  </div>
+
+  <ul>
+    <li>
+      <a [routerLink]="['/']">
+        Home
+      </a>
+    </li>
+
+
+    <ng-container *ngIf="isLoggedIn$ | async">
+      <li>
+        <a [routerLink]="['/basket']">
+          Basket
+        </a>
+      </li>
+
+      <li>
+        <a [routerLink]="['/settings']">
+          Settings
+        </a>
+      </li>
+
+      <li>
+        <a [routerLink]="['/profile', (currentUser$ | async)?.username]">
+          <img [src]="(currentUser$ | async)?.image" width="50"/> &nbsp; {{(currentUser$ | async)!.username}}
+        </a>
+      </li>
+    </ng-container>
+
+    <ng-container *ngIf="isAnonymous$ | async">
+
+      <li>
+        <a [routerLink]="['/login']">
+          Sign in
+        </a>
+      </li>
+
+      <li>
+        <a [routerLink]="['/register']">
+          Sign up
+        </a>
+      </li>
+
+    </ng-container>
+
+
+  </ul>
+
+</nav>

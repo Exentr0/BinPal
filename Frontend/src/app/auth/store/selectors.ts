@@ -20,6 +20,22 @@ export const validationErrorsSelector = createSelector(
 
 
 
+//   для топбар:
+export const isLoggedInSelector = createSelector(
+  authFeatureSelector,
+  (authState: AuthStateInterface) => authState.isLoggedIn
+)
+
+export const isAnonymousSelector = createSelector(
+  authFeatureSelector,
+  (authState: AuthStateInterface) => authState.isLoggedIn === false
+)
+
+export const currentUserSelector = createSelector(
+  authFeatureSelector,
+  (authState: AuthStateInterface) => authState.currentUser
+)
+
 
 // createSelector - створює більш складний селектор за допомогою комбінації інших селекторів чи простих функцій
 // для обчислення значень на основі стану
