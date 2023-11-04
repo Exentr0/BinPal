@@ -11,7 +11,7 @@ import {map} from "rxjs/operators";
 
 
 //реєстрація користувачів
-export class AuthServise {
+export class AuthService {
   constructor(private http: HttpClient) {}
 
   register(data: RegisterRequestInterface): Observable<CurrentUserInterface> {

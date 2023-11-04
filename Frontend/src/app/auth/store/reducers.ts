@@ -1,23 +1,47 @@
-import {AuthStateInterface} from "../types/authState.interface";
+import {AuthStateInterface} from "src/app/auth/types/authState.interface";
 import {Action, createReducer, on} from "@ngrx/store";
-import {registerAction} from "./actions/register.action";
+import {registerAction, registerFailureAction, registerSuccessAction} from "src/app/auth/store/actions/register.action";
 
 const initialState: AuthStateInterface = {
-  isSubmitting: false
+  isSubmitting: false,
+  currentUser: null,
+  isLoggedIn: null,
+  validationErrors: null
 }
 
 //Reducers - міняють стани
 const authReducer = createReducer(
   initialState,  // початковий стан (не зайдено в акаунт)
   on(
-    registerAction, //дія, яка міняє стан (зареєструвалися)
-    (state): AuthStateInterface => ({  //міняєм стан
+    registerAction, //дія, яка міняє стан (нажали Sign in)
+    (state): AuthStateInterface => ({  //міняємо стан
+      ...state, //всі попередні поля не чіпаємо
+      isSubmitting: true,
+      validationErrors: null //треба забрати всі помилки, які були, коли ЗНОВ клікає sign in
+    })
+  ),
+
+  on(
+    registerSuccessAction,
+    (state, action): AuthStateInterface => ({
       ...state,
-      isSubmitting: true
+      isSubmitting: false,
+      isLoggedIn: true,
+      currentUser: action.currentUser
+    })
+  ),
+
+  on(
+    registerFailureAction,
+    (state, action): AuthStateInterface => ({
+      ...state,
+      isSubmitting: false,
+      validationErrors: action.errors
     })
   )
+
 )
 
-export function reducers(state: AuthStateInterface, action: Action){
+export function reducers(state: AuthStateInterface, action: Action) {
   return authReducer(state, action)
 }
