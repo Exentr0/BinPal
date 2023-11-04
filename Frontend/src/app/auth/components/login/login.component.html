@@ -1,0 +1,36 @@
+<h1>Sign In</h1>
+
+<p><a [routerLink]="['/register']">Need an account?</a></p>
+
+
+<!--async - щоб отримувати дані-->
+<mc-backend-error-messages
+  *ngIf="backendErrors$ | async"
+  [backendErrors]="backendErrors$ | async"
+></mc-backend-error-messages>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <fieldset>
+
+    <fieldset class="form-group">
+      <input
+        type="text"
+        placeholder="Email"
+        formControlName="email"
+      />
+    </fieldset>
+
+    <fieldset class="form-group">
+      <input
+        type="password"
+        placeholder="Password"
+        formControlName="password"
+      />
+    </fieldset>
+
+    <button type="submit" [disabled]="!form.valid || (isSubmitting$ | async)">
+      Sign in
+    </button>
+
+  </fieldset>
+</form>

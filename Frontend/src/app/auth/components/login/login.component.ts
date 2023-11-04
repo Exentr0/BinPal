@@ -3,21 +3,21 @@ import {select, Store} from "@ngrx/store";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {Observable} from "rxjs/internal/Observable";
 import {isSubmittingSelector, validationErrorsSelector} from "src/app/auth/store/selectors";
-import {registerAction} from "src/app/auth/store/actions/register.action";
-import {RegisterRequestInterface} from "src/app/auth/types/registerRequest.interface";
 import {BackendErrorsInterface} from "src/app/shared/types/backendErrors.interface";
+import {LoginRequestInterface} from "../../types/loginRequest.interface";
+import {loginAction} from "../../store/actions/login.action";
 
 
 @Component({
-  selector: 'mc-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  selector: 'mc-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
 
 
-export class RegisterComponent implements OnInit {
+export class LoginComponent implements OnInit {
   form!: FormGroup;
-  isSubmitting$!: Observable<boolean>    // Observable дивиться за змінами, тупу підписується на зміни (всі "стостерігачі" в кінці $)
+  isSubmitting$!: Observable<boolean>
   backendErrors$!: Observable<BackendErrorsInterface | null>
 
   constructor(private fb: FormBuilder, private store: Store) {
@@ -30,16 +30,14 @@ export class RegisterComponent implements OnInit {
   }
 
 
-  //задаємо "спостерігачів" через селектори
   initializeValues(): void {
-    this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector)) //pipe - групування операцій
+    this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector))
     this.backendErrors$ = this.store.pipe(select(validationErrorsSelector))
   }
 
 
   initializeForm(): void {
     this.form = this.fb.group({
-      username: ['', Validators.required],
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(7)])],
     })
@@ -48,8 +46,8 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(): void {
     if (this.form.valid) {
-      const request: RegisterRequestInterface = {user: this.form.value}  //отримуємо значення з форми
-      this.store.dispatch(registerAction({request})) //відправляємо
+      const request: LoginRequestInterface = {user: this.form.value}  //отримуємо значення з форми
+      this.store.dispatch(loginAction({request})) //відправляємо
     }
   }
 

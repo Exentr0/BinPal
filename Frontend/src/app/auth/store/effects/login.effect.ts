@@ -1,6 +1,5 @@
 import {Injectable} from "@angular/core";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
-import {registerAction, registerFailureAction, registerSuccessAction} from "../actions/register.action";
 import {catchError, of, switchMap, tap} from "rxjs";
 import {AuthService} from "../../services/auth.service";
 import {CurrentUserInterface} from "../../../shared/types/currentUser.interface";
@@ -8,12 +7,12 @@ import {map} from "rxjs/operators";
 import {HttpErrorResponse} from "@angular/common/http";
 import {PersistenceService} from "../../../shared/services/persistence.service";
 import {Router} from "@angular/router";
+import {loginAction, loginFailureAction, loginSuccessAction} from "../actions/login.action";
 
 @Injectable()
 
-export class RegisterEffect {
+export class LoginEffect {
 
-  // $ - це Observable (потік даних, підписка)
   constructor(
     private actions$: Actions,
     private authService: AuthService,
@@ -23,17 +22,17 @@ export class RegisterEffect {
   }
 
 
-  register$ = createEffect(() =>
-    this.actions$.pipe(   //це ВСІ actions
-      ofType(registerAction), //фільтруєм всі actions і отримуємо тільки registerAction
+  login$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(loginAction),
       switchMap(({request}) => {
-        return this.authService.register(request).pipe(
+        return this.authService.login(request).pipe(
           map((currentUser: CurrentUserInterface) => {
-            this.persistenceService.set('accessToken', currentUser.token)  //збереження токіна поточного користувача
-            return registerSuccessAction({currentUser})
+            this.persistenceService.set('accessToken', currentUser.token)
+            return loginSuccessAction({currentUser})
           }),
           catchError((errorResponse: HttpErrorResponse) => {
-              return of(registerFailureAction({errors: errorResponse.error.errors}))
+              return of(loginFailureAction({errors: errorResponse.error.errors}))
             }
           ))
       })
@@ -42,7 +41,7 @@ export class RegisterEffect {
 
   redirectAfterSubmit$ = createEffect(() =>
       this.actions$.pipe(
-        ofType(registerSuccessAction),
+        ofType(loginSuccessAction),
         tap(() => {
           this.router.navigateByUrl('/')
         })
