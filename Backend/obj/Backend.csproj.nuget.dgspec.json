@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Desktop\\BinPal\\Backend\\Backend.csproj": {}
+    "D:\\BinPal\\Backend\\Backend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Desktop\\BinPal\\Backend\\Backend.csproj": {
+    "D:\\BinPal\\Backend\\Backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Desktop\\BinPal\\Backend\\Backend.csproj",
+        "projectUniqueName": "D:\\BinPal\\Backend\\Backend.csproj",
         "projectName": "Backend",
-        "projectPath": "C:\\Users\\User\\Desktop\\BinPal\\Backend\\Backend.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Desktop\\BinPal\\Backend\\obj\\",
+        "projectPath": "D:\\BinPal\\Backend\\Backend.csproj",
+        "packagesPath": "C:\\Users\\dimap\\.nuget\\packages\\",
+        "outputPath": "D:\\BinPal\\Backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\dimap\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -56,6 +58,10 @@
               "target": "Package",
               "version": "[7.0.11, )"
             },
+            "Sieve": {
+              "target": "Package",
+              "version": "[3.0.0-beta0015, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.5.0, )"
@@ -80,7 +86,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100-rc.1.23455.8\\RuntimeIdentifierGraph.json"
         }
       }
     }

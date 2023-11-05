@@ -17,7 +17,7 @@ public class User
     
     public string? Bio { get; set; }
     
-    public Cart Cart { get; set; } 
+    public ShopingCart ShopingCart { get; set; } 
     public List<PaymentMethod>? PaymentMethods { get; set; } 
     public List<Item>? PublishedPackages { get; set; }
     public List<Purchase>? Purchases { get; set; }

@@ -5,11 +5,12 @@ namespace Backend.Data
 {
     public class DataContext : DbContext
     {
-        public DataContext(DbContextOptions<DataContext> options) : base(options) { }
-
+        public DataContext(DbContextOptions<DataContext> options) : base(options)
+        {
+        }
         public DbSet<UserTest> UserTest => Set<UserTest>();
         public DbSet<User> Users => Set<User>(); 
-        public DbSet<Cart> ShoppingCarts => Set<Cart>();
+        public DbSet<ShopingCart> ShoppingCarts => Set<ShopingCart>();
         public DbSet<PaymentMethod> UserPaymentMethods => Set<PaymentMethod>();
         public DbSet<PaymentInfo> AccountInfos => Set<PaymentInfo>();
         public DbSet<Item> Items => Set<Item>();
@@ -20,15 +21,14 @@ namespace Backend.Data
         public DbSet<ItemCategory> ItemCategories => Set<ItemCategory>();
         public DbSet<Software> Software => Set<Software>();
         public DbSet<SoftwareCategory> SoftwareCategories => Set<SoftwareCategory>();
- 
         //Specify relationships
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
                 //User Cart To User (one-to-one)
-                modelBuilder.Entity<Cart>()
+                modelBuilder.Entity<ShopingCart>()
                     .HasOne(u => u.User)
-                    .WithOne(s => s.Cart)
-                    .HasForeignKey<Cart>(u => u.UserId)
+                    .WithOne(s => s.ShopingCart)
+                    .HasForeignKey<ShopingCart>(u => u.UserId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
                 
@@ -61,9 +61,9 @@ namespace Backend.Data
                     .HasKey(ci => new { ci.ItemId, ci.CartId });
                 
                 //User Cart To User Cart Item (one-to-many)
-                modelBuilder.Entity<Cart>()
+                modelBuilder.Entity<ShopingCart>()
                     .HasMany(c => c.CartItems)
-                    .WithOne(ci => ci.Cart)
+                    .WithOne(ci => ci.ShopingCart)
                     .HasForeignKey(c => c.CartId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();

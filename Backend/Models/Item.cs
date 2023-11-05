@@ -7,11 +7,7 @@ public class Item
 {
     [Key]
     public int Id { get; set; }
-    
- 
     public string Name { get; set; }
-    
-
     [RegularExpression(@"^\d+(\.\d{1,2})?$")]
     public float Rating { get; set; } 
     public int LikesAmount { get; set; }
