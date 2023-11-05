@@ -5,8 +5,11 @@ import {AuthService} from "../../services/auth.service";
 import {CurrentUserInterface} from "../../../shared/types/currentUser.interface";
 import {map} from "rxjs/operators";
 import {PersistenceService} from "../../../shared/services/persistence.service";
-import {loginAction} from "../actions/login.action";
-import {getCurrentUserFailureAction, getCurrentUserSuccessAction} from "../actions/getCurrentUser.action";
+import {
+  getCurrentUserAction,
+  getCurrentUserFailureAction,
+  getCurrentUserSuccessAction
+} from "../actions/getCurrentUser.action";
 
 @Injectable()
 
@@ -22,7 +25,7 @@ export class GetCurrentUserEffect {
 
   getCurrentUserEffect = createEffect(() =>
     this.actions$.pipe(
-      ofType(loginAction),
+      ofType(getCurrentUserAction),
       switchMap(() => {
         const token = this.persistenceService.get('accessToken')
         if(!token){

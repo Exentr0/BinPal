@@ -8,6 +8,8 @@ export const authFeatureSelector = createFeatureSelector<AuthStateInterface>('au
 //Створений селектор authFeatureSelector дозволяє отримати доступ до стану фічі 'auth'
 
 
+
+
 export const isSubmittingSelector = createSelector(
   authFeatureSelector,
   (authState: AuthStateInterface) => authState.isSubmitting
