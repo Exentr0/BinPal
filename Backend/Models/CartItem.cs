@@ -1,5 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Backend.Data;
+using FluentValidation;
 
 namespace Backend.Models;
 
@@ -14,4 +16,16 @@ public class CartItem
     public ShoppingCart ShoppingCart { get; set; }
     
     public Item Item { get; set; }
+}
+
+public class CartItemValidator : AbstractValidator<CartItem>
+{
+    public CartItemValidator()
+    {
+        RuleFor(ca => ca.ItemId)
+            .NotNull();
+
+        RuleFor(ca => ca.CartId)
+            .NotNull();
+    }
 }
