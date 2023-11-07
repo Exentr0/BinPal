@@ -35,24 +35,26 @@ namespace Backend.Controllers
             return Ok(_userService.GetMyName());
         }
         
+        //напиши метод для реєстрації
         [HttpPost("register")]
         public async Task<ActionResult<User>> Register(UserDto request)
         {
-            // Перевірка, чи користувач з такою електронною адресою вже існує
             if (user.Email == request.Email)
             {
-                return BadRequest("User with the same email already exists.");
+                return BadRequest("User already exists.");
             }
 
-            string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
+            var newUser = new User
+            {
+                Username = request.Username,
+                Email = request.Email,
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password)
+            };
+            
+            await _userService.Register(newUser);
+            
 
-            user.Username = request.Username;
-            user.Email = request.Email;
-            user.PasswordHash = passwordHash;
-
-            // Логіка для відправлення підтверджувального листа
-
-            return Ok(user);
+            return Ok(newUser);
         }
 
         [HttpPost("login")]
@@ -76,21 +78,8 @@ namespace Backend.Controllers
             return Ok(token);
         }
         
-        [HttpPost("make-admin")]
-        [Authorize(Roles = "Admin")]
-        public ActionResult MakeAdmin(UserDto request)
-        {
-            if (user.Email == request.Email && BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
-            {
-                var identity = User.Identity as ClaimsIdentity;
-                identity?.AddClaim(new Claim(ClaimTypes.Role, "Admin"));
-
-                return Ok("User is now an Admin.");
-            }
-
-            return BadRequest("User not found or invalid password.");
-        }
-
+        
+        
         [HttpPost("refresh-token")]
         public async Task<ActionResult<string>> RefreshToken()
         {
