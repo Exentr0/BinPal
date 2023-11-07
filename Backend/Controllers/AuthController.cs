@@ -35,7 +35,6 @@ namespace Backend.Controllers
             return Ok(_userService.GetMyName());
         }
         
-        //напиши метод для реєстрації
         [HttpPost("register")]
         public async Task<ActionResult<User>> Register(UserDto request)
         {
