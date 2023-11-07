@@ -45,14 +45,22 @@ namespace Backend.Services
             return await _dataContext.Users.AnyAsync(u => u.Username == username || u.Email == email);
         }
 
-        public async Task<User> Login(string username, string password)
+        public async Task<User> Login(string email, string password)
         {
-            var user = await _dataContext.Users.FirstOrDefaultAsync(u => u.Username == username);
+            var user = await _dataContext.Users.FirstOrDefaultAsync(u => u.Email == email);
             if (user == null)
-            { return null;
+            {
+                // Повертаємо null, якщо користувача з вказаним email не знайдено.
+                return null;
             }
-            if (!BCrypt.Net.BCrypt.Verify(password, user.PasswordHash)) { return null;
+
+            if (!BCrypt.Net.BCrypt.Verify(password, user.PasswordHash))
+            {
+                // Повертаємо null, якщо пароль не співпадає.
+                return null;
             }
+
+            // Якщо користувач і пароль відповідають, повертаємо об'єкт користувача.
             return user;
         }
 

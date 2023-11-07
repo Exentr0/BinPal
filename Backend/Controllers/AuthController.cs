@@ -63,22 +63,24 @@ namespace Backend.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<User>> Login(UserDto request)
         {
-            if (user.Email != request.Email)
+            var loggedInUser = await _userService.Login(request.Email, request.Password);
+            if (loggedInUser == null)
             {
-                return BadRequest("User not found.");
+                return BadRequest("User not found or wrong password.");
             }
 
-            if (!BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
-            {
-                return BadRequest("Wrong password.");
-            }
-
-            string token = await CreateToken(user);
+            string token = await CreateToken(loggedInUser);
 
             var refreshToken = await GenerateRefreshToken(); 
             await SetRefreshToken(refreshToken);
-
-            return Ok(token);
+            
+            var response = new
+            {
+                accessToken = token,
+                refreshToken = refreshToken.Token
+            };
+            
+            return Ok(response);
         }
         
         
@@ -135,7 +137,6 @@ namespace Backend.Controllers
             List<Claim> claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.Username),
-                new Claim(ClaimTypes.Role, "Admin"),
                 new Claim(ClaimTypes.Role, "User")
             };
 
