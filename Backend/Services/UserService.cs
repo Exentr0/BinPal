@@ -53,9 +53,7 @@ namespace Backend.Services
             }
             if (!BCrypt.Net.BCrypt.Verify(password, user.PasswordHash)) { return null;
             }
-
             return user;
-            
         }
 
         public async Task<User> GetUser(string username)
