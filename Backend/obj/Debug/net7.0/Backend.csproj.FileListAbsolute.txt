@@ -150,3 +150,6 @@ C:\Users\User\Desktop\df\BinPal\Backend\obj\Debug\net7.0\refint\Backend.dll
 C:\Users\User\Desktop\df\BinPal\Backend\obj\Debug\net7.0\Backend.pdb
 C:\Users\User\Desktop\df\BinPal\Backend\obj\Debug\net7.0\Backend.genruntimeconfig.cache
 C:\Users\User\Desktop\df\BinPal\Backend\obj\Debug\net7.0\ref\Backend.dll
+C:\Users\User\Desktop\BinPal\Backend\bin\Debug\net7.0\FluentValidation.dll
+C:\Users\User\Desktop\BinPal\Backend\bin\Debug\net7.0\FluentValidation.AspNetCore.dll
+C:\Users\User\Desktop\BinPal\Backend\bin\Debug\net7.0\FluentValidation.DependencyInjectionExtensions.dll
