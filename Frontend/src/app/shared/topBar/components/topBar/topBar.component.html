@@ -28,7 +28,7 @@
 
       <li>
         <a [routerLink]="['/profile', (currentUser$ | async)?.username]">
-          <img [src]="(currentUser$ | async)?.image"/> &nbsp; {{(currentUser$ | async)!.username}}
+          <img [src]="(currentUser$ | async)?.image" alt="User Image"/> &nbsp; {{(currentUser$ | async)!.username}}
         </a>
       </li>
     </ng-container>

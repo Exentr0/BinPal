@@ -39,6 +39,7 @@ export class LoginEffect {
     ))
 
 
+    //перенаправалення на головну сторінку
   redirectAfterSubmit$ = createEffect(() =>
       this.actions$.pipe(
         ofType(loginSuccessAction),

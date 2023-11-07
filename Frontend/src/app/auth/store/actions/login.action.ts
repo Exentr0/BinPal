@@ -7,7 +7,6 @@ import {BackendErrorsInterface} from "../../../shared/types/backendErrors.interf
 export const loginAction = createAction(
   ActionTypes.LOGIN,
   props<{request: LoginRequestInterface}>()
-
 )
 
 export const loginSuccessAction = createAction(

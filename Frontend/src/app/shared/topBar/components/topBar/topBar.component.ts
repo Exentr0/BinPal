@@ -23,6 +23,4 @@ export class TopBarComponent implements OnInit{
     this.currentUser$ = this.store.pipe(select(currentUserSelector))
   }
 
-
-  protected readonly isSecureContext = isSecureContext;
 }

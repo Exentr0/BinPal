@@ -5,13 +5,13 @@ import {PersistenceService} from "./persistence.service";
 
 @Injectable()
 
-export class Authinterceptor implements HttpInterceptor {
+export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private persistanceService: PersistenceService) {
+  constructor(private persistenceService: PersistenceService) {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const token = this.persistanceService.get('accessToken')
+    const token = this.persistenceService.get('accessToken')
     request = request.clone({
       setHeaders: {
         Authorization: token ? `Token ${token}` : ''

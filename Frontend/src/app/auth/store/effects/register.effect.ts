@@ -17,10 +17,9 @@ export class RegisterEffect {
   constructor(
     private actions$: Actions,
     private authService: AuthService,
-    private persistenceService: PersistenceService,
+    private persistenceService: PersistenceService, //для збереження даних,
     private router: Router
-  ) {
-  }
+  ) {}
 
 
   register$ = createEffect(() =>

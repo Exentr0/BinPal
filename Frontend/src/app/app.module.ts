@@ -12,7 +12,8 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { EffectsModule } from '@ngrx/effects';
 import {TopBarModule} from "./shared/topBar/topBar.module";
 import {PersistenceService} from "./shared/services/persistence.service";
-import {Authinterceptor} from "./shared/services/authinterceptor.service";
+import {AuthInterceptor} from "./shared/services/authinterceptor.service";
+import {GlobalFeedModule} from "./globalFeed/globalFeed.module";
 
 @NgModule({
   declarations: [
@@ -30,13 +31,14 @@ import {Authinterceptor} from "./shared/services/authinterceptor.service";
       maxAge: 25, //максимальна кількість дозволених дій для збереження в дереві історії
       logOnly: environment.production //працює тільки в режимі розробки
     }),
-    TopBarModule
+    TopBarModule,
+    GlobalFeedModule
   ],
   providers: [
     PersistenceService,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: Authinterceptor,
+      useClass: AuthInterceptor,
       multi: true
     }
 
