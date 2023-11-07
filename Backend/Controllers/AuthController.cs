@@ -35,10 +35,13 @@ namespace Backend.Controllers
             return Ok(_userService.GetMyName());
         }
         
-        //напиши метод для реєстрації
         [HttpPost("register")]
         public async Task<ActionResult<User>> Register(UserDto request)
         {
+            if (await _userService.UserExists(request.Username, request.Email))
+            {
+                return BadRequest("User already exists.");
+            }
             if (user.Email == request.Email)
             {
                 return BadRequest("User already exists.");

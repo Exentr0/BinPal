@@ -2,6 +2,7 @@ using System.Security.Claims;
 using Backend.Data;
 using Backend.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 
 namespace Backend.Services
 {
@@ -27,11 +28,21 @@ namespace Backend.Services
             return result;
         }
         
-        public async Task Register(User user)
+        public async Task<User> Register(User user)
         {
+            // Хешуємо пароль
+            user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash);
+
+            // Додаємо користувача до бази даних і зберігаємо зміни
             await _dataContext.Users.AddAsync(user);
             await _dataContext.SaveChangesAsync();
-            
+            return user;
+        }
+        
+        public async Task<bool> UserExists(string username, string email)
+        {
+            // Перевірка на дублікати електронних адрес і імен користувачів
+            return await _dataContext.Users.AnyAsync(u => u.Username == username || u.Email == email);
         }
 
         public async Task<User> Login(string username, string password)
