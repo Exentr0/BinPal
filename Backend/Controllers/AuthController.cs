@@ -42,14 +42,14 @@ namespace Backend.Controllers
             {
                 return new ObjectResult("User already exists.")
                 {
-                    StatusCode = 403 
+                    StatusCode = 401 
                 };
             }
             if (user.Email == request.Email)
             {
                 return new ObjectResult("User already exists.")
                 {
-                    StatusCode = 403 
+                    StatusCode = 401 
                 };
             }
 
@@ -74,7 +74,7 @@ namespace Backend.Controllers
             {
                 return new ObjectResult("User not found or wrong password")
                 {
-                    StatusCode = 403 
+                    StatusCode = 401 
                 };
             }
 
