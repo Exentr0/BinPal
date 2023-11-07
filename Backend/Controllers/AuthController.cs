@@ -40,11 +40,17 @@ namespace Backend.Controllers
         {
             if (await _userService.UserExists(request.Username, request.Email))
             {
-                return BadRequest("User already exists.");
+                return new ObjectResult("User already exists.")
+                {
+                    StatusCode = 403 
+                };
             }
             if (user.Email == request.Email)
             {
-                return BadRequest("User already exists.");
+                return new ObjectResult("User already exists.")
+                {
+                    StatusCode = 403 
+                };
             }
 
             var newUser = new User
@@ -66,7 +72,10 @@ namespace Backend.Controllers
             var loggedInUser = await _userService.Login(request.Email, request.Password);
             if (loggedInUser == null)
             {
-                return BadRequest("User not found or wrong password.");
+                return new ObjectResult("User not found or wrong password")
+                {
+                    StatusCode = 403 
+                };
             }
 
             string token = await CreateToken(loggedInUser);
