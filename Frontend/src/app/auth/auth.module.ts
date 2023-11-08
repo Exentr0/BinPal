@@ -1,11 +1,12 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {RouterModule, Routes} from "@angular/router";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
 import {PasswordModule} from 'primeng/password';
+
 
 import {RegisterComponent} from "./components/register/regoster.component";
 import {StoreModule} from "@ngrx/store";
@@ -43,9 +44,14 @@ const routes: Routes = [
     StoreModule.forFeature('auth', reducers),
     EffectsModule.forFeature([RegisterEffect, LoginEffect, GetCurrentUserEffect]),
     BackendErrorMessagesModule,
+    FormsModule,
   ],
   declarations: [RegisterComponent, LoginComponent],
-  providers: [AuthService, PersistenceService]
+  providers: [
+    AuthService,
+    PersistenceService,
+
+  ]
 
 })
 

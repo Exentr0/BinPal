@@ -8,6 +8,7 @@ import {LoginRequestInterface} from "../../types/loginRequest.interface";
 import {loginAction} from "../../store/actions/login.action";
 
 
+
 @Component({
   selector: 'mc-login',
   templateUrl: './login.component.html',
@@ -39,7 +40,7 @@ export class LoginComponent implements OnInit {
   initializeForm(): void {
     this.form = this.fb.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
-      password: ['', Validators.compose([Validators.required, Validators.minLength(7)])],
+      password: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
     })
   }
 
