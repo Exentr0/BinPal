@@ -7,10 +7,10 @@ namespace Backend.Models;
 public class CartItem
 {
     [ForeignKey("ItemId")] 
-    public string ItemId { get; set; }
+    public int ItemId { get; set; }
     
     [ForeignKey("CartId")] 
-    public string CartId { get; set; }
+    public int CartId { get; set; }
     
     public int Quantity { get; set; }
 

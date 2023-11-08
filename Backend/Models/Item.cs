@@ -10,6 +10,8 @@ public class Item
     public string Name { get; set; }
     [RegularExpression(@"^\d+(\.\d{1,2})?$")]
     public float Rating { get; set; } 
+    public int RatingValue { get; set; }
+    public bool Likes { get; set; }
     public int LikesAmount { get; set; }
     
     public int Price { get; set; }
