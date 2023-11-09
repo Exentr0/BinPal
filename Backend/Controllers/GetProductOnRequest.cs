@@ -13,7 +13,7 @@ public class GetProductOnRequest: ControllerBase
         _context = context;
     }
 
-    [HttpGet]
+    [HttpGet ("{id}/request")]
     public async Task<ActionResult<object>> GetItem(
         [FromQuery] string searchQuery,
         [FromQuery] int page = 1,
