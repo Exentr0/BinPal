@@ -42,14 +42,14 @@ namespace Backend.Controllers
             {
                 return new ObjectResult("User already exists.")
                 {
-                    StatusCode = 401 
+                    StatusCode = 409 
                 };
             }
             if (user.Email == request.Email)
             {
                 return new ObjectResult("User already exists.")
                 {
-                    StatusCode = 401 
+                    StatusCode = 409
                 };
             }
 
