@@ -1,7 +1,5 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Backend.Data;
-using FluentValidation;
 
 namespace Backend.Models;
 
@@ -17,16 +15,3 @@ public class ItemCategory
     
     public Category Category { get; set; }
 }   
-
-public class ItemCategoryValidator : AbstractValidator<ItemCategory>
-{
-
-    public ItemCategoryValidator()
-    {
-        RuleFor(ic => ic.ItemId)
-            .NotNull().WithMessage("ItemId can't be null");
-            
-        RuleFor(ic => ic.CategoryId)
-            .NotNull().WithMessage("CategoryId can't be null");
-    }
-}

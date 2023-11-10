@@ -3,20 +3,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Backend.Models;
 
-public class Purchase
+public class Cart
 {
     [Key] 
     public int Id { get; set; }
     
-    [ForeignKey("UserId")]
+    [ForeignKey("UserId")] 
     public int UserId { get; set; }
-    
-    [ForeignKey("ItemId")]
-    public int ItemId { get; set; }
-    
-    public DateTime PurchaseDate { get; set; }
     
     public User User { get; set; }
     
-    public Item Item { get; set; }
-}
+    [ForeignKey("CartItemId")]
+    public int? CartItemId { get; set; }
+    
+    public List<CartItem>? CartItems { get; set; }
+}   
