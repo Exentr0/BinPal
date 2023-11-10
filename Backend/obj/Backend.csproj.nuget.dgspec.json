@@ -38,10 +38,6 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
-            "Azure.Storage.Blobs": {
-              "target": "Package",
-              "version": "[12.19.0, )"
-            },
             "BCrypt.Net-Next": {
               "target": "Package",
               "version": "[4.0.3, )"
@@ -49,10 +45,6 @@
             "FluentValidation": {
               "target": "Package",
               "version": "[11.8.0, )"
-            },
-            "FluentValidation.AspNetCore": {
-              "target": "Package",
-              "version": "[11.3.0, )"
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
