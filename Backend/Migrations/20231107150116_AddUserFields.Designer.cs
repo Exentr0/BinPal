@@ -4,6 +4,7 @@ using Backend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,16 +12,40 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231107150116_AddUserFields")]
+    partial class AddUserFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.11")
+                .HasAnnotation("ProductVersion", "7.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Backend.Models.Cart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("CartItemId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("ShoppingCarts");
+                });
 
             modelBuilder.Entity("Backend.Models.CartItem", b =>
                 {
@@ -63,7 +88,6 @@ namespace Backend.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("License")
@@ -84,7 +108,6 @@ namespace Backend.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("PublisherInfo")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<float>("Rating")
@@ -159,9 +182,8 @@ namespace Backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SecurityCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("SecurityCode")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -221,25 +243,6 @@ namespace Backend.Migrations
                     b.ToTable("Purchases");
                 });
 
-            modelBuilder.Entity("Backend.Models.ShoppingCart", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
-
-                    b.ToTable("ShoppingCarts");
-                });
-
             modelBuilder.Entity("Backend.Models.Software", b =>
                 {
                     b.Property<int>("Id")
@@ -252,7 +255,7 @@ namespace Backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("Picture")
+                    b.Property<byte[]>("ProfilePicture")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
@@ -285,20 +288,29 @@ namespace Backend.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Bio")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("ProfilePicture")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("RefreshToken")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TokenCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("TokenExpires")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -326,9 +338,20 @@ namespace Backend.Migrations
                     b.ToTable("UserTest");
                 });
 
+            modelBuilder.Entity("Backend.Models.Cart", b =>
+                {
+                    b.HasOne("Backend.Models.User", "User")
+                        .WithOne("Cart")
+                        .HasForeignKey("Backend.Models.Cart", "UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Backend.Models.CartItem", b =>
                 {
-                    b.HasOne("Backend.Models.ShoppingCart", "ShoppingCart")
+                    b.HasOne("Backend.Models.Cart", "Cart")
                         .WithMany("CartItems")
                         .HasForeignKey("CartId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -340,9 +363,9 @@ namespace Backend.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Item");
+                    b.Navigation("Cart");
 
-                    b.Navigation("ShoppingCart");
+                    b.Navigation("Item");
                 });
 
             modelBuilder.Entity("Backend.Models.Item", b =>
@@ -432,17 +455,6 @@ namespace Backend.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Backend.Models.ShoppingCart", b =>
-                {
-                    b.HasOne("Backend.Models.User", "User")
-                        .WithOne("ShoppingCart")
-                        .HasForeignKey("Backend.Models.ShoppingCart", "UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Backend.Models.SoftwareCategory", b =>
                 {
                     b.HasOne("Backend.Models.Category", "Category")
@@ -460,6 +472,11 @@ namespace Backend.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("Software");
+                });
+
+            modelBuilder.Entity("Backend.Models.Cart", b =>
+                {
+                    b.Navigation("CartItems");
                 });
 
             modelBuilder.Entity("Backend.Models.Category", b =>
@@ -486,11 +503,6 @@ namespace Backend.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Backend.Models.ShoppingCart", b =>
-                {
-                    b.Navigation("CartItems");
-                });
-
             modelBuilder.Entity("Backend.Models.Software", b =>
                 {
                     b.Navigation("SoftwareCategories");
@@ -498,6 +510,9 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Backend.Models.User", b =>
                 {
+                    b.Navigation("Cart")
+                        .IsRequired();
+
                     b.Navigation("ItemReviews");
 
                     b.Navigation("PaymentMethods");
@@ -505,9 +520,6 @@ namespace Backend.Migrations
                     b.Navigation("PublishedPackages");
 
                     b.Navigation("Purchases");
-
-                    b.Navigation("ShoppingCart")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

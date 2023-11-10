@@ -1,13 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "V+bXVPhgaIAuN24RqXkQjNr+GnU6ovPDTBNRIS6HYWcbOXH29B/45B0V0WRVhD8hQC4OknU43cqavRnz+y+ULQ==",
+  "dgSpecHash": "jw4JXRVBYgANvcSNP2exX9c7y4dfjRYbyubMAkkvzkIhqd/aKs3/mEiuWs1RWLNbeueOsrU+ioWoCBFYVHGGGQ==",
   "success": true,
   "projectFilePath": "/Volumes/T7/projects/binpal/BinPal/Backend/Backend.csproj",
   "expectedPackageFiles": [
     "/Users/artemkorolcuk/.nuget/packages/azure.core/1.25.0/azure.core.1.25.0.nupkg.sha512",
     "/Users/artemkorolcuk/.nuget/packages/azure.identity/1.7.0/azure.identity.1.7.0.nupkg.sha512",
     "/Users/artemkorolcuk/.nuget/packages/bcrypt.net-next/4.0.3/bcrypt.net-next.4.0.3.nupkg.sha512",
-    "/Users/artemkorolcuk/.nuget/packages/fluentvalidation/11.8.0/fluentvalidation.11.8.0.nupkg.sha512",
     "/Users/artemkorolcuk/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/Users/artemkorolcuk/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/7.0.8/microsoft.aspnetcore.authentication.jwtbearer.7.0.8.nupkg.sha512",
     "/Users/artemkorolcuk/.nuget/packages/microsoft.aspnetcore.openapi/7.0.9/microsoft.aspnetcore.openapi.7.0.9.nupkg.sha512",

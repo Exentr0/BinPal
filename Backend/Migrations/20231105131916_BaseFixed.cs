@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Backend.Migrations
 {
     /// <inheritdoc />
-    public partial class ChangeRepeat : Migration
+    public partial class BaseFixed : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,7 +17,7 @@ namespace Backend.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SecurityCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SecurityCode = table.Column<int>(type: "int", nullable: false),
                     Provider = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -46,7 +46,7 @@ namespace Backend.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Picture = table.Column<byte[]>(type: "varbinary(max)", nullable: false)
+                    ProfilePicture = table.Column<byte[]>(type: "varbinary(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -62,16 +62,14 @@ namespace Backend.Migrations
                     Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RefreshToken = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TokenCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TokenExpires = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ProfilePicture = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Bio = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ProfilePicture = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    Bio = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                 });
+            
 
             migrationBuilder.CreateTable(
                 name: "SoftwareCategories",
@@ -107,8 +105,8 @@ namespace Backend.Migrations
                     Rating = table.Column<float>(type: "real", nullable: false),
                     LikesAmount = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PublisherInfo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PublisherInfo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     License = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PublisherId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -129,7 +127,8 @@ namespace Backend.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    CartItemId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -351,7 +350,7 @@ namespace Backend.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserPaymentMethods");
-
+            
             migrationBuilder.DropTable(
                 name: "Categories");
 
