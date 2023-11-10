@@ -6,8 +6,7 @@ namespace Backend.Data
     public class DataContext : DbContext
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
-
-        public DbSet<UserTest> UserTest => Set<UserTest>();
+        
         public DbSet<User> Users => Set<User>(); 
         public DbSet<ShoppingCart> ShoppingCarts => Set<ShoppingCart>();
         public DbSet<PaymentMethod> UserPaymentMethods => Set<PaymentMethod>();
@@ -20,6 +19,10 @@ namespace Backend.Data
         public DbSet<ItemCategory> ItemCategories => Set<ItemCategory>();
         public DbSet<Software> Software => Set<Software>();
         public DbSet<SoftwareCategory> SoftwareCategories => Set<SoftwareCategory>();
+        public DbSet<ItemRelease> ItemReleases => Set<ItemRelease>();
+        public DbSet<Plugin> Plugins => Set<Plugin>();
+        public DbSet<SoftwarePlugin> SoftwarePlugins => Set<SoftwarePlugin>();
+        public DbSet<ItemPlugin> ItemPlugins => Set<ItemPlugin>();
  
         //Specify relationships
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -55,8 +58,7 @@ namespace Backend.Data
                     .HasForeignKey(i => i.PublisherId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
-                
-                
+            
                 modelBuilder.Entity<CartItem>()
                     .HasKey(ci => new { ci.ItemId, ci.CartId });
                 
@@ -91,8 +93,7 @@ namespace Backend.Data
                     .HasForeignKey(u => u.UserId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
-                
-                
+            
                 
                 //User To Item Review (one-to-many)
                 modelBuilder.Entity<User>()
@@ -130,7 +131,7 @@ namespace Backend.Data
                     .IsRequired();
                 
                 modelBuilder.Entity<SoftwareCategory>()
-                    .HasKey(ci => new { ci.SoftwareId, ci.CategoryId });
+                    .HasKey(sc => new { sc.SoftwareId, sc.CategoryId });
                 
                 //Category To Software Category(one-to-many)
                 modelBuilder.Entity<Category>()
@@ -147,7 +148,53 @@ namespace Backend.Data
                     .HasForeignKey(sc => sc.SoftwareId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
-                    
+
+                //Item to ItemRelease (one-to-many)
+                modelBuilder.Entity<ItemRelease>()
+                    .HasOne(ir => ir.Item)
+                    .WithMany(i => i.ItemReleases)
+                    .HasForeignKey(ir => ir.ItemId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired();
+                
+                modelBuilder.Entity<SoftwarePlugin>()
+                    .HasKey(sp => new { sp.SoftwareId, sp.PluginId });
+            
+                //Plugin To Software Plugin(one-to-many)
+                modelBuilder.Entity<Plugin>()
+                    .HasMany(p => p.SoftwarePlugins)
+                    .WithOne(sp => sp.Plugin)
+                    .HasForeignKey(sp => sp.PluginId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired();
+                
+                //Software To Software Plugin
+                modelBuilder.Entity<Software>()
+                    .HasMany(s => s.SoftwarePlugins)
+                    .WithOne(sp => sp.Software)
+                    .HasForeignKey(sp => sp.SoftwareId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired();
+                
+                modelBuilder.Entity<ItemPlugin>()
+                    .HasKey(ip => new { ip.ItemId, ip.PluginId });
+            
+                //Plugin To Item Plugin(one-to-many)
+                modelBuilder.Entity<Plugin>()
+                    .HasMany(p => p.ItemPlugins)
+                    .WithOne(ip => ip.Plugin)
+                    .HasForeignKey(ip => ip.PluginId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired();
+                
+                //Item To Item Plugin
+                modelBuilder.Entity<Item>()
+                    .HasMany(i => i.ItemPlugins)
+                    .WithOne(ip => ip.Item)
+                    .HasForeignKey(ip => ip.ItemId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired();
+                
             base.OnModelCreating(modelBuilder);
         }
     }

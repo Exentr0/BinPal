@@ -17,15 +17,18 @@ public class AzureBlobService
         _blobServiceClient = new BlobServiceClient(new Uri(blobUri), credential);
     }
 
-    public async Task<List<Uri>> UploadFilesAsync()
+    public async Task<List<Uri>> UploadFilesAsync(string filePath)
     {
-        var blobUris = new List<Uri>(); 
-        string filePath = "Test.txt";
+        var blobUris = new List<Uri>();
         var blobContainer = _blobServiceClient.GetBlobContainerClient("files");
 
-        var blob = blobContainer.GetBlobClient($"test/{filePath}");
+        var blob = blobContainer.GetBlobClient($"test/{Path.GetFileName(filePath)}");
 
-        await blob.UploadAsync(filePath, true);
+        await using (var fileStream = File.OpenRead(filePath))
+        {
+            await blob.UploadAsync(fileStream, true);
+        }
+
         blobUris.Add(blob.Uri);
 
         return blobUris;
