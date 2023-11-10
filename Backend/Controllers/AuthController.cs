@@ -4,15 +4,14 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 using Backend.Models;
 using Backend.Services;
-using FluentValidation;
-using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.IdentityModel.Tokens;
-using ValidationFailure = FluentValidation.Results.ValidationFailure;
+using Microsoft.Extensions.Configuration;
 
 namespace Backend.Controllers
 {
@@ -37,32 +36,34 @@ namespace Backend.Controllers
         }
         
         [HttpPost("register")]
-        public async Task<ActionResult<User>> Register(UserDto request,  [FromServices] IValidator<User> validator){
+        public async Task<ActionResult<User>> Register(UserDto request)
+        {
+            if (await _userService.UserExists(request.Username, request.Email))
+            {
+                return new ObjectResult("User already exists.")
+                {
+                    StatusCode = 409 
+                };
+            }
+            if (user.Email == request.Email)
+            {
+                return new ObjectResult("User already exists.")
+                {
+                    StatusCode = 409
+                };
+            }
+
             var newUser = new User
             {
                 Username = request.Username,
                 Email = request.Email,
-                Password = BCrypt.Net.BCrypt.HashPassword(request.Password)
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password)
             };
-
-            ValidationResult validationResult = await validator.ValidateAsync(newUser);
-
-            if (!validationResult.IsValid)
-            {
-                var modelStateDictionary = new ModelStateDictionary();
-                foreach (ValidationFailure failure in validationResult.Errors)
-                {
-                    modelStateDictionary.AddModelError(
-                        failure.PropertyName,
-                        failure.ErrorMessage);
-
-                }
-                return ValidationProblem(modelStateDictionary);
-            }
+            
             await _userService.Register(newUser);
-            {
-                return Ok(newUser);
-            }
+            
+
+            return Ok(newUser);
         }
 
         [HttpPost("login")]

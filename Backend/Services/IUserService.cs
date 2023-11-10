@@ -9,5 +9,7 @@ namespace Backend.Services
         Task<User> Register(User user);
         Task<User> Login(string username, string password);
         Task<User> GetUser(string username);
+
+        Task<bool> UserExists(string requestUsername, string requestEmail);
     }
 }
