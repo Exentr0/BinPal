@@ -17,7 +17,10 @@ public class User
     
     public string Password { get; set; }
     
-    public byte[] ProfilePicture { get; set; }
+    public string RefreshToken { get; set; } = string.Empty;
+    public DateTime TokenCreated { get; set; }
+    public DateTime TokenExpires { get; set; }
+    public string ProfilePicture { get; set; } = "default-profile-picture.jpg";
     
     public string Bio { get; set; }
     

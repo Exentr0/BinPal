@@ -231,3 +231,4 @@ C:/Users/User/Desktop/df/BinPal/Backend/obj/Debug/net7.0/ref/Backend.dll
 /Volumes/T7/projects/binpal/BinPal/Backend/obj/Debug/net7.0/Backend.pdb
 /Volumes/T7/projects/binpal/BinPal/Backend/obj/Debug/net7.0/Backend.genruntimeconfig.cache
 /Volumes/T7/projects/binpal/BinPal/Backend/obj/Debug/net7.0/ref/Backend.dll
+/Volumes/T7/projects/binpal/BinPal/Backend/bin/Debug/net7.0/FluentValidation.dll
