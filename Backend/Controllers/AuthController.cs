@@ -91,8 +91,6 @@ namespace Backend.Controllers
             return Ok(response);
         }
         
-        
-        
         [HttpPost("refresh-token")]
         public async Task<ActionResult<string>> RefreshToken()
         {

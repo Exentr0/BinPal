@@ -232,3 +232,8 @@ C:/Users/User/Desktop/df/BinPal/Backend/obj/Debug/net7.0/ref/Backend.dll
 /Volumes/T7/projects/binpal/BinPal/Backend/obj/Debug/net7.0/Backend.genruntimeconfig.cache
 /Volumes/T7/projects/binpal/BinPal/Backend/obj/Debug/net7.0/ref/Backend.dll
 /Volumes/T7/projects/binpal/BinPal/Backend/bin/Debug/net7.0/FluentValidation.dll
+/Volumes/T7/projects/binpal/BinPal/Backend/bin/Debug/net7.0/Azure.Storage.Blobs.dll
+/Volumes/T7/projects/binpal/BinPal/Backend/bin/Debug/net7.0/Azure.Storage.Common.dll
+/Volumes/T7/projects/binpal/BinPal/Backend/bin/Debug/net7.0/FluentValidation.AspNetCore.dll
+/Volumes/T7/projects/binpal/BinPal/Backend/bin/Debug/net7.0/FluentValidation.DependencyInjectionExtensions.dll
+/Volumes/T7/projects/binpal/BinPal/Backend/bin/Debug/net7.0/System.IO.Hashing.dll
