@@ -11,7 +11,7 @@ public class CartItem
     [ForeignKey("CartId")] 
     public int CartId { get; set; }
     
-    public Cart Cart { get; set; }
+    public ShopingCart ShopingCart { get; set; }
     
     public Item Item { get; set; }
 }

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Backend.Models;
 
-public class Cart
+public class ShopingCart
 {
     [Key] 
     public int Id { get; set; }

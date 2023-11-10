@@ -3480,19 +3480,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/artemkorolcuk/.nuget/packages/": {}
+    "C:\\Users\\User\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Volumes/T7/projects/binpal/BinPal/Backend/Backend.csproj",
+      "projectUniqueName": "C:\\Users\\User\\Desktop\\BinPal\\Backend\\Backend.csproj",
       "projectName": "Backend",
-      "projectPath": "/Volumes/T7/projects/binpal/BinPal/Backend/Backend.csproj",
-      "packagesPath": "/Users/artemkorolcuk/.nuget/packages/",
-      "outputPath": "/Volumes/T7/projects/binpal/BinPal/Backend/obj/",
+      "projectPath": "C:\\Users\\User\\Desktop\\BinPal\\Backend\\Backend.csproj",
+      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\User\\Desktop\\BinPal\\Backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/artemkorolcuk/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -3582,7 +3582,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.402/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
       }
     }
   }
