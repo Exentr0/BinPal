@@ -24,5 +24,4 @@ const routes: Routes = [
     providers: []
 })
 
-export class GlobalFeedModule {
-}
+export class GlobalFeedModule {}

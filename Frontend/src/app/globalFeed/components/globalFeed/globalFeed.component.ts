@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./globalFeed.component.css']
 })
 export class GlobalFeedComponent {
-
+  // apiUrl = '/products'
+  apiUrl = '/articles'
 }

@@ -1,10 +1,42 @@
-import {Component} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {select, Store} from "@ngrx/store";
+import {getFeedAction} from "../../store/actions/getFeed.action";
+import {Observable} from "rxjs/internal/Observable";
+import {GetFeedResponseInterface} from "../../types/getFeedResponse.interface";
+import {errorSelector, feedSelector, isLoadingSelector} from "../../store/selectors";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'mc-feed',
     templateUrl: './feed.component.html',
     styleUrls: ['./feed.component.css']
 })
-export class FeedComponent {
+export class FeedComponent implements OnInit{
+  @Input('apiUrl') apiUrlProps!: string
+
+  isLoading$!: Observable<boolean>
+  error$!: Observable<string | null>
+  feed$!: Observable<GetFeedResponseInterface | null>
+  limit = 12
+  constructor(private store: Store, private router: Router) {}
+
+
+  ngOnInit() {
+    this.initializeValues()
+    this.fetchData()
+    console.log()
+  }
+
+  initializeValues(): void{
+    this.isLoading$ = this.store.pipe(select(isLoadingSelector))
+    this.error$ = this.store.pipe(select(errorSelector))
+    this.feed$ = this.store.pipe(select(feedSelector))
+  }
+
+  fetchData(): void{
+    this.store.dispatch(getFeedAction({url: this.apiUrlProps}))
+  }
+
+
 
 }

@@ -23,7 +23,7 @@ export class GetCurrentUserEffect {
   }
 
 
-  getCurrentUserEffect = createEffect(() =>
+  getCurrentUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(getCurrentUserAction),
       switchMap(() => {

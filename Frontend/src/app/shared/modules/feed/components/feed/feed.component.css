@@ -1,0 +1,65 @@
+
+.body {
+  display: flex;
+  justify-content: center;
+}
+
+.loader{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.error{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+
+.product {
+  width: 210px;
+  background-color: #242424;
+  /*background-color: transparent;*/
+  font-family: 'Inter', sans-serif;
+  color: #ffffff;
+}
+
+.product img {
+  width: 210px;
+  border-radius: 10px; /* Заокруглення кутів */
+}
+
+.seller {
+  text-transform: uppercase;
+  color: #B3B3B3;
+  font-size: 12px;
+}
+
+.title {
+  font-size: 16px;
+}
+
+.rating {
+  font-size: 12px;
+}
+
+.price {
+  display: inline-block; /* Робимо елемент блочним, але не переносимим на новий рядок */
+  font-size: 14px;
+}
+
+.add-to-cart {
+  display: inline-block;
+  margin-left: 75px;
+  color: #AA7EDF;
+  font-size: 12px;
+  background-color: transparent;
+  border: none;
+}
+
+
+

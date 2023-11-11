@@ -1,1 +1,25 @@
-feed
+
+<div class="body">
+<mc-loading class="loader" *ngIf="isLoading$ | async"></mc-loading>
+<mc-error-message class="error" *ngIf="error$ | async" [message]="'Error'"></mc-error-message>
+
+
+<div *ngIf="feed$ | async">
+
+  <div *ngFor="let product of (feed$ | async)?.articles">
+
+    <div class="product">
+      <img src="https://unknownedits.com/cdn/shop/files/thum.png?v=1689225560&width=823" alt="Title">
+
+      <p class="seller">Seller</p>
+      <p class="title">{{product.title}}</p>
+      <p class="rating">5 ({{product.favoritesCount}}) | 💜 ({{product.favoritesCount}})</p>
+      <p class="price">$199.99</p>
+      <button class="add-to-cart">Add to Cart</button>
+    </div>
+
+  </div>
+<!--  mc-paginathio-->
+  PAGINATION
+</div>
+</div>

@@ -1,3 +1,5 @@
+//перехоплює всі HTTP запити, отримує токен зі сховища, додає до всіх цих запитів заголовок Authorization: Token 'your_access_token'
+
 import {Injectable} from "@angular/core";
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
 import {Observable} from "rxjs/internal/Observable";
