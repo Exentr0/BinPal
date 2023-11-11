@@ -38,13 +38,13 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
-            "FluentValidation": {
+            "BCrypt.Net-Next": {
               "target": "Package",
-              "version": "[11.8.0, )"
+              "version": "[4.0.3, )"
             },
-            "FluentValidation.AspNetCore": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
-              "version": "[11.3.0, )"
+              "version": "[7.0.8, )"
             },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
@@ -52,7 +52,7 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[7.0.11, )"
+              "version": "[7.0.13, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -62,9 +62,25 @@
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[7.0.11, )"
+              "version": "[7.0.13, )"
             },
             "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            },
+            "Swashbuckle.AspNetCore.Filters": {
+              "target": "Package",
+              "version": "[7.0.12, )"
+            },
+            "Swashbuckle.AspNetCore.Swagger": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerGen": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerUI": {
               "target": "Package",
               "version": "[6.5.0, )"
             }
