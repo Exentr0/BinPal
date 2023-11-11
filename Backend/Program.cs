@@ -1,15 +1,47 @@
 using System.Text;
 using Backend.Data;
+using Backend.Models;
 using Backend.Services;
+using Backend.Storage;
+using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
+using FluentValidation.AspNetCore;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var service = new AzureBlobService(builder.Configuration);
+
+// Add services to the container.
+builder.Services.AddControllers(); 
+builder.Services.AddScoped<IValidator<User>, UserValidator>();
+builder.Services.AddScoped<IValidator<CartItem>, CartItemValidator>();
+builder.Services.AddScoped<IValidator<Category>, CategoryValidator>();
+builder.Services.AddScoped<IValidator<Item>, ItemValidator>();
+builder.Services.AddScoped<IValidator<ItemCategory>, ItemCategoryValidator>();
+builder.Services.AddScoped<IValidator<ItemReview>, ItemReviewValidator>();
+builder.Services.AddScoped<IValidator<PaymentInfo>, PaymentInfoValidator>();
+builder.Services.AddScoped<IValidator<Purchase>, PurchaseValidator>();
+builder.Services.AddScoped<IValidator<ShoppingCart>, ShoppingCartValidator>();
+builder.Services.AddScoped<IValidator<Software>, SoftwareValidator>();
+builder.Services.AddScoped<IValidator<SoftwareCategory>, SoftwareCategoryValidator>();
+builder.Services.AddScoped<IValidator<PaymentMethod>, PaymentMethodValidator>();
+builder.Services.AddScoped<IValidator<ItemRelease>, ItemReleaseValidator>();
+builder.Services.AddScoped<IValidator<Plugin>, PluginValidator>();
+builder.Services.AddScoped<IValidator<SoftwarePlugin>, SoftwarePluginValidator>();
+builder.Services.AddScoped<IValidator<ItemPlugin>, ItemPluginValidator>();
+
+//Add Fluent Validation 
+builder.Services.AddFluentValidation(fv =>
+{
+    fv.ImplicitlyValidateChildProperties = true;
+    fv.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+});
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
