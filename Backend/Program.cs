@@ -6,15 +6,18 @@ using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
- 
+
 var builder = WebApplication.CreateBuilder(args);
 
 var service = new AzureBlobService(builder.Configuration);
 
+//Test Azure Blob Upload
+await service.UploadFilesAsync();
 
 // Add services to the container.
-builder.Services.AddControllers(); 
+builder.Services.AddControllers();
 builder.Services.AddScoped<IValidator<User>, UserValidator>();
+builder.Services.AddScoped<IValidator<UserTest>, UserTestValidator>();
 builder.Services.AddScoped<IValidator<CartItem>, CartItemValidator>();
 builder.Services.AddScoped<IValidator<Category>, CategoryValidator>();
 builder.Services.AddScoped<IValidator<Item>, ItemValidator>();
@@ -26,10 +29,6 @@ builder.Services.AddScoped<IValidator<ShoppingCart>, ShoppingCartValidator>();
 builder.Services.AddScoped<IValidator<Software>, SoftwareValidator>();
 builder.Services.AddScoped<IValidator<SoftwareCategory>, SoftwareCategoryValidator>();
 builder.Services.AddScoped<IValidator<PaymentMethod>, PaymentMethodValidator>();
-builder.Services.AddScoped<IValidator<ItemRelease>, ItemReleaseValidator>();
-builder.Services.AddScoped<IValidator<Plugin>, PluginValidator>();
-builder.Services.AddScoped<IValidator<SoftwarePlugin>, SoftwarePluginValidator>();
-builder.Services.AddScoped<IValidator<ItemPlugin>, ItemPluginValidator>();
 
 
 //Add Fluent Validation 

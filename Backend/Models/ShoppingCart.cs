@@ -31,7 +31,7 @@ namespace Backend.Models
 
             RuleFor(sc => sc.Id)
                 .NotNull().WithMessage("Id can't be null");
-            When(sc => sc.Id != null, () =>
+            When(sc => sc.Id != 0, () =>
             {
                 RuleFor(sc => sc.Id)
                     .IsUnique(_context, sc => sc.Id)

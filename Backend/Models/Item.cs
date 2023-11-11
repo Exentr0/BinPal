@@ -33,13 +33,11 @@ public class Item
     public int PublisherId { get; set; }
     
     public User User { get; set; }
-
-    public List<ItemRelease> ItemReleases { get; set; }
+    
     public List<CartItem>? CartItems { get; set; }
     public List<Purchase>? Purchases { get; set; }
     public List<ItemReview>? Reviews { get; set; }
     public List<ItemCategory>? ItemCategories { get; set; }
-    public List<ItemPlugin>? ItemPlugins { get; set; }
 }
 
 public class ItemValidator : AbstractValidator<Item>

@@ -23,11 +23,9 @@ public class CartItemValidator : AbstractValidator<CartItem>
     public CartItemValidator()
     {
         RuleFor(ca => ca.ItemId)
-            .NotNull()
-            .WithMessage("itemId can't be null");
+            .NotNull();
 
         RuleFor(ca => ca.CartId)
-            .NotNull()
-            .WithMessage("CartId can't be null");;
+            .NotNull();
     }
 }
