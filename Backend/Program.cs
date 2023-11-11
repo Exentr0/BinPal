@@ -1,18 +1,11 @@
-using Azure.Storage.Blobs;
 using Backend.Data;
 using Backend.Models;
-using Backend.Storage;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
-
-var service = new AzureBlobService(builder.Configuration);
-
-//Test Azure Blob Upload
-await service.UploadFilesAsync();
 
 // Add services to the container.
 builder.Services.AddControllers();

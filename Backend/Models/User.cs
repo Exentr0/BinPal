@@ -17,7 +17,7 @@ public class User
     
     public string Password { get; set; }
     
-    public string ProfilePictureUrl { get; set; }
+    public byte[] ProfilePicture { get; set; }
     
     public string Bio { get; set; }
     
@@ -44,7 +44,7 @@ public class UserValidator : AbstractValidator<User>
         });
         
         
-        RuleFor(u => u.Username)
+        RuleFor(user => user.Username)
             .NotNull().WithMessage("UserName can't be null");
         When(u => u.Username != null, () =>
             {
@@ -57,7 +57,7 @@ public class UserValidator : AbstractValidator<User>
             });
             
 
-        RuleFor(u => u.Email)
+        RuleFor(user => user.Email)
             .NotNull().WithMessage("Email can't be null");
         When(u => u.Email != null, () =>
             {
@@ -70,7 +70,7 @@ public class UserValidator : AbstractValidator<User>
             }); 
         
         
-        RuleFor(u => u.Password)
+        RuleFor(user => user.Password)
             .NotNull().WithMessage("Password can't be null");
         When(u => u.Password != null, () =>
             {
@@ -80,17 +80,10 @@ public class UserValidator : AbstractValidator<User>
             });
 
 
-        RuleFor(u => u.ProfilePictureUrl)
-            .NotNull().WithMessage("Profile picture URL cannot be null.");
-        When(u => u.ProfilePictureUrl != null, () =>
-        {
-            RuleFor(u => u.ProfilePictureUrl)
-                .Must(CustomValidators.IsValidUrl)
-                .WithMessage("Profile picture URL is not a valid URL.")
-                .IsUnique(_context, u => u.ProfilePictureUrl).WithMessage("Profile Picture URL should be unique");;
-        });
+        RuleFor(user => user.ProfilePicture)
+            .NotNull();
         
-        RuleFor(u => u.Bio)
+        RuleFor(user => user.Bio)
             .NotNull().WithMessage("Bio can't be null");
         When(u => u.Bio != null, () =>
             {

@@ -34,14 +34,6 @@ public static class CustomValidators
     {
         return date > DateTime.Now;
     }
-    
-    //Check if url is valid
-    public static bool IsValidUrl(string url)
-    {
-        Uri uriResult;
-        bool isValidUri = Uri.TryCreate(url, UriKind.Absolute, out uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
-        return isValidUri;
-    }
 }
 
 
