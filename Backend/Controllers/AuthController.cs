@@ -144,13 +144,13 @@ namespace Backend.Controllers
                 Expires = newRefreshToken.ExpiresAt,
             };
             Response.Cookies.Append("refreshToken", newRefreshToken.Token, cookieOptions);
-            
-            _httpContextAccessor.HttpContext.Session.SetString("refreshToken", newRefreshToken.Token);
-            _httpContextAccessor.HttpContext.Session.SetString("tokenCreated", newRefreshToken.CreatedAt.ToString("o"));
-            _httpContextAccessor.HttpContext.Session.SetString("tokenExpires", newRefreshToken.ExpiresAt.ToString("o"));
+
+            _user.RefreshToken = newRefreshToken.Token;
+            _user.TokenCreated = newRefreshToken.CreatedAt;
+            _user.TokenExpires = newRefreshToken.ExpiresAt;
         }
-
-
+                
+        
         private async Task<string> CreateToken(User user)
         {
             List<Claim> claims = new List<Claim>
@@ -158,24 +158,16 @@ namespace Backend.Controllers
                 new Claim(ClaimTypes.Name, user.Username),
                 new Claim(ClaimTypes.Role, "User")
             };
-            
+
             var key = GenerateKey(64); 
 
             var creds = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha512);
-            
-            // Отримуємо час дії з RefreshToken
-            var tokenCreated = DateTime.Parse(_httpContextAccessor.HttpContext.Session.GetString("tokenCreated"));
-            var tokenExpires = DateTime.Parse(_httpContextAccessor.HttpContext.Session.GetString("tokenExpires"));
-            
+
             var token = new JwtSecurityToken(
                 claims: claims,
-                expires: tokenExpires,
-                notBefore: tokenCreated, 
+                expires: DateTime.Now.AddDays(1),
                 signingCredentials: creds
             );
-            
-            tokenExpires = tokenExpires.AddDays(1); 
-            _httpContextAccessor.HttpContext.Session.SetString("tokenExpires", tokenExpires.ToString("o"));
 
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
 

@@ -2,7 +2,7 @@ namespace Backend.Registration___Authorization;
 
 public class RefreshToken
 {
-    public string Token { get; set; }
-    public DateTime ExpiresAt { get; set; }
+    public required string Token { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.Now;
+    public DateTime ExpiresAt { get; set; }
 }
