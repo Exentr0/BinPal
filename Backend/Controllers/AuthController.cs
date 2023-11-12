@@ -35,7 +35,7 @@ namespace Backend.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<User>> Register(UserDto request, [FromServices] IValidator<User> validator)
+        public async Task<ActionResult<User>> Register(UserDtoRegister request, [FromServices] IValidator<User> validator)
         {
             var newUser = new User
             {
@@ -74,7 +74,7 @@ namespace Backend.Controllers
 
 
         [HttpPost("login")]
-        public async Task<ActionResult<User>> Login(UserDto request)
+        public async Task<ActionResult<User>> Login(UserDtoLogin request)
         {
             var loggedInUser = await _userService.Login(request.Email, request.Password);
             if (loggedInUser == null)
