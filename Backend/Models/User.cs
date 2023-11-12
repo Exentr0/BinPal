@@ -23,7 +23,7 @@ public class User
 
     public DateTime TokenExpires { get; set; } = DateTime.Now;
 
-    public string ProfilePictureUrl { get; set; } = string.Empty;
+    public string ProfilePictureUrl { get; set; } = "https://www.example.com/path/to/resource?query_param=value#fragment";
 
     public string Bio { get; set; } = string.Empty;
     
@@ -94,8 +94,7 @@ public class UserValidator : AbstractValidator<User>
         {
             RuleFor(u => u.ProfilePictureUrl)
                 .Must(CustomValidators.IsValidUrl)
-                .WithMessage("Profile picture URL is not a valid URL.")
-                .IsUnique(_context, u => u.ProfilePictureUrl).WithMessage("Profile Picture URL should be unique");;
+                .WithMessage("Profile picture URL is not a valid URL.");
         });
         
         RuleFor(u => u.Bio)
@@ -106,14 +105,9 @@ public class UserValidator : AbstractValidator<User>
                     .MaximumLength(500)
                     .WithMessage("Bio cannot exceed 500 characters.");
             });
-
+        
         RuleFor(u => u.TokenCreated)
             .NotNull().WithMessage("TokenCreated cannot be null.");
-        When(u => u.TokenCreated != null, () =>
-        {
-            RuleFor(u => u.TokenCreated)
-                .Must(date => date <= DateTime.UtcNow).WithMessage("TokenCreated must be a date in the past.");
-        });
 
         RuleFor(u => u.TokenExpires)
             .NotNull().WithMessage("TokenExpires cannot be null.");
@@ -123,16 +117,9 @@ public class UserValidator : AbstractValidator<User>
                 .Must((user, tokenExpires) => tokenExpires > DateTime.UtcNow && tokenExpires > user.TokenCreated)
                 .WithMessage("TokenExpires must be a date in the future and greater than TokenCreated.");
         });
-        
-        
-        RuleFor(u => u.RefreshToken)
-            .Must(IsValidRefreshToken)
-            .WithMessage("RefreshToken is not valid.");
-    }
 
-    private bool IsValidRefreshToken(string refreshToken)
-    {
-        return !string.IsNullOrEmpty(refreshToken) && refreshToken.Length > 10;
+
+        RuleFor(u => u.RefreshToken)
+            .NotNull().WithMessage("RefreshToken cannot be null");
     }
-    
 }
