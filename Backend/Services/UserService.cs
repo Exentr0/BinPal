@@ -30,9 +30,6 @@ namespace Backend.Services
         
         public async Task<User> Register(User user)
         {
-            // Хешуємо пароль
-            user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
-
             // Додаємо користувача до бази даних і зберігаємо зміни
             await _dataContext.Users.AddAsync(user);
             await _dataContext.SaveChangesAsync();

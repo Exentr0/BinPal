@@ -155,10 +155,10 @@ namespace Backend.Controllers
                 new Claim(ClaimTypes.Name, user.Username),
                 new Claim(ClaimTypes.Role, "User")
             };
+            
+            var key = GenerateKey(64); 
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value!));
-
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+            var creds = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha512);
 
             var token = new JwtSecurityToken(
                 claims: claims,
@@ -170,5 +170,16 @@ namespace Backend.Controllers
 
             return jwt;
         }
+
+        private byte[] GenerateKey(int size)
+        {
+            using (var rng = new RNGCryptoServiceProvider())
+            {
+                byte[] key = new byte[size];
+                rng.GetBytes(key);
+                return key;
+            }
+        }
+
     }
 }
