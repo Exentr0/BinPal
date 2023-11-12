@@ -21,7 +21,7 @@ public class User
     
     public DateTime TokenCreated { get; set; } = DateTime.Now;
 
-    public DateTime TokenExpires { get; set; } = DateTime.Now;
+    public DateTime TokenExpires { get; set; } = DateTime.Now.AddDays(1);
 
     public string ProfilePictureUrl { get; set; } = "https://www.example.com/path/to/resource?query_param=value#fragment";
 

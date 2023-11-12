@@ -21,11 +21,13 @@ namespace Backend.Controllers
         private static User _user = new User();
         private readonly IConfiguration _configuration;
         private readonly IUserService _userService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AuthController(IConfiguration configuration, IUserService userService)
+        public AuthController(IConfiguration configuration, IUserService userService, IHttpContextAccessor httpContextAccessor)
         {
             _configuration = configuration;
             _userService = userService;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         [HttpGet, Authorize]
@@ -43,6 +45,7 @@ namespace Backend.Controllers
                 Email = request.Email,
                 Password = request.Password
             };
+            
 
             // Validate the new user using FluentValidation
             ValidationResult validationResult = await validator.ValidateAsync(newUser);
@@ -127,7 +130,7 @@ namespace Backend.Controllers
             var refreshToken = new RefreshToken
             {
                 Token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64)),
-                ExpiresAt = DateTime.Now.AddDays(7)
+                ExpiresAt = DateTime.UtcNow.AddDays(7)
             };
 
             return refreshToken;
@@ -141,10 +144,10 @@ namespace Backend.Controllers
                 Expires = newRefreshToken.ExpiresAt,
             };
             Response.Cookies.Append("refreshToken", newRefreshToken.Token, cookieOptions);
-
-            _user.RefreshToken = newRefreshToken.Token;
-            _user.TokenCreated = newRefreshToken.CreatedAt;
-            _user.TokenExpires = newRefreshToken.ExpiresAt;
+            
+            _httpContextAccessor.HttpContext.Session.SetString("refreshToken", newRefreshToken.Token);
+            _httpContextAccessor.HttpContext.Session.SetString("tokenCreated", newRefreshToken.CreatedAt.ToString("o"));
+            _httpContextAccessor.HttpContext.Session.SetString("tokenExpires", newRefreshToken.ExpiresAt.ToString("o"));
         }
 
 
@@ -159,12 +162,20 @@ namespace Backend.Controllers
             var key = GenerateKey(64); 
 
             var creds = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha512);
-
+            
+            // Отримуємо час дії з RefreshToken
+            var tokenCreated = DateTime.Parse(_httpContextAccessor.HttpContext.Session.GetString("tokenCreated"));
+            var tokenExpires = DateTime.Parse(_httpContextAccessor.HttpContext.Session.GetString("tokenExpires"));
+            
             var token = new JwtSecurityToken(
                 claims: claims,
-                expires: DateTime.Now.AddHours(1),
+                expires: tokenExpires,
+                notBefore: tokenCreated, 
                 signingCredentials: creds
             );
+            
+            tokenExpires = tokenExpires.AddDays(1); 
+            _httpContextAccessor.HttpContext.Session.SetString("tokenExpires", tokenExpires.ToString("o"));
 
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
 
