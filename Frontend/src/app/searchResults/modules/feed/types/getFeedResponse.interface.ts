@@ -1,4 +1,5 @@
-import {ProductInterface} from "../../../types/product.interface";
+import {ProductInterface} from "../../../../shared/types/product.interface";
+
 
 export interface GetFeedResponseInterface {
   // products: ProductInterface[]

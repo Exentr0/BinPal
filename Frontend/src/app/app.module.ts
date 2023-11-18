@@ -13,8 +13,8 @@ import { EffectsModule } from '@ngrx/effects';
 import {TopBarModule} from "./shared/topBar/topBar.module";
 import {PersistenceService} from "./shared/services/persistence.service";
 import {AuthInterceptor} from "./shared/services/authinterceptor.service";
-import {GlobalFeedModule} from "./globalFeed/globalFeed.module";
 import {routerReducer, StoreRouterConnectingModule} from '@ngrx/router-store';
+import {GlobalFeedModule} from "./searchResults/modules/globalFeed/globalFeed.module";
 
 @NgModule({
   declarations: [

@@ -7,9 +7,9 @@ import {StoreModule} from "@ngrx/store";
 import {reducers} from "./store/reducer";
 import {FeedService} from "./services/feed.service";
 import {RouterModule} from "@angular/router";
-import {ErrorMessageModule} from "../errorMessage/errorMessage.module";
-import {LoadingModule} from "../loading/loading.module";
-import {PaginationModule} from "../pagination/pagination.module";
+import {ErrorMessageModule} from "../../../shared/modules/errorMessage/errorMessage.module";
+import {LoadingModule} from "../../../shared/modules/loading/loading.module";
+import {PaginationModule} from "../../../shared/modules/pagination/pagination.module";
 
 
 @NgModule({
