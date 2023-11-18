@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-//звязування адреса і компонента
+
 const routes: Routes = [];
 
 

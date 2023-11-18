@@ -5,11 +5,10 @@
 
 
 <div *ngIf="feed$ | async">
-
   <div *ngFor="let product of (feed$ | async)?.articles">
-
+<!--має бути  <div *ngFor="let product of (feed$ | async)?.products">-->
     <div class="product">
-      <img src="https://unknownedits.com/cdn/shop/files/thum.png?v=1689225560&width=823" alt="Title">
+      <img src="https://assetstorev1-prd-cdn.unity3d.com/key-image/0dbc76eb-d3fe-460a-9862-4fecde21cbd8.webp" alt="Title">
 
       <p class="seller">Seller</p>
       <p class="title">{{product.title}}</p>
@@ -17,9 +16,17 @@
       <p class="price">$199.99</p>
       <button class="add-to-cart">Add to Cart</button>
     </div>
-
+    <p></p>
   </div>
-<!--  mc-paginathio-->
-  PAGINATION
+
+
+  <!--має бути  [total]="(feed$ | async)!.productsCount"-->
+  <mc-pagination
+    [total]="(feed$ | async)!.articlesCount"
+    [limit]="limit"
+    [url]="baseUrl"
+    [currentPage]="currentPage"
+  ></mc-pagination>
+
 </div>
 </div>

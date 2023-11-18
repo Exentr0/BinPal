@@ -1,17 +1,16 @@
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using Backend.Models;
+using Backend.Registration___Authorization;
 using Backend.Services;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.Extensions.Configuration;
+using FluentValidation;
+using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Backend.Controllers
 {
@@ -19,14 +18,16 @@ namespace Backend.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private static User user = new User();
+        private static User _user = new User();
         private readonly IConfiguration _configuration;
         private readonly IUserService _userService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AuthController(IConfiguration configuration, IUserService userService)
+        public AuthController(IConfiguration configuration, IUserService userService, IHttpContextAccessor httpContextAccessor)
         {
             _configuration = configuration;
             _userService = userService;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         [HttpGet, Authorize]
@@ -34,47 +35,56 @@ namespace Backend.Controllers
         {
             return Ok(_userService.GetMyName());
         }
-        
-        [HttpPost("register")]
-        public async Task<ActionResult<User>> Register(UserDto request)
-        {
-            if (await _userService.UserExists(request.Username, request.Email))
-            {
-                return new ObjectResult("User already exists.")
-                {
-                    StatusCode = 403 
-                };
-            }
-            if (user.Email == request.Email)
-            {
-                return new ObjectResult("User already exists.")
-                {
-                    StatusCode = 403 
-                };
-            }
 
+        [HttpPost("register")]
+        public async Task<ActionResult<User>> Register(UserDtoRegister request, [FromServices] IValidator<User> validator)
+        {
             var newUser = new User
             {
                 Username = request.Username,
                 Email = request.Email,
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password)
+                Password = request.Password
             };
             
-            await _userService.Register(newUser);
-            
 
+            // Validate the new user using FluentValidation
+            ValidationResult validationResult = await validator.ValidateAsync(newUser);
+
+            // Check if validation failed
+            if (!validationResult.IsValid)
+            {
+                // Convert validation errors to ModelState errors
+                var modelStateDictionary = new ModelStateDictionary();
+                foreach (FluentValidation.Results.ValidationFailure failure in validationResult.Errors)
+                {
+                    modelStateDictionary.AddModelError(
+                        failure.PropertyName,
+                        failure.ErrorMessage);
+                }
+
+                // Return validation errors
+                return ValidationProblem(modelStateDictionary);
+            }
+            else
+            {
+                newUser.Password = BCrypt.Net.BCrypt.HashPassword(request.Password);
+                // If validation succeeded, register the new user
+                await _userService.Register(newUser);   
+            }
+            // Return the newly registered user
             return Ok(newUser);
         }
 
+
         [HttpPost("login")]
-        public async Task<ActionResult<User>> Login(UserDto request)
+        public async Task<ActionResult<User>> Login(UserDtoLogin request)
         {
             var loggedInUser = await _userService.Login(request.Email, request.Password);
             if (loggedInUser == null)
             {
                 return new ObjectResult("User not found or wrong password")
                 {
-                    StatusCode = 403 
+                    StatusCode = 401 
                 };
             }
 
@@ -99,16 +109,16 @@ namespace Backend.Controllers
         {
             var refreshToken = Request.Cookies["refreshToken"];
 
-            if (!user.RefreshToken.Equals(refreshToken))
+            if (!_user.RefreshToken.Equals(refreshToken))
             {
                 return Unauthorized("Invalid Refresh Token");
             }
-            else if (user.TokenExpires < DateTime.Now)
+            else if (_user.TokenExpires < DateTime.Now)
             {
                 return Unauthorized("Token expired.");
             }
 
-            string token = await CreateToken(user);
+            string token = await CreateToken(_user);
             var newRefreshToken = await GenerateRefreshToken();
             await SetRefreshToken(newRefreshToken);
 
@@ -120,7 +130,7 @@ namespace Backend.Controllers
             var refreshToken = new RefreshToken
             {
                 Token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64)),
-                Expires = DateTime.Now.AddDays(7)
+                ExpiresAt = DateTime.UtcNow.AddDays(7)
             };
 
             return refreshToken;
@@ -131,16 +141,16 @@ namespace Backend.Controllers
             var cookieOptions = new CookieOptions
             {
                 HttpOnly = true,
-                Expires = newRefreshToken.Expires,
+                Expires = newRefreshToken.ExpiresAt,
             };
             Response.Cookies.Append("refreshToken", newRefreshToken.Token, cookieOptions);
 
-            user.RefreshToken = newRefreshToken.Token;
-            user.TokenCreated = newRefreshToken.Created;
-            user.TokenExpires = newRefreshToken.Expires;
+            _user.RefreshToken = newRefreshToken.Token;
+            _user.TokenCreated = newRefreshToken.CreatedAt;
+            _user.TokenExpires = newRefreshToken.ExpiresAt;
         }
-
-
+                
+        
         private async Task<string> CreateToken(User user)
         {
             List<Claim> claims = new List<Claim>
@@ -149,13 +159,13 @@ namespace Backend.Controllers
                 new Claim(ClaimTypes.Role, "User")
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value!));
+            var key = GenerateKey(64); 
 
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+            var creds = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha512);
 
             var token = new JwtSecurityToken(
                 claims: claims,
-                expires: DateTime.Now.AddHours(1),
+                expires: DateTime.Now.AddDays(1),
                 signingCredentials: creds
             );
 
@@ -163,5 +173,16 @@ namespace Backend.Controllers
 
             return jwt;
         }
+
+        private byte[] GenerateKey(int size)
+        {
+            using (var rng = new RNGCryptoServiceProvider())
+            {
+                byte[] key = new byte[size];
+                rng.GetBytes(key);
+                return key;
+            }
+        }
+
     }
 }

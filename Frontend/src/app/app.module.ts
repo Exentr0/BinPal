@@ -14,6 +14,7 @@ import {TopBarModule} from "./shared/topBar/topBar.module";
 import {PersistenceService} from "./shared/services/persistence.service";
 import {AuthInterceptor} from "./shared/services/authinterceptor.service";
 import {GlobalFeedModule} from "./globalFeed/globalFeed.module";
+import {routerReducer, StoreRouterConnectingModule} from '@ngrx/router-store';
 
 @NgModule({
   declarations: [
@@ -25,14 +26,16 @@ import {GlobalFeedModule} from "./globalFeed/globalFeed.module";
     AppRoutingModule,
     AuthModule,
     HttpClientModule,
-    StoreModule.forRoot({}),
+    StoreModule.forRoot({router: routerReducer}),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({  //для розширення браузера, щоб моніторити NgRx
       maxAge: 25, //максимальна кількість дозволених дій для збереження в дереві історії
       logOnly: environment.production //працює тільки в режимі розробки
     }),
+    StoreRouterConnectingModule.forRoot(),
     TopBarModule,
-    GlobalFeedModule
+    GlobalFeedModule,
+    StoreRouterConnectingModule.forRoot()
   ],
   providers: [
     PersistenceService,
