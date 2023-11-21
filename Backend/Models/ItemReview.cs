@@ -36,7 +36,8 @@ public class ItemReviewValidator : AbstractValidator<ItemReview>
         context = _context;
         
         RuleFor(ir => ir.Id)
-            .NotNull().WithMessage("Id can't be null");
+            .NotNull()
+            .WithMessage("Id can't be null");
         When(ir => ir.Id != null, () =>
         {
             RuleFor(ir => ir.Id)
@@ -45,13 +46,16 @@ public class ItemReviewValidator : AbstractValidator<ItemReview>
         });
         
         RuleFor(ir => ir.UserId)
-            .NotNull().WithMessage("UserID can't be null");
+            .NotNull()
+            .WithMessage("UserID can't be null");
         
         RuleFor(ir => ir.ItemId)
-            .NotNull().WithMessage("ItemId can't be null");
+            .NotNull()
+            .WithMessage("ItemId can't be null");
         
         RuleFor(ir => ir.Rating)
-            .NotNull().WithMessage("Rating can't be null");
+            .NotNull()
+            .WithMessage("Rating can't be null");
         When(ir => ir.Rating != null, () =>
         {
             RuleFor(ir => ir.Rating)
@@ -69,6 +73,7 @@ public class ItemReviewValidator : AbstractValidator<ItemReview>
         });
         
         RuleFor(ir => ir.Time)
-            .NotNull().WithMessage("Time can't be null");
+            .NotNull()
+            .WithMessage("Time can't be null");
     }
 }

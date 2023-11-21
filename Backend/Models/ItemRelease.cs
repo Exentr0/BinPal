@@ -28,7 +28,8 @@ public class ItemReleaseValidator : AbstractValidator<ItemRelease>
     {
         _context = context;
         RuleFor(ir => ir.Id)
-            .NotNull().WithMessage("Id can't be null");
+            .NotNull()
+            .WithMessage("Id can't be null");
         When(ir => ir.Id != null, () =>
         {
             RuleFor(ir => ir.Id)
@@ -37,7 +38,8 @@ public class ItemReleaseValidator : AbstractValidator<ItemRelease>
         });
 
         RuleFor(ir => ir.Name)
-            .NotNull().WithMessage("Name can't be null");
+            .NotNull()
+            .WithMessage("Name can't be null");
         When(ir => ir.Name != null, () =>
         {
             RuleFor(ir => ir.Name)

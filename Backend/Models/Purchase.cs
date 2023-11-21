@@ -34,7 +34,8 @@ namespace Backend.Models
             _context = context;
 
             RuleFor(p => p.Id)
-                .NotNull().WithMessage("Id can't be null");
+                .NotNull()
+                .WithMessage("Id can't be null");
             When(p => p.Id != null, () =>
             {
                 RuleFor(p => p.Id)
@@ -43,7 +44,8 @@ namespace Backend.Models
             });
 
             RuleFor(p => p.PurchaseDate)
-                .NotNull().WithMessage("Purchase Date can't be null");
+                .NotNull()
+                .WithMessage("Purchase Date can't be null");
             When(p => p.PurchaseDate != null, () =>
             {
                 RuleFor(p => p.PurchaseDate)
@@ -52,10 +54,12 @@ namespace Backend.Models
             });
 
             RuleFor(p => p.UserId)
-                .NotNull().WithMessage("UserId can't be null");
+                .NotNull()
+                .WithMessage("UserId can't be null");
 
             RuleFor(p => p.ItemId)
-                .NotNull().WithMessage("ItemId can't be null");
+                .NotNull()
+                .WithMessage("ItemId can't be null");
         }
     }
 }

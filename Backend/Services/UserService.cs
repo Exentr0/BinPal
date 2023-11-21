@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using Backend.Data;
 using Backend.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
 
@@ -56,13 +57,40 @@ namespace Backend.Services
             return user;
         }
 
-        public async Task<User> GetUser(string username)
+        public async Task<User> GetUserByIdAsync(int userId)
+        {
+            var user = await _dataContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            if (user == null)
+            {
+                throw new InvalidOperationException($"User with ID {userId} not found.");
+            }
+            return user;
+        }
+
+        
+        public async Task<User> GetUserByName(string username)
         {
             
                 var user = await _dataContext.Users.FirstOrDefaultAsync(u => u.Username == username);
+                if (user == null)
+                {
+                    throw new InvalidOperationException($"User with Username {username} not found.");
+                }
                 return user;
             
         }
+        
+        public async Task UpdatePFP(int userId, string newProfilePictureUrl)
+        {
+            var user = GetUserByIdAsync(userId).Result;
+
+            // Update the user's profile picture URL
+            user.ProfilePictureUrl = newProfilePictureUrl;
+
+            // Save changes to the database
+            await _dataContext.SaveChangesAsync();
+        }
+        
 
         public async Task<List<User>> GetUsers()
         {

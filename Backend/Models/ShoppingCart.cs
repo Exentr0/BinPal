@@ -30,7 +30,8 @@ namespace Backend.Models
             _context = context;
 
             RuleFor(sc => sc.Id)
-                .NotNull().WithMessage("Id can't be null");
+                .NotNull()
+                .WithMessage("Id can't be null");
             When(sc => sc.Id != null, () =>
             {
                 RuleFor(sc => sc.Id)
@@ -39,7 +40,8 @@ namespace Backend.Models
             });
 
             RuleFor(sc => sc.UserId)
-                .NotNull().WithMessage("UserId can't be null");
+                .NotNull()
+                .WithMessage("UserId can't be null");
         }
     }
 }

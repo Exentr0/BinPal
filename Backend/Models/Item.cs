@@ -51,7 +51,8 @@ public class ItemValidator : AbstractValidator<Item>
         _context = context;
         
         RuleFor(i => i.Id)
-            .NotNull().WithMessage("Id can't be null");
+            .NotNull()
+            .WithMessage("Id can't be null");
         When(i => i.Id != null, () =>
             {
                 RuleFor(i => i.Id)
@@ -60,7 +61,8 @@ public class ItemValidator : AbstractValidator<Item>
             });
         
         RuleFor(i => i.Name)
-            .NotNull().WithMessage("Name can't be null");
+            .NotNull()
+            .WithMessage("Name can't be null");
         When(i => i.Name != null, () =>
         {
             RuleFor(i => i.Name)
@@ -71,7 +73,8 @@ public class ItemValidator : AbstractValidator<Item>
         });
 
         RuleFor(i => i.Rating)
-            .NotNull().WithMessage("Rating can't be null");
+            .NotNull()
+            .WithMessage("Rating can't be null");
         When(i => i.Rating != null, () =>
         {
             RuleFor(i => i.Rating)
@@ -80,7 +83,8 @@ public class ItemValidator : AbstractValidator<Item>
         });
        
         RuleFor(i => i.LikesAmount)
-            .NotNull().WithMessage("LikesAmount can't be null");
+            .NotNull()
+            .WithMessage("LikesAmount can't be null");
         When(i => i.LikesAmount != null, () =>
         {
             RuleFor(i => i.LikesAmount)
@@ -89,7 +93,8 @@ public class ItemValidator : AbstractValidator<Item>
         });
         
         RuleFor(i => i.Price)
-            .NotNull().WithMessage("Price can't be null");
+            .NotNull()
+            .WithMessage("Price can't be null");
         When(i => i.Price != null, () =>
         {
             RuleFor(i => i.Price)
@@ -97,7 +102,8 @@ public class ItemValidator : AbstractValidator<Item>
         });
 
         RuleFor(i => i.Description)
-            .NotNull().WithMessage("Description can't be null");
+            .NotNull()
+            .WithMessage("Description can't be null");
         When(i => i.Description != null, () =>
         {
             RuleFor(i => i.Description)
@@ -107,7 +113,8 @@ public class ItemValidator : AbstractValidator<Item>
             
         
         RuleFor(i => i.PublisherInfo)
-            .NotNull().WithMessage("PublisherInfo can't be null");
+            .NotNull()
+            .WithMessage("PublisherInfo can't be null");
         When(i => i.PublisherInfo != null, () =>
         {
             RuleFor(i => i.PublisherInfo)
@@ -116,7 +123,8 @@ public class ItemValidator : AbstractValidator<Item>
         });
         
         RuleFor(i => i.License)
-            .NotNull().WithMessage("License can't be null");
+            .NotNull()
+            .WithMessage("License can't be null");
         When(i => i.License != null, () =>
         {
             RuleFor(i => i.License)
@@ -128,7 +136,8 @@ public class ItemValidator : AbstractValidator<Item>
             .NotNull().WithMessage("PublisherId can't be null");
         
         RuleFor(i => i.PicturesUrl)
-            .NotNull().WithMessage("Pictures Url cannot be null.");
+            .NotNull()
+            .WithMessage("Pictures Url cannot be null.");
         When(i => i.PicturesUrl != null, () =>
         {
             RuleFor(i => i.PicturesUrl)
@@ -138,7 +147,8 @@ public class ItemValidator : AbstractValidator<Item>
         });
         
         RuleFor(i => i.ContentUrl)
-            .NotNull().WithMessage("Content Url cannot be null.");
+            .NotNull()
+            .WithMessage("Content Url cannot be null.");
         When(i => i.ContentUrl != null, () =>
         {
             RuleFor(i => i.ContentUrl)
