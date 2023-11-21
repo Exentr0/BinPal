@@ -26,13 +26,7 @@
         <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.5.0" />
         <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.5.0" />
         <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.0.3" />
-    <ItemGroup>
-      <Folder Include="Controllers\Storage\" />
+        <Folder Include="Controllers\Storage\" />
     </ItemGroup>
-
-    </ItemGroup>
-
-
-
-
+    
 </Project>

@@ -1,3 +1,4 @@
+using Azure;
 using Azure.Storage;
 using Azure.Storage.Blobs;
 
@@ -33,13 +34,39 @@ namespace Backend.Storage
 
      
         // Delete a blob based on the blob name
-        public async Task DeleteBlobAsync(string blobName)
-        {
-            // Get the BlobClient for the specified blob
-            var blobClient = ContainerClient.GetBlobClient(blobName);
+       public async Task DeleteBlobAsync(string blobName)
+       {
+           try
+           {
+               // Get the BlobClient for the specified blob
+               var blobClient = ContainerClient.GetBlobClient(blobName);
+       
+               // Delete the blob if it exists
+               if (await blobClient.ExistsAsync())
+               {
+                   await blobClient.DeleteIfExistsAsync();
+                   Console.WriteLine($"Blob with name '{blobName}' deleted successfully.");
+               }
+               else
+               {
+                   // Log the error and throw an exception
+                   Console.WriteLine($"Error: Blob with name '{blobName}' not found.");
+                   throw new InvalidOperationException($"Blob with name '{blobName}' not found.");
+               }
+           }
+           catch (RequestFailedException ex)
+           {
+               Console.WriteLine($"Error deleting blob: {ex.Message}");
+               // Log the error or rethrow the exception based on your application's needs
+               throw;
+           }
+           catch (Exception ex)
+           {
+               Console.WriteLine($"Unexpected error deleting blob: {ex.Message}");
+               // Log the error or rethrow the exception based on your application's needs
+               throw;
+           }
+       }
 
-            // Delete the blob if it exists
-            await blobClient.DeleteIfExistsAsync();
-        }
     }
 }

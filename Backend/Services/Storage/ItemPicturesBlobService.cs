@@ -40,4 +40,13 @@ public class ItemPicturesBlobService : AzureBlobService
             throw;
         }
     }
+
+    public async Task DeleteAllBlobsAsync(int itemId)
+    {
+        string directory = $"{itemId}";
+        await foreach (var blobItem in ContainerClient.GetBlobsAsync(prefix: directory))
+        {
+           await DeleteBlobAsync(blobItem.Name);
+        }
+    }
 }

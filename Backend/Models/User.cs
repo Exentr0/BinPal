@@ -23,7 +23,7 @@ public class User
 
     public DateTime TokenExpires { get; set; } = DateTime.Now.AddDays(1);
 
-    public string ProfilePictureUrl { get; set; } = "https://www.example.com/path/to/resource?query_param=value#fragment";
+    public string ProfilePictureUrl { get; set; }
 
     public string Bio { get; set; } = string.Empty;
     
@@ -90,17 +90,6 @@ public class UserValidator : AbstractValidator<User>
                     .Matches(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$")
                     .WithMessage("Password must contain at least 1 lowercase letter, 1 uppercase letter, 1 digit, and be at least 8 characters long.");
             });
-
-
-        RuleFor(u => u.ProfilePictureUrl)
-            .NotNull()
-            .WithMessage("Profile picture URL cannot be null.");
-        When(u => u.ProfilePictureUrl != null, () =>
-        {
-            RuleFor(u => u.ProfilePictureUrl)
-                .Must(CustomValidators.IsValidUrl)
-                .WithMessage("Profile picture URL is not a valid URL.");
-        });
         
         RuleFor(u => u.Bio)
             .NotNull()
