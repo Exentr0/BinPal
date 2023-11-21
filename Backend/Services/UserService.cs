@@ -64,6 +64,22 @@ namespace Backend.Services
             
         }
 
+        public async Task UpdatePFP(int userId, string newProfilePictureUrl)
+        {
+            var user = await _dataContext.Users.FindAsync(userId);
+
+            if (user == null)
+            {
+                throw new InvalidOperationException($"User with ID {userId} not found.");
+            }
+
+            // Update the user's profile picture URL
+            user.ProfilePictureUrl = newProfilePictureUrl;
+
+            // Save changes to the database
+            await _dataContext.SaveChangesAsync();
+        }
+
         public async Task<List<User>> GetUsers()
         {
                 var users = await _dataContext.Users.ToListAsync();

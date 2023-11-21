@@ -5,7 +5,7 @@ using FluentValidation;
 
 namespace Backend.Models;
 
-public class PaymentInfo
+public class PaymentDetails
 {
     [Key]
     public int Id { get; set; }
@@ -18,15 +18,16 @@ public class PaymentInfo
     public PaymentMethod PaymentMethod { get; set; }
 }
 
-public class PaymentInfoValidator : AbstractValidator<PaymentInfo>
+public class PaymentDetailsValidator : AbstractValidator<PaymentDetails>
 {
     private readonly DataContext context;
-    public PaymentInfoValidator(DataContext _context)
+    public PaymentDetailsValidator(DataContext _context)
     {
         context = _context;
         
         RuleFor(pi => pi.Id)
-            .NotNull().WithMessage("Id can't be null");
+            .NotNull()
+            .WithMessage("Id can't be null");
         When(pi => pi.Id != null, () =>
         {
             RuleFor(pi => pi.Id)
@@ -35,7 +36,8 @@ public class PaymentInfoValidator : AbstractValidator<PaymentInfo>
         });
         
         RuleFor(pi => pi.SecurityCode)
-            .NotNull().WithMessage("Security Code can't be null");
+            .NotNull()
+            .WithMessage("Security Code can't be null");
         When(pi => pi.SecurityCode != null, () =>
         {
             RuleFor(pi => pi.SecurityCode)
@@ -44,7 +46,8 @@ public class PaymentInfoValidator : AbstractValidator<PaymentInfo>
         });
         
         RuleFor(pi => pi.Provider)
-            .NotNull().WithMessage("Provider can't be null");
+            .NotNull()
+            .WithMessage("Provider can't be null");
         When(pi => !string.IsNullOrWhiteSpace(pi.Provider), () =>
         {
             RuleFor(pi => pi.Provider)
@@ -53,7 +56,8 @@ public class PaymentInfoValidator : AbstractValidator<PaymentInfo>
         });
         
         RuleFor(pi => pi.ExpirationDate)
-            .NotNull().WithMessage("Expiration Date can't be null");
+            .NotNull()
+            .WithMessage("Expiration Date can't be null");
         When(pi => pi.ExpirationDate != null, () =>
         {
             RuleFor(pi => pi.ExpirationDate)

@@ -24,9 +24,11 @@ public class ItemCategoryValidator : AbstractValidator<ItemCategory>
     public ItemCategoryValidator()
     {
         RuleFor(ic => ic.ItemId)
-            .NotNull().WithMessage("ItemId can't be null");
+            .NotNull()
+            .WithMessage("ItemId can't be null");
             
         RuleFor(ic => ic.CategoryId)
-            .NotNull().WithMessage("CategoryId can't be null");
+            .NotNull()
+            .WithMessage("CategoryId can't be null");
     }
 }

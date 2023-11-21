@@ -41,7 +41,8 @@ public class UserValidator : AbstractValidator<User>
     {
         _context = context;
         RuleFor(u => u.Id)
-            .NotNull().WithMessage("Id can't be null");
+            .NotNull()
+            .WithMessage("Id can't be null");
         When(u => u.Id != null, () =>
         {
             RuleFor(u => u.Id)
@@ -51,7 +52,8 @@ public class UserValidator : AbstractValidator<User>
         
         
         RuleFor(u => u.Username)
-            .NotNull().WithMessage("UserName can't be null");
+            .NotNull()
+            .WithMessage("UserName can't be null");
         When(u => u.Username != null, () =>
             {
                 RuleFor(u => u.Username)
@@ -64,7 +66,8 @@ public class UserValidator : AbstractValidator<User>
             
 
         RuleFor(u => u.Email)
-            .NotNull().WithMessage("Email can't be null");
+            .NotNull()
+            .WithMessage("Email can't be null");
         When(u => u.Email != null, () =>
             {
                 RuleFor(u => u.Email)
@@ -78,7 +81,8 @@ public class UserValidator : AbstractValidator<User>
         
         
         RuleFor(u => u.Password)
-            .NotNull().WithMessage("Password can't be null");
+            .NotNull()
+            .WithMessage("Password can't be null");
         When(u => u.Password != null, () =>
             {
                 RuleFor(u => u.Password)
@@ -89,7 +93,8 @@ public class UserValidator : AbstractValidator<User>
 
 
         RuleFor(u => u.ProfilePictureUrl)
-            .NotNull().WithMessage("Profile picture URL cannot be null.");
+            .NotNull()
+            .WithMessage("Profile picture URL cannot be null.");
         When(u => u.ProfilePictureUrl != null, () =>
         {
             RuleFor(u => u.ProfilePictureUrl)
@@ -98,7 +103,8 @@ public class UserValidator : AbstractValidator<User>
         });
         
         RuleFor(u => u.Bio)
-            .NotNull().WithMessage("Bio can't be null");
+            .NotNull()
+            .WithMessage("Bio can't be null");
         When(u => u.Bio != null, () =>
             {
                 RuleFor(u => u.Bio)
@@ -107,10 +113,12 @@ public class UserValidator : AbstractValidator<User>
             });
         
         RuleFor(u => u.TokenCreated)
-            .NotNull().WithMessage("TokenCreated cannot be null.");
+            .NotNull()
+            .WithMessage("TokenCreated cannot be null.");
 
         RuleFor(u => u.TokenExpires)
-            .NotNull().WithMessage("TokenExpires cannot be null.");
+            .NotNull()
+            .WithMessage("TokenExpires cannot be null.");
         When(u => u.TokenExpires != null, () =>
         {
             RuleFor(u => u.TokenExpires)
@@ -120,6 +128,7 @@ public class UserValidator : AbstractValidator<User>
 
 
         RuleFor(u => u.RefreshToken)
-            .NotNull().WithMessage("RefreshToken cannot be null");
+            .NotNull()
+            .WithMessage("RefreshToken cannot be null");
     }
 }

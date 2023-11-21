@@ -2,9 +2,11 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using Azure;
 using Backend.Models;
 using Backend.Registration___Authorization;
 using Backend.Services;
+using Backend.Services.Storage;
 using Microsoft.IdentityModel.Tokens;
 using FluentValidation;
 using FluentValidation.Results;
@@ -16,18 +18,20 @@ namespace Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class UserController : ControllerBase
     {
         private static User _user = new User();
         private readonly IConfiguration _configuration;
         private readonly IUserService _userService;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly UserPFPBlobService _userPfpBlobService;
 
-        public AuthController(IConfiguration configuration, IUserService userService, IHttpContextAccessor httpContextAccessor)
+        public UserController(IConfiguration configuration, IUserService userService, IHttpContextAccessor httpContextAccessor, UserPFPBlobService userPfpBlobService)
         {
             _configuration = configuration;
             _userService = userService;
             _httpContextAccessor = httpContextAccessor;
+            _userPfpBlobService = userPfpBlobService;
         }
 
         [HttpGet, Authorize]
@@ -101,8 +105,6 @@ namespace Backend.Controllers
             
             return Ok(response);
         }
-        
-        
         
         [HttpPost("refresh-token")]
         public async Task<ActionResult<string>> RefreshToken()
@@ -183,6 +185,47 @@ namespace Backend.Controllers
                 return key;
             }
         }
+
+        
+        [HttpPost("change-profile-picture/{userId}")]
+        public async Task<IActionResult> ChangeProfilePicture(int userId, IFormFile profilePicture)
+        {
+            try
+            {
+                // Upload the profile picture to Azure Blob Storage
+                await _userPfpBlobService.UploadBlobAsync(userId, profilePicture);
+
+                // Get the URL for the user's profile picture
+                var newProfilePictureUrl = _userPfpBlobService.GetUserPfpUrl(userId);
+
+                // Update the user's profile picture URL in the database
+                await _userService.UpdatePFP(userId, newProfilePictureUrl);
+
+                return Ok("Profile picture updated successfully");
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine($"Error changing profile picture: {ex.Message}");
+
+                // Return a BadRequest result with a custom error message
+                return BadRequest($"User with ID {userId} not found or unable to update profile picture.");
+            }
+            catch (RequestFailedException ex)
+            {
+                Console.WriteLine($"Error changing profile picture: {ex.Message}");
+
+                // Return a StatusCode 500 (Internal Server Error) for Azure Storage-related exceptions
+                return StatusCode(500, "Internal server error related to Azure Storage");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error changing profile picture: {ex.Message}");
+
+                // Return a StatusCode 500 (Internal Server Error) for other exceptions
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
 
     }
 }
