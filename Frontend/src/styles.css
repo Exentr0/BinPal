@@ -2,4 +2,6 @@
 @import "primeng/resources/themes/mdc-dark-deeppurple/theme.css";
 @import "primeng/resources/primeng.css";
 
-
+body {
+  background-color: #1e1e1e;
+}

@@ -6,7 +6,7 @@ import {isSubmittingSelector, validationErrorsSelector} from "src/app/auth/store
 import {registerAction} from "src/app/auth/store/actions/register.action";
 import {RegisterRequestInterface} from "src/app/auth/types/registerRequest.interface";
 import {BackendErrorsInterface} from "src/app/shared/types/backendErrors.interface";
-
+import {customPasswordValidator} from "../../validators/password.validator";
 
 @Component({
   selector: 'mc-register',
@@ -41,17 +41,21 @@ export class RegisterComponent implements OnInit {
     this.form = this.fb.group({
       username: ['', Validators.required],
       email: ['', Validators.compose([Validators.required, Validators.email])],
-      password: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
+      password: ['', Validators.compose([Validators.required, Validators.minLength(8), customPasswordValidator()])],
     })
   }
 
 
   onSubmit(): void {
     if (this.form.valid) {
-      const request: RegisterRequestInterface = {user: this.form.value}  //отримуємо значення з форми
+      const request: RegisterRequestInterface = this.form.value  //отримуємо значення з форми
       this.store.dispatch(registerAction({request})) //відправляємо
     }
   }
 
+
+
+
 }
+
 

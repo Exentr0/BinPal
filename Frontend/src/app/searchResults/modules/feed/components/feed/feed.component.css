@@ -1,7 +1,9 @@
 
-.body {
-  display: flex;
-  justify-content: center;
+:root {
+  --color-dark: #1E1E1E;
+  --color-light: #FFFFFF;
+  --color-gray: #B3B3B3;
+  --color-accent: #AA7EDF;
 }
 
 .loader{
@@ -19,47 +21,53 @@
 }
 
 
-
-.product {
-  width: 210px;
-  background-color: #242424;
-  /*background-color: transparent;*/
-  font-family: 'Inter', sans-serif;
-  color: #ffffff;
+.container{
+  width: 1275px;
+  padding: 0 0;
+  margin: 0 auto;
 }
 
-.product img {
-  width: 210px;
-  border-radius: 10px; /* Заокруглення кутів */
+.grid-container{
+  width: 100%;
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(5, 1fr);
 }
 
-.seller {
-  text-transform: uppercase;
-  color: #B3B3B3;
-  font-size: 12px;
+.products-grid{
+  grid-column: 4 span;
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(4, 1fr);
+  list-style-type: none;
 }
 
-.title {
-  font-size: 16px;
+.filters{
+  position: relative;
 }
 
-.rating {
-  font-size: 12px;
+.filters-price__inputs{
+  width: 100%;
 }
 
-.price {
-  display: inline-block; /* Робимо елемент блочним, але не переносимим на новий рядок */
-  font-size: 14px;
+.fixed{
+  position: fixed;
+  top: 20px;
+  right: 0;
 }
 
-.add-to-cart {
-  display: inline-block;
-  margin-left: 75px;
-  color: #AA7EDF;
-  font-size: 12px;
-  background-color: transparent;
-  border: none;
+
+.height{
+  height: 2000px;
 }
+
+
+
+.pagination{
+  position: absolute;
+  left: 50%;
+}
+
 
 
 

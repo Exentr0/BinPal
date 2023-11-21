@@ -17,7 +17,8 @@ errorMessages!: string[]
         if (this.backendErrorsProps !== null) {
             this.errorMessages = Object.keys(this.backendErrorsProps).map((name: string) => {
                 const messages = this.backendErrorsProps![name].join(', '); // Використовуємо non-null assertion operator
-                return `${name} ${messages}`;
+                return `${messages}`;
+                // return `${name} ${messages}`;
             });
         } else {
             this.errorMessages = []; // Обробка випадку, коли this.backendErrorsProps === null

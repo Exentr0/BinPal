@@ -1,32 +1,47 @@
-
 <div class="body">
-<mc-loading class="loader" *ngIf="isLoading$ | async"></mc-loading>
-<mc-error-message class="error" *ngIf="error$ | async" [message]="'Error'"></mc-error-message>
+  <mc-loading class="loader" *ngIf="isLoading$ | async"></mc-loading>
+  <mc-error-message class="error" *ngIf="error$ | async" [message]="'Error'"></mc-error-message>
 
 
-<div *ngIf="feed$ | async">
-  <div *ngFor="let product of (feed$ | async)?.articles">
-<!--має бути  <div *ngFor="let product of (feed$ | async)?.products">-->
-    <div class="product">
-      <img src="https://assetstorev1-prd-cdn.unity3d.com/key-image/0dbc76eb-d3fe-460a-9862-4fecde21cbd8.webp" alt="Title">
+  <div *ngIf="feed$ | async">
 
-      <p class="seller">Seller</p>
-      <p class="title">{{product.title}}</p>
-      <p class="rating">5 ({{product.favoritesCount}}) | 💜 ({{product.favoritesCount}})</p>
-      <p class="price">$199.99</p>
-      <button class="add-to-cart">Add to Cart</button>
+    <div class="container">
+    <div class="products-content grid-container">
+      <ul class="products-grid">
+        <!--має бути  <div *ngFor="let product of (feed$ | async)?.products">-->
+        <li class="products-grid__item" *ngFor="let product of (feed$ | async)?.articles">
+          <mc-product
+            [image]="'https://assetstorev1-prd-cdn.unity3d.com/key-image/5cb253da-59ab-40e1-b9a4-64ed12580b5e.webp'"
+            [seller]="'Test Seller'"
+            [title]="product.title"
+            [rating]="5"
+            [ratingCount]="63"
+            [favoritesCount]="product.favoritesCount"
+            [price]="199.99">
+          </mc-product>
+        </li>
+      </ul>
+      <div class="filters">
+        <div class="filters__item filters-price">
+          <h3 class="filters-price__title">Pricing</h3>
+          <div class="filters-price__slider"></div>
+          <div class="filters-price__inputs">
+            <input class="filters-price__input">
+            <input class="filters-price__input">
+          </div>
+        </div>
+      </div>
     </div>
-    <p></p>
+    </div>
+
+    <!--має бути  [total]="(feed$ | async)!.productsCount"-->
+    <mc-pagination
+      class="pagination"
+      [total]="(feed$ | async)!.articlesCount"
+      [limit]="limit"
+      [url]="baseUrl"
+      [currentPage]="currentPage"
+    ></mc-pagination>
+
   </div>
-
-
-  <!--має бути  [total]="(feed$ | async)!.productsCount"-->
-  <mc-pagination
-    [total]="(feed$ | async)!.articlesCount"
-    [limit]="limit"
-    [url]="baseUrl"
-    [currentPage]="currentPage"
-  ></mc-pagination>
-
-</div>
 </div>

@@ -23,7 +23,7 @@ export class FeedComponent implements OnInit, OnDestroy {
   baseUrl!: string
   queryParamsSubscription!: Subscription
   currentPage!: number
-  limit = 12 //товарів на одній сторінці
+  limit = 24 //товарів на одній сторінці
 
   constructor(private store: Store, private router: Router, private route: ActivatedRoute) {
   }

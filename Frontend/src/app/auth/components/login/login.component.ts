@@ -6,7 +6,7 @@ import {isSubmittingSelector, validationErrorsSelector} from "src/app/auth/store
 import {BackendErrorsInterface} from "src/app/shared/types/backendErrors.interface";
 import {LoginRequestInterface} from "../../types/loginRequest.interface";
 import {loginAction} from "../../store/actions/login.action";
-import {of} from "rxjs";
+import {customPasswordValidator} from "../../validators/password.validator";
 
 
 
@@ -41,14 +41,14 @@ export class LoginComponent implements OnInit {
   initializeForm(): void {
     this.form = this.fb.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
-      password: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
+      password: ['', Validators.compose([Validators.required, Validators.minLength(8), customPasswordValidator()])],
     })
   }
 
 
   onSubmit(): void {
     if (this.form.valid) {
-      const request: LoginRequestInterface = {user: this.form.value}  //отримуємо значення з форми
+      const request: LoginRequestInterface = this.form.value  //отримуємо значення з форми
       this.store.dispatch(loginAction({request})) //відправляємо
     }
   }

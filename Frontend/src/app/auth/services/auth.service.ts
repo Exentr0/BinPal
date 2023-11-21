@@ -17,16 +17,18 @@ export class AuthService {
 
 
   getUser(response: AuthResponseInterface): CurrentUserInterface {
-    return response.user
+    return response
   }
 
   register(data: RegisterRequestInterface): Observable<CurrentUserInterface> {
-    const url = environment.apiUrl + '/users'
+    // const url = environment.apiUrl + '/users' //для fake api
+    const url = environment.apiUrl + '/Auth/register'
     return this.http.post<AuthResponseInterface>(url, data).pipe(map(this.getUser))
   }
 
   login(data: LoginRequestInterface): Observable<CurrentUserInterface> {
-    const url = environment.apiUrl + '/users/login'
+    // const url = environment.apiUrl + '/users/login'
+    const url = environment.apiUrl + '/Auth/login'
     return this.http.post<AuthResponseInterface>(url, data).pipe(map(this.getUser))
   }
 
@@ -37,3 +39,5 @@ export class AuthService {
 
 
 }
+
+
