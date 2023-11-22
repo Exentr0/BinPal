@@ -23,7 +23,7 @@ public class User
 
     public DateTime TokenExpires { get; set; } = DateTime.Now.AddDays(1);
 
-    public string ProfilePictureUrl { get; set; }
+    public string ProfilePictureUrl { get; set; } = "https://adobemarketplace.blob.core.windows.net/userpfps/default_pfp.png";
 
     public string Bio { get; set; } = string.Empty;
     
