@@ -21,7 +21,7 @@ namespace Backend.Models
         [ForeignKey("PaymentInfoId")]
         public int PaymentInfoId { get; set; }
 
-        public PaymentInfo PaymentInfo { get; set; }
+        public PaymentDetails PaymentDetails { get; set; }
     }
 
     public class PaymentMethodValidator : AbstractValidator<PaymentMethod>
@@ -33,7 +33,8 @@ namespace Backend.Models
             context = _context;
 
             RuleFor(pm => pm.Id)
-                .NotNull().WithMessage("Id can't be null");
+                .NotNull()
+                .WithMessage("Id can't be null");
 
             When(pm => pm.Id != null, () =>
             {
@@ -43,13 +44,16 @@ namespace Backend.Models
             });
 
             RuleFor(pm => pm.IsDefault)
-                .NotNull().WithMessage("IsDefault can't be null");
+                .NotNull()
+                .WithMessage("IsDefault can't be null");
 
             RuleFor(pm => pm.UserId)
-                .NotNull().WithMessage("UserId can't be null");
+                .NotNull()
+                .WithMessage("UserId can't be null");
 
             RuleFor(pm => pm.PaymentInfoId)
-                .NotNull().WithMessage("PaymentInfoId can't be null");
+                .NotNull()
+                .WithMessage("PaymentInfoId can't be null");
 
             // Custom validation rule to check if a user has more payment methods with the same PaymentInfoId
             RuleFor(pm => pm.PaymentInfoId)

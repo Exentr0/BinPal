@@ -10,7 +10,7 @@ namespace Backend.Data
         public DbSet<User> Users => Set<User>(); 
         public DbSet<ShoppingCart> ShoppingCarts => Set<ShoppingCart>();
         public DbSet<PaymentMethod> UserPaymentMethods => Set<PaymentMethod>();
-        public DbSet<PaymentInfo> AccountInfos => Set<PaymentInfo>();
+        public DbSet<PaymentDetails> AccountInfos => Set<PaymentDetails>();
         public DbSet<Item> Items => Set<Item>();
         public DbSet<CartItem> UserCartItems => Set<CartItem>();
         public DbSet<Purchase> Purchases => Set<Purchase>();
@@ -45,7 +45,7 @@ namespace Backend.Data
                 
                 //User Payment Method to Account Into (one-to-one)
                 modelBuilder.Entity<PaymentMethod>()
-                    .HasOne(pm => pm.PaymentInfo) 
+                    .HasOne(pm => pm.PaymentDetails) 
                     .WithOne(pi => pi.PaymentMethod)
                     .HasForeignKey<PaymentMethod>(pm => pm.PaymentInfoId) 
                     .OnDelete(DeleteBehavior.Restrict)
