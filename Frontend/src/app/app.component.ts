@@ -1,20 +1,19 @@
-import { Component } from '@angular/core';
-import {UserTest} from "./modules/user-test";
-import {UserTestService} from "./services/user-test.service";
+import {Component, OnInit} from '@angular/core';
+import {Store} from "@ngrx/store";
+import { getCurrentUserAction } from './auth/store/actions/getCurrentUser.action';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'Frontend';
-  userTests : UserTest[] = [];
-  constructor(private userTestService: UserTestService) { }
+
+export class AppComponent implements OnInit{
+
+  constructor(private store: Store) {}
 
   ngOnInit(): void{
-    this.userTestService
-        .getUserTests()
-        .subscribe((result: UserTest[]) => (this.userTests = result));
+    this.store.dispatch(getCurrentUserAction())
   }
+
 }
+

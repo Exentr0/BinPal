@@ -1,0 +1,50 @@
+<div class="outer-container">
+  <div class="inner-container">
+    <h1>Sign Up</h1>
+
+    <p><a [routerLink]="['/login']" class="register-link">Have an account?</a></p>
+
+    <mc-backend-error-messages
+      class="backend-errors-text"
+      *ngIf="backendErrors$ | async"
+      [backendErrors]="backendErrors$ | async"
+    ></mc-backend-error-messages>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <fieldset>
+
+        <fieldset class="input-field">
+          <input pInputText placeholder="username" formControlName="username"/>
+        </fieldset>
+
+        <fieldset class="input-field">
+          <input pInputText placeholder="email" formControlName="email"/>
+        </fieldset>
+
+
+        <fieldset class="input-field">
+          <p-password
+            formControlName="password"
+            placeholder="password"
+            [toggleMask]="true"
+          > <ng-template pTemplate="footer">
+            <p-divider></p-divider>
+            <p class="mt-2">Suggestions</p>
+            <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+              <li>At least one lowercase</li>
+              <li>At least one uppercase</li>
+              <li>At least one numeric</li>
+              <li>Minimum 8 characters</li>
+            </ul>
+          </ng-template></p-password>
+        </fieldset>
+
+        <button pButton type="submit" [disabled]="!form.valid || (isSubmitting$ | async)">
+          Sign up
+        </button>
+
+      </fieldset>
+    </form>
+  </div>
+</div>
+

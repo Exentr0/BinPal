@@ -87,6 +87,8 @@
               "src/assets"
             ],
             "styles": [
+              "primeng/resources/themes/mdc-dark-deeppurple/theme.css",
+              "primeng/resources/primeng.css",
               "src/styles.css"
             ],
             "scripts": []
