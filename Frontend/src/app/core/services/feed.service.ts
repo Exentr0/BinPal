@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/internal/Observable";
-import {GetFeedResponseInterface} from "../types/getFeedResponse.interface";
-import {environment} from "../../../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
+import { environment } from "src/environments/environment";
+import { GetFeedResponseInterface } from "../components/Products/Feeds/types/getFeedResponse.interface";
 
 @Injectable()
 

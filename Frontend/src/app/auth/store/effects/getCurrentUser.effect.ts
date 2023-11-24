@@ -4,12 +4,12 @@ import {catchError, of, switchMap} from "rxjs";
 import {AuthService} from "../../services/auth.service";
 import {CurrentUserInterface} from "../../../shared/types/currentUser.interface";
 import {map} from "rxjs/operators";
-import {PersistenceService} from "../../../shared/services/persistence.service";
 import {
   getCurrentUserAction,
   getCurrentUserFailureAction,
   getCurrentUserSuccessAction
 } from "../actions/getCurrentUser.action";
+import { PersistenceService } from "src/app/core/services/persistence.service";
 
 @Injectable()
 

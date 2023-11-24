@@ -1,8 +1,8 @@
 import {Component, OnInit} from "@angular/core";
 import {Observable} from "rxjs/internal/Observable";
-import {CurrentUserInterface} from "../../../types/currentUser.interface";
 import {select, Store} from "@ngrx/store";
-import {currentUserSelector, isAnonymousSelector, isLoggedInSelector} from "../../../../auth/store/selectors";
+import { isLoggedInSelector, isAnonymousSelector, currentUserSelector } from "src/app/auth/store/selectors";
+import { CurrentUserInterface } from "../../types/currentUser.interface";
 
 @Component({
   selector: 'mc-topBar',

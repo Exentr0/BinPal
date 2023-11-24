@@ -1,4 +1,4 @@
-import {FeedStateInterface} from "../types/feedState.interface";
+import {FeedStateInterface} from "../../Products/Feeds/types/feedState.interface";
 import {Action, createReducer, on} from "@ngrx/store";
 import {getFeedAction, getFeedFailureAction, getFeedSuccessAction} from "./actions/getFeed.action";
 import {routerNavigationAction} from "@ngrx/router-store";
