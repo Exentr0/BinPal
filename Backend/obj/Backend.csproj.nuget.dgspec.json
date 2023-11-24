@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\evka\\lp\\binpal\\mybranch\\BinPal\\Backend\\Backend.csproj": {}
+    "C:\\Users\\User\\Desktop\\BinPal\\Backend\\Backend.csproj": {}
   },
   "projects": {
-    "C:\\evka\\lp\\binpal\\mybranch\\BinPal\\Backend\\Backend.csproj": {
+    "C:\\Users\\User\\Desktop\\BinPal\\Backend\\Backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\evka\\lp\\binpal\\mybranch\\BinPal\\Backend\\Backend.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Desktop\\BinPal\\Backend\\Backend.csproj",
         "projectName": "Backend",
-        "projectPath": "C:\\evka\\lp\\binpal\\mybranch\\BinPal\\Backend\\Backend.csproj",
-        "packagesPath": "C:\\Users\\evkalipt\\.nuget\\packages\\",
-        "outputPath": "C:\\evka\\lp\\binpal\\mybranch\\BinPal\\Backend\\obj\\",
+        "projectPath": "C:\\Users\\User\\Desktop\\BinPal\\Backend\\Backend.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\Desktop\\BinPal\\Backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\evkalipt\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -124,7 +124,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.404\\RuntimeIdentifierGraph.json"
         }
       }
     }
