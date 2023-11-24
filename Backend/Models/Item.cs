@@ -14,7 +14,8 @@ public class Item
     public string Name { get; set; }
 
     public float Rating { get; set; }
-
+    public int RatingValue { get; set; }
+    public bool Likes { get; set; }
     public int LikesAmount { get; set; } = 0;
     
     public int Price { get; set; }
