@@ -11,7 +11,7 @@ import {environment} from "src/environments/environment";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { EffectsModule } from '@ngrx/effects';
 import {routerReducer, StoreRouterConnectingModule} from '@ngrx/router-store';
-import { TopBarModule } from './shared/shared.module';
+import { SharedModule } from './shared/shared.module';
 import { PersistenceService } from './core/services/persistence.service';
 import { AuthInterceptor } from './core/services/authinterceptor.service';
 
@@ -32,7 +32,7 @@ import { AuthInterceptor } from './core/services/authinterceptor.service';
       logOnly: environment.production //працює тільки в режимі розробки
     }),
     StoreRouterConnectingModule.forRoot(),
-    TopBarModule,
+    SharedModule,
     StoreRouterConnectingModule.forRoot()
   ],
   providers: [

@@ -9,7 +9,7 @@ import {PasswordModule} from 'primeng/password';
 import {InputMaskModule} from 'primeng/inputmask';
 
 
-import {RegisterComponent} from "./components/register/regoster.component";
+import {RegisterComponent} from "./components/register/register.component";
 import {StoreModule} from "@ngrx/store";
 import {reducers} from "./store/reducers";
 import {AuthService} from "./services/auth.service";
@@ -20,7 +20,7 @@ import {LoginComponent} from "./components/login/login.component";
 import {GetCurrentUserEffect} from "./store/effects/getCurrentUser.effect";
 import {DividerModule} from "primeng/divider";
 import { PersistenceService } from "../core/services/persistence.service";
-import { SharedModule } from "primeng/api";
+import { SharedModule } from "../shared/shared.module";
 
 
 const routes: Routes = [
@@ -54,7 +54,6 @@ const routes: Routes = [
   providers: [
     AuthService,
     PersistenceService,
-
   ]
 
 })

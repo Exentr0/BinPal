@@ -16,4 +16,4 @@ import { ProductComponent } from "./components/product/product.component";
   providers: [UtilsService]
 })
 
-export class TopBarModule { }
+export class SharedModule { }
