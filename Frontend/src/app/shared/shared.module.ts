@@ -10,9 +10,11 @@ import { UtilsService } from "../core/services/utils.service";
 import { ProductComponent } from "./components/product/product.component";
 import { FooterComponent } from "./components/footer/footer.component";
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import {PaginatorModule} from "primeng/paginator";
+import {ImageModule} from "primeng/image";
 
 @NgModule({
-  imports: [CommonModule, RouterModule, NgOptimizedImage],
+  imports: [CommonModule, RouterModule, NgOptimizedImage, PaginatorModule, ImageModule],
   declarations: [
     NavbarComponent,
     FooterComponent,

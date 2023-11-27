@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from "@angular/core";
-import { UtilsService } from "src/app/core/services/utils.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {PaginatorState} from "primeng/paginator";
 
 @Component({
   selector: 'mc-pagination',
@@ -9,22 +10,34 @@ import { UtilsService } from "src/app/core/services/utils.service";
 
 
 export class PaginationComponent implements OnInit {
-  @Input('total') totalProps!: number
-  @Input('limit') limitProps!: number
-  @Input('currentPage') currentPageProps!: number
-  @Input('url') urlProps!: string
-
-  pagesCount!: number
-  pages!: number[]
+  @Input('totalProducts') totalProducts!: number
+  @Input('limitProducts') limitProducts!: number
+  @Input('currentPage') currentPage!: number
 
 
-  constructor(private utilsService: UtilsService) {
+  first!: number
+
+
+  constructor(private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.pagesCount = Math.ceil(this.totalProps / this.limitProps)
-    this.pages = this.utilsService.range(1, this.pagesCount)
-    console.log('test', this.pages)
+    this.first = this.currentPage * this.limitProducts - this.limitProducts
+  }
+
+
+  onPageChange(event: PaginatorState) {
+    this.first = event.first || 0;
+    this.limitProducts = event.rows || 24;
+
+    this.currentPage = (this.first + this.limitProducts) / this.limitProducts;
+
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {page: this.currentPage, limit: this.limitProducts},
+      queryParamsHandling: "merge",
+    });
+
   }
 
 

@@ -9,6 +9,7 @@ import { FeedComponent } from "./Feeds/feed.component";
 import { GetFeedEffect } from "./Feeds/store/effects/getFeed.effect";
 import { reducers } from "./Feeds/store/reducer";
 import { SharedModule } from "src/app/shared/shared.module";
+import {DataViewModule} from "primeng/dataview";
 
 
 const routes: Routes = [
@@ -20,14 +21,15 @@ const routes: Routes = [
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    EffectsModule.forFeature([GetFeedEffect]),
-    StoreModule.forFeature('feed', reducers),
-    RouterModule,
-    SharedModule
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        EffectsModule.forFeature([GetFeedEffect]),
+        StoreModule.forFeature('feed', reducers),
+        RouterModule,
+        SharedModule,
+        DataViewModule
+    ],
 
   declarations: [FeedComponent, GlobalFeedComponent],
   exports: [FeedComponent],
