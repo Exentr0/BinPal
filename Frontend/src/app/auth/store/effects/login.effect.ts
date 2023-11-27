@@ -5,9 +5,9 @@ import {AuthService} from "../../services/auth.service";
 import {CurrentUserInterface} from "../../../shared/types/currentUser.interface";
 import {map} from "rxjs/operators";
 import {HttpErrorResponse} from "@angular/common/http";
-import {PersistenceService} from "../../../shared/services/persistence.service";
 import {Router} from "@angular/router";
 import {loginAction, loginFailureAction, loginSuccessAction} from "../actions/login.action";
+import { PersistenceService } from "src/app/core/services/persistence.service";
 
 @Injectable()
 

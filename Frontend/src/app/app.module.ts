@@ -10,11 +10,11 @@ import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 import {environment} from "src/environments/environment";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { EffectsModule } from '@ngrx/effects';
-import {TopBarModule} from "./shared/topBar/topBar.module";
-import {PersistenceService} from "./shared/services/persistence.service";
-import {AuthInterceptor} from "./shared/services/authinterceptor.service";
 import {routerReducer, StoreRouterConnectingModule} from '@ngrx/router-store';
-import {GlobalFeedModule} from "./searchResults/modules/globalFeed/globalFeed.module";
+import { SharedModule } from './shared/shared.module';
+import { PersistenceService } from './core/services/persistence.service';
+import { AuthInterceptor } from './core/services/authinterceptor.service';
+import {ProductsModule} from "./core/components/Products/products.module";
 
 @NgModule({
   declarations: [
@@ -24,6 +24,7 @@ import {GlobalFeedModule} from "./searchResults/modules/globalFeed/globalFeed.mo
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    ProductsModule,
     AuthModule,
     HttpClientModule,
     StoreModule.forRoot({router: routerReducer}),
@@ -33,8 +34,7 @@ import {GlobalFeedModule} from "./searchResults/modules/globalFeed/globalFeed.mo
       logOnly: environment.production //працює тільки в режимі розробки
     }),
     StoreRouterConnectingModule.forRoot(),
-    TopBarModule,
-    GlobalFeedModule,
+    SharedModule,
     StoreRouterConnectingModule.forRoot()
   ],
   providers: [
