@@ -1,6 +1,6 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
-import {RouterModule} from "@angular/router";
+import {RouterModule, Routes} from "@angular/router";
 import { GlobalFeedComponent } from "./GlobalFeed/globalFeed.component";
 import { EffectsModule } from "@ngrx/effects";
 import { StoreModule } from "@ngrx/store";
@@ -10,9 +10,19 @@ import { GetFeedEffect } from "./Feeds/store/effects/getFeed.effect";
 import { reducers } from "./Feeds/store/reducer";
 import { SharedModule } from "src/app/shared/shared.module";
 
+
+const routes: Routes = [
+  {
+    path: '',
+    component: GlobalFeedComponent
+  }
+]
+
+
 @NgModule({
   imports: [
     CommonModule,
+    RouterModule.forChild(routes),
     EffectsModule.forFeature([GetFeedEffect]),
     StoreModule.forFeature('feed', reducers),
     RouterModule,
@@ -24,5 +34,5 @@ import { SharedModule } from "src/app/shared/shared.module";
   providers: [FeedService, GlobalFeedComponent]
 })
 
-export class FeedModule {
+export class ProductsModule {
 }

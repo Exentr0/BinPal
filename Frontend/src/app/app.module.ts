@@ -14,6 +14,7 @@ import {routerReducer, StoreRouterConnectingModule} from '@ngrx/router-store';
 import { SharedModule } from './shared/shared.module';
 import { PersistenceService } from './core/services/persistence.service';
 import { AuthInterceptor } from './core/services/authinterceptor.service';
+import {ProductsModule} from "./core/components/Products/products.module";
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { AuthInterceptor } from './core/services/authinterceptor.service';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    ProductsModule,
     AuthModule,
     HttpClientModule,
     StoreModule.forRoot({router: routerReducer}),

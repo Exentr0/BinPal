@@ -1,12 +1,12 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {select, Store} from "@ngrx/store";
-import {getFeedAction} from "../../store/actions/getFeed.action";
-import {Observable} from "rxjs/internal/Observable";
-import {GetFeedResponseInterface} from "../../types/getFeedResponse.interface";
-import {errorSelector, feedSelector, isLoadingSelector} from "../../store/selectors";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {Subscription} from "rxjs";
 import queryString from 'query-string';
+import {Observable} from "rxjs/internal/Observable";
+import {GetFeedResponseInterface} from "./types/getFeedResponse.interface";
+import {errorSelector, feedSelector, isLoadingSelector} from "./store/selectors";
+import {getFeedAction} from "./store/actions/getFeed.action";
 
 
 @Component({
