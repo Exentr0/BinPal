@@ -2,13 +2,12 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {select, Store} from "@ngrx/store";
 import {Observable} from "rxjs/internal/Observable";
 import {ActivatedRoute, Params, Router} from "@angular/router";
-import {of, Subscription, switchMap} from "rxjs";
+import {Subscription } from "rxjs";
 import queryString from 'query-string';
 import {GetFeedResponseInterface} from "./types/getFeedResponse.interface";
 import {ProductInterface} from "../../../../shared/types/product.interface";
 import {errorSelector, feedSelector, isLoadingSelector} from "./store/selectors";
 import {getFeedAction} from "./store/actions/getFeed.action";
-
 
 @Component({
   selector: 'mc-feed',
@@ -25,11 +24,13 @@ export class FeedComponent implements OnInit, OnDestroy {
   queryParamsSubscription!: Subscription
   currentPage!: number
   limitProducts!: number
-  products?: ProductInterface[];
+  products?: ProductInterface[]
+  rangePrice: number[] = [20, 200];
+
+
 
   constructor(private store: Store, private router: Router, private route: ActivatedRoute) {
   }
-
 
   ngOnInit(): void {
     this.initializeValues()
@@ -45,16 +46,15 @@ export class FeedComponent implements OnInit, OnDestroy {
     this.isLoading$ = this.store.pipe(select(isLoadingSelector))
     this.error$ = this.store.pipe(select(errorSelector))
     this.feed$ = this.store.pipe(select(feedSelector))
+    this.baseUrl = this.router.url.split('?')[0]  //базова url до '?'
 
 
-    this.feed$.pipe(
-      switchMap(feed => feed ? of(feed) : of(null)),
-    ).subscribe(feed => {
-      this.products = feed?.articles;
+    this.feed$.subscribe(response => {
+      if (response) {
+        this.products = response.articles;
+      }
     });
 
-
-    this.baseUrl = this.router.url.split('?')[0]  //базова url до '?'
   }
 
   fetchFeed(): void {
@@ -71,6 +71,7 @@ export class FeedComponent implements OnInit, OnDestroy {
   }
 
 
+
   initializeListeners(): void {
     this.queryParamsSubscription = this.route.queryParams.subscribe(
       (params: Params) => {
@@ -79,6 +80,7 @@ export class FeedComponent implements OnInit, OnDestroy {
         this.fetchFeed()
       })
   }
+
 
 
 }

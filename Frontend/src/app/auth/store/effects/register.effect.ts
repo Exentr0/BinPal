@@ -13,11 +13,10 @@ import { PersistenceService } from "src/app/core/services/persistence.service";
 
 export class RegisterEffect {
 
-  // $ - це Observable (потік даних, підписка)
   constructor(
     private actions$: Actions,
     private authService: AuthService,
-    private persistenceService: PersistenceService, //для збереження даних,
+    private persistenceService: PersistenceService,
     private router: Router
   ) {}
 
