@@ -1,24 +1,24 @@
-import {NgModule} from "@angular/core";
-import {CommonModule} from "@angular/common";
-import {RouterModule, Routes} from "@angular/router";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { RouterModule, Routes } from "@angular/router";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
-import {InputTextModule} from 'primeng/inputtext';
-import {ButtonModule} from 'primeng/button';
-import {PasswordModule} from 'primeng/password';
-import {InputMaskModule} from 'primeng/inputmask';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { PasswordModule } from 'primeng/password';
+import { InputMaskModule } from 'primeng/inputmask';
 
 
-import {RegisterComponent} from "./components/register/register.component";
-import {StoreModule} from "@ngrx/store";
-import {reducers} from "./store/reducers";
-import {AuthService} from "./services/auth.service";
-import {EffectsModule} from "@ngrx/effects";
-import {RegisterEffect} from "./store/effects/register.effect";
-import {LoginEffect} from "./store/effects/login.effect";
-import {LoginComponent} from "./components/login/login.component";
-import {GetCurrentUserEffect} from "./store/effects/getCurrentUser.effect";
-import {DividerModule} from "primeng/divider";
+import { RegisterComponent } from "./components/register/register.component";
+import { StoreModule } from "@ngrx/store";
+import { reducers } from "./store/reducers";
+import { AuthService } from "./services/auth.service";
+import { EffectsModule } from "@ngrx/effects";
+import { RegisterEffect } from "./store/effects/register.effect";
+import { LoginEffect } from "./store/effects/login.effect";
+import { LoginComponent } from "./components/login/login.component";
+import { GetCurrentUserEffect } from "./store/effects/getCurrentUser.effect";
+import { DividerModule } from "primeng/divider";
 import { PersistenceService } from "../core/services/persistence.service";
 import { SharedModule } from "../shared/shared.module";
 
