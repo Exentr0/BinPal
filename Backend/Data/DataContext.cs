@@ -19,7 +19,6 @@ namespace Backend.Data
         public DbSet<ItemCategory> ItemCategories => Set<ItemCategory>();
         public DbSet<Software> Software => Set<Software>();
         public DbSet<SoftwareCategory> SoftwareCategories => Set<SoftwareCategory>();
-        public DbSet<ItemRelease> ItemReleases => Set<ItemRelease>();
         public DbSet<Plugin> Plugins => Set<Plugin>();
         public DbSet<SoftwarePlugin> SoftwarePlugins => Set<SoftwarePlugin>();
         public DbSet<ItemPlugin> ItemPlugins => Set<ItemPlugin>();
@@ -148,14 +147,7 @@ namespace Backend.Data
                     .HasForeignKey(sc => sc.SoftwareId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
-
-                //Item to ItemRelease (one-to-many)
-                modelBuilder.Entity<ItemRelease>()
-                    .HasOne(ir => ir.Item)
-                    .WithMany(i => i.ItemReleases)
-                    .HasForeignKey(ir => ir.ItemId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .IsRequired();
+            
                 
                 modelBuilder.Entity<SoftwarePlugin>()
                     .HasKey(sp => new { sp.SoftwareId, sp.PluginId });

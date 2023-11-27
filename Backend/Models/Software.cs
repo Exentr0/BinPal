@@ -14,8 +14,6 @@ namespace Backend.Models
 
         public string Name { get; set; }
 
-        public string PictureUrl { get; set; }
-
         public List<SoftwareCategory>? SoftwareCategories { get; set; }
         public List<SoftwarePlugin>? SoftwarePlugins { get; set; }
     }
@@ -47,18 +45,6 @@ namespace Backend.Models
                     .IsUnique(_context, s => s.Name)
                     .WithMessage("Name should be unique")
                     .MaximumLength(20).WithMessage("Name must be a maximum of 20 characters");
-            });
-
-            RuleFor(s => s.PictureUrl)
-                .NotNull()
-                .WithMessage("Picture URL can't be null");
-            When(s => s.PictureUrl != null, () =>
-            {
-                RuleFor(s => s.PictureUrl)
-                    .Must(CustomValidators.IsValidUrl)
-                    .WithMessage("Pictures URL is not a valid URL.")
-                    .IsUnique(_context, s => s.PictureUrl)
-                    .WithMessage("Picture URL should be unique");
             });
         }
     }

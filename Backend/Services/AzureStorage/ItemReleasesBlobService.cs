@@ -3,9 +3,9 @@ using Backend.Storage;
 
 namespace Backend.Services.Storage;
 
-public class ItemContentBlobService : AzureBlobService
+public class ItemReleasesBlobService : AzureBlobService
 {
-    public ItemContentBlobService(IConfiguration configuration) : base(configuration)
+    public ItemReleasesBlobService(IConfiguration configuration) : base(configuration)
     {
         ContainerName = configuration["AzureBlobStorageOptions:ItemContentContainerName"];
         
@@ -17,10 +17,10 @@ public class ItemContentBlobService : AzureBlobService
         }
     }
 
-    public override async Task UploadBlobAsync(int itemId, IFormFile zipFile)
+    public override async Task UploadBlobAsync(int itemId, IFormFile file)
     {
         // Construct the blob name with the specified directory (ItemId)
-        var blobName = $"{itemId}/{Path.GetFileName(zipFile.FileName)}";
+        var blobName = $"{itemId}/{Path.GetFileName(file.FileName)}";
 
         // Get the BlobClient for the specified blob
         var blockBlobClient = ContainerClient.GetBlobClient(blobName);
@@ -28,7 +28,7 @@ public class ItemContentBlobService : AzureBlobService
         try
         {
             // Upload the file to the blob
-            await using var stream = zipFile.OpenReadStream();
+            await using var stream = file.OpenReadStream();
             await blockBlobClient.UploadAsync(stream, true);
         }
         catch (RequestFailedException ex)
@@ -38,6 +38,7 @@ public class ItemContentBlobService : AzureBlobService
         }
     }
     
+    //Delete all blobs of releases of Item
     public async Task DeleteAllBlobsAsync(int itemId)
     {
         string directory = $"{itemId}";
@@ -45,5 +46,25 @@ public class ItemContentBlobService : AzureBlobService
         {
             await DeleteBlobAsync(blobItem.Name);
         }
+    }
+    
+    //Get Urls to blobs of Releases of Item
+    public async Task<List<string>> GetItemReleaseUrlsAsync(int itemId)
+    {
+        string directory = $"{itemId}";
+        var blobUrls = new List<string>();
+
+        await foreach (var blobItem in ContainerClient.GetBlobsAsync(prefix: directory))
+        {
+            var blobName = blobItem.Name;
+            var blobClient = ContainerClient.GetBlobClient(blobName);
+
+            // Construct the URL based on the blob client's Uri
+            var blobUrl = blobClient.Uri.ToString();
+
+            blobUrls.Add(blobUrl);
+        }
+
+        return blobUrls;
     }
 }

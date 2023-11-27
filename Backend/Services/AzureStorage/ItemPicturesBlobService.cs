@@ -20,10 +20,10 @@ public class ItemPicturesBlobService : AzureBlobService
     }
 
     // Upload a blob (picture) for a Item
-    public override async Task UploadBlobAsync(int itemId, IFormFile zipFile)
+    public override async Task UploadBlobAsync(int itemId, IFormFile file)
     {
         // Construct the blob name with the specified directory (ItemId)
-        var blobName = $"{itemId}/{Path.GetFileName(zipFile.FileName)}";
+        var blobName = $"{itemId}/{Path.GetFileName(file.FileName)}";
                 
         // Get the BlobClient for the specified blob
         var blobClient = ContainerClient.GetBlobClient(blobName);
@@ -31,7 +31,7 @@ public class ItemPicturesBlobService : AzureBlobService
         try
         {
             // Upload the image to the blob
-            await using var stream = zipFile.OpenReadStream();
+            await using var stream = file.OpenReadStream();
             await blobClient.UploadAsync(stream, true);
         }
         catch (RequestFailedException ex)
@@ -41,12 +41,38 @@ public class ItemPicturesBlobService : AzureBlobService
         }
     }
 
+    // Delete all blobs (pictures) for a specified item
     public async Task DeleteAllBlobsAsync(int itemId)
     {
         string directory = $"{itemId}";
+
+        // Iterate through all blobs in the specified directory and delete them
         await foreach (var blobItem in ContainerClient.GetBlobsAsync(prefix: directory))
         {
-           await DeleteBlobAsync(blobItem.Name);
+            await DeleteBlobAsync(blobItem.Name);
         }
+    }
+
+    // Get a list of URLs for pictures associated with a specified item
+    public async Task<List<string>> GetItemPictureUrlsAsync(int itemId)
+    {
+        string directory = $"{itemId}";
+        var blobUrls = new List<string>();
+
+        // Iterate through all blobs in the specified directory and construct URLs
+        await foreach (var blobItem in ContainerClient.GetBlobsAsync(prefix: directory))
+        {
+            var blobName = blobItem.Name;
+            var blobClient = ContainerClient.GetBlobClient(blobName);
+
+            // Construct the URL based on the blob client's Uri
+            var blobUrl = blobClient.Uri.ToString();
+
+            // Add the URL to the list
+            blobUrls.Add(blobUrl);
+        }
+
+        // Return the list of URLs
+        return blobUrls;
     }
 }

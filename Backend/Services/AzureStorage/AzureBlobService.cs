@@ -30,7 +30,7 @@ namespace Backend.Storage
         }
 
         //Abstract method for uploading a blob
-        public abstract Task UploadBlobAsync(int entityId, IFormFile zipFile);
+        public abstract Task UploadBlobAsync(int entityId, IFormFile file);
 
      
         // Delete a blob based on the blob name

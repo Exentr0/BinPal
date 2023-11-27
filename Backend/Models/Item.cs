@@ -24,17 +24,13 @@ public class Item
     public string PublisherInfo { get; set; }
     
     public string License { get; set; }
-
-    public string PicturesUrl { get; set; }
-
-    public string ContentUrl { get; set; }
+    
 
     [ForeignKey("PublisherId")] 
     public int PublisherId { get; set; }
     
     public User User { get; set; }
-
-    public List<ItemRelease> ItemReleases { get; set; }
+    
     public List<CartItem>? CartItems { get; set; }
     public List<Purchase>? Purchases { get; set; }
     public List<ItemReview>? Reviews { get; set; }
@@ -134,27 +130,5 @@ public class ItemValidator : AbstractValidator<Item>
 
         RuleFor(i => i.PublisherId)
             .NotNull().WithMessage("PublisherId can't be null");
-        
-        RuleFor(i => i.PicturesUrl)
-            .NotNull()
-            .WithMessage("Pictures Url cannot be null.");
-        When(i => i.PicturesUrl != null, () =>
-        {
-            RuleFor(i => i.PicturesUrl)
-                .Must(CustomValidators.IsValidUrl)
-                .WithMessage("Pictures URL is not a valid URL.")
-                .IsUnique(_context, i => i.PicturesUrl).WithMessage("Pictures URL should be unique");
-        });
-        
-        RuleFor(i => i.ContentUrl)
-            .NotNull()
-            .WithMessage("Content Url cannot be null.");
-        When(i => i.ContentUrl != null, () =>
-        {
-            RuleFor(i => i.ContentUrl)
-                .Must(CustomValidators.IsValidUrl)
-                .WithMessage("Content URL is not a valid URL.")
-                .IsUnique(_context, i => i.PicturesUrl).WithMessage("Content URL should be unique");
-        });
     }
 }

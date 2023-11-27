@@ -23,7 +23,7 @@ namespace Backend.Services.Storage
         }
 
         // Upload a blob (profile picture) for a user
-        public override async Task UploadBlobAsync(int userId, IFormFile zipFile)
+        public override async Task UploadBlobAsync(int userId, IFormFile file)
         {
             string blobName = $"{userId}";
             
@@ -33,7 +33,7 @@ namespace Backend.Services.Storage
             try
             {
                 // Upload the profile picture to the blob
-                await using var stream = zipFile.OpenReadStream();
+                await using var stream = file.OpenReadStream();
                 await blobClient.UploadAsync(stream, true);
             }
             catch (RequestFailedException ex)

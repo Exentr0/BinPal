@@ -19,7 +19,8 @@ var builder = WebApplication.CreateBuilder(args);
 //Azure Storage Services
 builder.Services.AddScoped<UserPFPBlobService>();
 builder.Services.AddScoped<ItemPicturesBlobService>();
-builder.Services.AddScoped<ItemContentBlobService>();
+builder.Services.AddScoped<ItemReleasesBlobService>();
+builder.Services.AddScoped<SoftwarePicturesBlobService>();
 
 // Add services to the container.
 builder.Services.AddScoped<IValidator<User>, UserValidator>();
@@ -34,7 +35,6 @@ builder.Services.AddScoped<IValidator<ShoppingCart>, ShoppingCartValidator>();
 builder.Services.AddScoped<IValidator<Software>, SoftwareValidator>();
 builder.Services.AddScoped<IValidator<SoftwareCategory>, SoftwareCategoryValidator>();
 builder.Services.AddScoped<IValidator<PaymentMethod>, PaymentMethodValidator>();
-builder.Services.AddScoped<IValidator<ItemRelease>, ItemReleaseValidator>();
 builder.Services.AddScoped<IValidator<Plugin>, PluginValidator>();
 builder.Services.AddScoped<IValidator<SoftwarePlugin>, SoftwarePluginValidator>();
 builder.Services.AddScoped<IValidator<ItemPlugin>, ItemPluginValidator>();

@@ -80,17 +80,6 @@ namespace Backend.Services
             
         }
         
-        public async Task UpdatePFP(int userId, string newProfilePictureUrl)
-        {
-            var user = GetUserByIdAsync(userId).Result;
-
-            // Update the user's profile picture URL
-            user.ProfilePictureUrl = newProfilePictureUrl;
-
-            // Save changes to the database
-            await _dataContext.SaveChangesAsync();
-        }
-        
 
         public async Task<List<User>> GetUsers()
         {
