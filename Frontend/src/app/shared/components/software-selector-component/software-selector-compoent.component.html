@@ -1,0 +1,19 @@
+<!-- software-selector-compoent.component.html -->
+
+<div class="card flex justify-content-center">
+    <p-multiSelect [options]="softwareList" [(ngModel)]="selectedSoftware" placeholder="Select Software" optionLabel="name">
+        <ng-template let-value pTemplate="selectedItems">
+            <div class="inline-flex align-items-center gap-2 px-1" *ngFor="let option of value">
+                <img [src]="option.iconUrl" alt="{{ option.name }} Icon" style="width: 18px" />
+                <div>{{ option.name }},</div>
+            </div>
+            <div *ngIf="!value || value.length === 0">Select Software</div>
+        </ng-template>
+        <ng-template let-software pTemplate="item">
+            <div class="flex align-items-center gap-2">
+                <img [src]="software.iconUrl" alt="{{ software.name }} Icon" style="width: 18px" />
+                <div>{{ software.name }}</div>
+            </div>
+        </ng-template>
+    </p-multiSelect>
+</div>

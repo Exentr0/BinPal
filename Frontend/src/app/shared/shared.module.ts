@@ -10,9 +10,18 @@ import { UtilsService } from "../core/services/utils.service";
 import { ProductComponent } from "./components/product/product.component";
 import { FooterComponent } from "./components/footer/footer.component";
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { SoftwareSelectorComponent } from "./components/software-selector-component/software-selector-compoent.component";
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  imports: [CommonModule, RouterModule, NgOptimizedImage],
+  imports: [
+      CommonModule,
+    RouterModule,
+    NgOptimizedImage,
+    MultiSelectModule,
+    FormsModule
+  ],
   declarations: [
     NavbarComponent,
     FooterComponent,
@@ -21,7 +30,8 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
     LoadingComponent,
     PaginationComponent,
     ProductComponent,
-    SearchBarComponent],
+    SearchBarComponent,
+    SoftwareSelectorComponent],
   exports: [
     NavbarComponent,
     FooterComponent,
@@ -29,7 +39,8 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
     BackendErrorMessagesComponent,
     LoadingComponent,
     PaginationComponent,
-    ProductComponent],
+    ProductComponent,
+    SoftwareSelectorComponent,],
   providers: [UtilsService]
 })
 

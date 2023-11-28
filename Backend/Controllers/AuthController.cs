@@ -1,12 +1,9 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
-using System.Text;
-using Azure;
 using Backend.Models;
 using Backend.Registration___Authorization;
 using Backend.Services;
-using Backend.Services.Storage;
 using Microsoft.IdentityModel.Tokens;
 using FluentValidation;
 using FluentValidation.Results;
@@ -24,16 +21,14 @@ namespace Backend.Controllers
         private readonly IConfiguration _configuration;
         private readonly IUserService _userService;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly UserPFPBlobService _userPfpBlobService;
 
-        public AuthController(IConfiguration configuration, IUserService userService, IHttpContextAccessor httpContextAccessor, UserPFPBlobService userPfpBlobService)
+        public AuthController(IConfiguration configuration, IUserService userService, IHttpContextAccessor httpContextAccessor)
         {
             _configuration = configuration;
             _userService = userService;
             _httpContextAccessor = httpContextAccessor;
-            _userPfpBlobService = userPfpBlobService;
         }
-
+        
         [HttpGet, Authorize]
         public ActionResult<string> GetMyName()
         {

@@ -41,7 +41,7 @@ public class SoftwarePicturesBlobService : AzureBlobService
     // Get the URL for a software picture based on software ID
     public string GetSoftwarePictureUrl(int softwareId)
     {
-        string blobName = $"{softwareId}";
+        string blobName = $"{softwareId}.png";
 
         // Get the BlobClient for the specified blob
         var blobClient = ContainerClient.GetBlobClient(blobName);

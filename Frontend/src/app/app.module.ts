@@ -15,10 +15,11 @@ import { SharedModule } from './shared/shared.module';
 import { PersistenceService } from './core/services/persistence.service';
 import { AuthInterceptor } from './core/services/authinterceptor.service';
 import {ProductsModule} from "./core/components/Products/products.module";
+import { PackageAddingModule} from "./package-adding/package-adding.module";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,6 +27,7 @@ import {ProductsModule} from "./core/components/Products/products.module";
     AppRoutingModule,
     ProductsModule,
     AuthModule,
+    PackageAddingModule,
     HttpClientModule,
     StoreModule.forRoot({router: routerReducer}),
     EffectsModule.forRoot([]),
