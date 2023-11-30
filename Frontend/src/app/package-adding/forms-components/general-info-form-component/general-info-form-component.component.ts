@@ -22,7 +22,6 @@ export class GeneralInfoFormComponentComponent implements OnInit{
     if (this.generalInfo.name && this.generalInfo.price && this.generalInfo.description) {
       this.ticketService.packageInfo.generalInfo = this.generalInfo;
       this.router.navigate(['add-package/supported-software']);
-
       return;
     }
 

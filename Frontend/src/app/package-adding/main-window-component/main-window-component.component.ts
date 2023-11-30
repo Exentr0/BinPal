@@ -24,6 +24,14 @@ export class MainWindowComponentComponent {
       {
         label: 'Supported Apps',
         routerLink: 'supported-software'
+      },
+      {
+        label: 'Required Plugins',
+        routerLink : 'required-plugins'
+      },
+      {
+        label: 'Categories',
+        routerLink: 'categories'
       }
     ];
 

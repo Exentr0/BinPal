@@ -1,0 +1,15 @@
+<!-- software-selector-component.component.html -->
+<div class="grid-container">
+    <ng-container *ngFor="let software of softwareOptionsList">
+        <div
+                class="card"
+                [style.background-color]="isSelected(software) ? 'rgba(178, 46, 191, 0.66)' : '#333'"
+                (click)="selectSoftware(software)"
+        >
+            <div class="card-content">
+                <img [src]="software.iconUrl" alt="{{ software.name }} Icon" style="width: 100px" />
+                <div>{{ software.name }}</div>
+            </div>
+        </div>
+    </ng-container>
+</div>

@@ -15,7 +15,7 @@ import { SharedModule } from './shared/shared.module';
 import { PersistenceService } from './core/services/persistence.service';
 import { AuthInterceptor } from './core/services/authinterceptor.service';
 import {ProductsModule} from "./core/components/Products/products.module";
-import { PackageAddingModule} from "./package-adding/package-adding.module";
+import { PackageAddingModule } from "./package-adding/package-adding.module";
 
 @NgModule({
   declarations: [

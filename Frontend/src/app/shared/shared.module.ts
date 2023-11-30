@@ -1,26 +1,29 @@
-import { NgModule } from "@angular/core";
-import { CommonModule, NgOptimizedImage } from "@angular/common";
-import { NavbarComponent } from "./components/navbar/navbar.component";
-import { RouterModule } from "@angular/router";
-import { ErrorMessageComponent } from "./components/errorMessage/errorMessage.component";
-import { BackendErrorMessagesComponent } from "./components/backendErrorMessages/backendErrorMessages.component";
-import { LoadingComponent } from "./components/loading/loading.component";
-import { PaginationComponent } from "./components/pagination/pagination.component";
-import { UtilsService } from "../core/services/utils.service";
-import { ProductComponent } from "./components/product/product.component";
-import { FooterComponent } from "./components/footer/footer.component";
-import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { SoftwareSelectorComponent } from "./components/software-selector-component/software-selector-compoent.component";
 import { FormsModule } from '@angular/forms';
+import { CardModule } from 'primeng/card';
+import { CheckboxModule } from 'primeng/checkbox';
+
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { ErrorMessageComponent } from './components/errorMessage/errorMessage.component';
+import { BackendErrorMessagesComponent } from './components/backendErrorMessages/backendErrorMessages.component';
+import { LoadingComponent } from './components/loading/loading.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
+import { ProductComponent } from './components/product/product.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { UtilsService } from '../core/services/utils.service';
 
 @NgModule({
   imports: [
-      CommonModule,
+    CommonModule,
     RouterModule,
-    NgOptimizedImage,
     MultiSelectModule,
-    FormsModule
+    FormsModule,
+    CardModule,
+    CheckboxModule,
   ],
   declarations: [
     NavbarComponent,
@@ -31,7 +34,7 @@ import { FormsModule } from '@angular/forms';
     PaginationComponent,
     ProductComponent,
     SearchBarComponent,
-    SoftwareSelectorComponent],
+  ],
   exports: [
     NavbarComponent,
     FooterComponent,
@@ -40,8 +43,9 @@ import { FormsModule } from '@angular/forms';
     LoadingComponent,
     PaginationComponent,
     ProductComponent,
-    SoftwareSelectorComponent,],
-  providers: [UtilsService]
+  ],
+  providers: [
+    UtilsService,
+  ]
 })
-
 export class SharedModule { }

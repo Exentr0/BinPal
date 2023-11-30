@@ -20,7 +20,6 @@ namespace Backend.Data
         public DbSet<Software> Software => Set<Software>();
         public DbSet<SoftwareCategory> SoftwareCategories => Set<SoftwareCategory>();
         public DbSet<Plugin> Plugins => Set<Plugin>();
-        public DbSet<SoftwarePlugin> SoftwarePlugins => Set<SoftwarePlugin>();
         public DbSet<ItemPlugin> ItemPlugins => Set<ItemPlugin>();
  
         //Specify relationships
@@ -148,23 +147,11 @@ namespace Backend.Data
                     .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
             
-                
-                modelBuilder.Entity<SoftwarePlugin>()
-                    .HasKey(sp => new { sp.SoftwareId, sp.PluginId });
-            
-                //Plugin To Software Plugin(one-to-many)
-                modelBuilder.Entity<Plugin>()
-                    .HasMany(p => p.SoftwarePlugins)
-                    .WithOne(sp => sp.Plugin)
-                    .HasForeignKey(sp => sp.PluginId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .IsRequired();
-                
-                //Software To Software Plugin
+                //Software to Plugin (one-to-many)
                 modelBuilder.Entity<Software>()
                     .HasMany(s => s.SoftwarePlugins)
-                    .WithOne(sp => sp.Software)
-                    .HasForeignKey(sp => sp.SoftwareId)
+                    .WithOne(p => p.Software)
+                    .HasForeignKey(p => p.SoftwareId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
                 
