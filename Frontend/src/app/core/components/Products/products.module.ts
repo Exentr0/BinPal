@@ -15,6 +15,7 @@ import {FormsModule} from "@angular/forms";
 import {InputTextModule} from "primeng/inputtext";
 import {DropdownModule} from "primeng/dropdown";
 import {TopComponent} from "./Top/top.component";
+import {ScrollPanelModule} from "primeng/scrollpanel";
 
 
 const routes: Routes = [
@@ -26,19 +27,20 @@ const routes: Routes = [
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    EffectsModule.forFeature([GetFeedEffect]),
-    StoreModule.forFeature('feed', reducers),
-    RouterModule,
-    SharedModule,
-    DataViewModule,
-    SliderModule,
-    FormsModule,
-    InputTextModule,
-    DropdownModule
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        EffectsModule.forFeature([GetFeedEffect]),
+        StoreModule.forFeature('feed', reducers),
+        RouterModule,
+        SharedModule,
+        DataViewModule,
+        SliderModule,
+        FormsModule,
+        InputTextModule,
+        DropdownModule,
+        ScrollPanelModule
+    ],
 
   declarations: [FeedComponent, GlobalFeedComponent, TopComponent],
   exports: [FeedComponent],

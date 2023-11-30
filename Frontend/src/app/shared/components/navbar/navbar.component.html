@@ -1,56 +1,51 @@
-<nav>
-  <div>
-    <a [routerLink]="['/']">
-      Adobe MARKETPLACE
-    </a>
-  </div>
+<div class="container">
+  <div class="nav">
 
-  <ul>
-    <li>
+
+    <div class="logo">
       <a [routerLink]="['/']">
-        Home
+        <img class="logo-img" src="./assets/homeLogo.png"/>
       </a>
-    </li>
+    </div>
+
+    <div class="nologo">
+
+    <span class="p-input-icon-left search">
+    <i class="pi pi-search search-ico"></i>
+    <input type="text" class="search-input" pInputText pAutoFocus [autofocus]="true" placeholder="Search"/>
+    </span>
 
 
-    <ng-container *ngIf="isLoggedIn$ | async">
-      <li>
-        <a [routerLink]="['/basket']">
-          Basket
-        </a>
-      </li>
+      <!--    <ng-container *ngIf="isLoggedIn$ | async">-->
 
-      <li>
-        <a [routerLink]="['/settings']">
-          Settings
-        </a>
-      </li>
+      <button class="button" data-tooltip="Add" [routerLink]="['/add']">
+        <i class="pi pi-upload"></i>
+      </button>
 
-      <li>
-        <a [routerLink]="['/profile', (currentUser$ | async)?.username]">
-          <img [src]="(currentUser$ | async)?.image" alt="User Image" /> &nbsp; {{(currentUser$ | async)!.username}}
-        </a>
-      </li>
-    </ng-container>
-
-    <ng-container *ngIf="isAnonymous$ | async">
-
-      <li>
-        <a [routerLink]="['/login']">
-          Sign in
-        </a>
-      </li>
-
-      <li>
-        <a [routerLink]="['/register']">
-          Sign up
-        </a>
-      </li>
-
-    </ng-container>
+      <button class="button" data-tooltip="Saved" [routerLink]="['/account/saved', (currentUser$ | async)?.username]">
+        <i class="pi pi-heart"></i>
+      </button>
 
 
+      <button class="button" data-tooltip="Cart" [routerLink]="['/cart']">
+        <i class="pi pi-shopping-bag"></i>
+      </button>
 
-  </ul>
+      <button class="button" data-tooltip="Profile" [routerLink]="['/account', (currentUser$ | async)?.username]">
+        <i class="pi pi-user"></i>
+      </button>
 
-</nav>
+      <!--    </ng-container>-->
+
+      <!--    <ng-container *ngIf="isAnonymous$ | async">-->
+
+<!--      <button class="button" data-tooltip="Login" [routerLink]="['/login']">-->
+<!--        <i class="pi pi-sign-in"></i>-->
+<!--      </button>-->
+
+      <!--    </ng-container>-->
+    </div>
+
+
+  </div>
+</div>

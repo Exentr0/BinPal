@@ -1,20 +1,38 @@
-import { NgModule } from "@angular/core";
-import { CommonModule, NgOptimizedImage } from "@angular/common";
-import { NavbarComponent } from "./components/navbar/navbar.component";
-import { RouterModule } from "@angular/router";
-import { ErrorMessageComponent } from "./components/errorMessage/errorMessage.component";
-import { BackendErrorMessagesComponent } from "./components/backendErrorMessages/backendErrorMessages.component";
-import { LoadingComponent } from "./components/loading/loading.component";
-import { PaginationComponent } from "./components/pagination/pagination.component";
-import { UtilsService } from "../core/services/utils.service";
-import { ProductComponent } from "./components/product/product.component";
-import { FooterComponent } from "./components/footer/footer.component";
-import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import {NgModule} from "@angular/core";
+import {CommonModule, NgOptimizedImage} from "@angular/common";
+import {NavbarComponent} from "./components/navbar/navbar.component";
+import {RouterModule} from "@angular/router";
+import {ErrorMessageComponent} from "./components/errorMessage/errorMessage.component";
+import {BackendErrorMessagesComponent} from "./components/backendErrorMessages/backendErrorMessages.component";
+import {LoadingComponent} from "./components/loading/loading.component";
+import {PaginationComponent} from "./components/pagination/pagination.component";
+import {UtilsService} from "../core/services/utils.service";
+import {ProductComponent} from "./components/product/product.component";
+import {FooterComponent} from "./components/footer/footer.component";
+import {SearchBarComponent} from './components/search-bar/search-bar.component';
 import {PaginatorModule} from "primeng/paginator";
 import {ImageModule} from "primeng/image";
+import {MenubarModule} from "primeng/menubar";
+import {InputTextModule} from "primeng/inputtext";
+import {DividerModule} from "primeng/divider";
+import {AutoFocusModule} from "primeng/autofocus";
+import {ToastModule} from "primeng/toast";
+import {MenuModule} from "primeng/menu";
 
 @NgModule({
-  imports: [CommonModule, RouterModule, NgOptimizedImage, PaginatorModule, ImageModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    NgOptimizedImage,
+    PaginatorModule,
+    ImageModule,
+    MenubarModule,
+    InputTextModule,
+    DividerModule,
+    AutoFocusModule,
+    ToastModule,
+    MenuModule,
+  ],
   declarations: [
     NavbarComponent,
     FooterComponent,
@@ -35,4 +53,5 @@ import {ImageModule} from "primeng/image";
   providers: [UtilsService]
 })
 
-export class SharedModule { }
+export class SharedModule {
+}

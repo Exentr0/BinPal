@@ -1,11 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap');
 
-:root {
-  --color-dark: #1E1E1E;
-  --color-light: #FFFFFF;
-  --color-gray: #B3B3B3;
-  --color-accent: #AA7EDF;
-}
 
 
 .product {
@@ -56,7 +50,7 @@
 }
 
 .product__seller:hover {
-  color: var(--color-accent); /* Задайте колір, який відображається при наведенні курсора */
+  color: var(--color-accent); /*  при наведенні курсора */
 }
 
 .product__link {
@@ -137,11 +131,17 @@
 .product__btn {
   position: absolute;
   right: -5px;
-  color: #AA7EDF;
+  color: var(--color-accent);
   font-size: 14px;
   letter-spacing: 0.6px;
   background-color: transparent;
   border: none;
   cursor: pointer;
+  transition: all ease-in-out 0.2s;
 }
 
+
+
+.product__btn:hover {
+  transform: translateY(-2px);
+}

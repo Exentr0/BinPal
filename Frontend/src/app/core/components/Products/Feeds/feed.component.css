@@ -1,18 +1,11 @@
-:root {
-  --color-dark: #1E1E1E;
-  --color-light: #FFFFFF;
-  --color-gray: #B3B3B3;
-  --color-accent: #AA7EDF;
-}
-
-.loader{
+.loader {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-.error{
+.error {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -20,30 +13,18 @@
 }
 
 
-.container{
+.container {
   padding-left: 10px;
   padding-right: 10px;
   max-width: 1300px;
   margin: 0 auto;
 }
 
-.filters-price__slider{
+.filters-price__slider {
   width: 300px;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-.pagination{
+.pagination {
   right: 50%;
 }

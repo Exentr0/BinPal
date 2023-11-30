@@ -2,8 +2,22 @@
 @import "primeng/resources/themes/mdc-dark-deeppurple/theme.css";
 @import "primeng/resources/primeng.css";
 
-body {
-  background-color: #1e1e1e;
+:root {
+  --color-dark: #1E1E1E;
+  --color-more-dark: #121212;
+  --color-light: #FFFFFF;
+  --color-gray: #B3B3B3;
+  --color-accent: #AA7EDF;
 }
+
+
+body {
+  background-color: var(--color-dark);
+  margin: 0;
+
+}
+
+
+
 
 
