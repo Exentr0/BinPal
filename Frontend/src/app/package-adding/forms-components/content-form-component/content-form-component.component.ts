@@ -29,7 +29,6 @@ export class ContentFormComponentComponent implements OnInit{
             this.router.navigate(['add-package/general']);
             return;
         }
-
         this.submitted = true;
     }
 

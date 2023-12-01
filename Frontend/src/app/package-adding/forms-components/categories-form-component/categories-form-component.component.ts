@@ -34,7 +34,7 @@ export class CategoriesFormComponentComponent implements OnInit {
 
   nextPage() {
     const allCategoriesArraysNotEmpty = Array.from(this.categoriesMap.values()).every(
-      (categories) => categories && categories.length > 0
+      (categories) => categories && categories.length >= 0
     );
 
     if (allCategoriesArraysNotEmpty) {

@@ -3,6 +3,7 @@ import { PackageAddingService } from '../../services/packageAddingService';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { FileUpload } from 'primeng/fileupload';
+import {ImageService} from "../../../shared/services/imageService";
 
 @Component({
   selector: 'app-media-form-component',
@@ -16,7 +17,7 @@ export class MediaFormComponentComponent implements OnInit {
   uploadedPictures: File[] = [];
   submitted: boolean = false;
 
-  constructor(public ticketService: PackageAddingService, private router: Router, private messageService: MessageService) {}
+  constructor(public ticketService: PackageAddingService, private router: Router, private messageService: MessageService, private imageService : ImageService) {}
 
   ngOnInit(): void {
     this.uploadedPictures = this.ticketService.getPackageInfo().uploadedPictures;
@@ -24,7 +25,7 @@ export class MediaFormComponentComponent implements OnInit {
 
   nextPage() {
       if (this.fileUpload && this.fileUpload.files && this.fileUpload.files.length) {
-          this.uploadedPictures = this.fileUpload.files;
+        this.uploadedPictures = this.fileUpload.files;
         this.ticketService.packageInfo.uploadedPictures = this.uploadedPictures;
         console.log(this.ticketService.getPackageInfo().uploadedPictures);
         this.router.navigate(['add-package/content']);
@@ -33,6 +34,7 @@ export class MediaFormComponentComponent implements OnInit {
 
     this.submitted = true;
   }
+
 
   prevPage() {
     this.router.navigate(['add-package/categories']);
