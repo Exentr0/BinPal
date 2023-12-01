@@ -16,8 +16,6 @@ export class NavbarComponent implements OnInit {
   isLoggedIn$!: Observable<boolean | null>
   isAnonymous$!: Observable<boolean>
   currentUser$!: Observable<CurrentUserInterface | null>
-  value?: any
-  items: MenuItem[] | undefined;
 
   constructor(private store: Store) {
   }
@@ -27,39 +25,7 @@ export class NavbarComponent implements OnInit {
     this.isAnonymous$ = this.store.pipe(select(isAnonymousSelector))
     this.currentUser$ = this.store.pipe(select(currentUserSelector))
 
-    this.items = [
-      {
-        label: 'Options',
-        items: [
-          {
-            label: 'Update',
-            icon: 'pi pi-refresh',
 
-          },
-          {
-            label: 'Delete',
-            icon: 'pi pi-times',
-
-          }
-        ]
-      },
-      {
-        label: 'Navigate',
-        items: [
-          {
-            label: 'Angular',
-            icon: 'pi pi-external-link',
-            url: 'http://angular.io'
-          },
-          {
-            label: 'Router',
-            icon: 'pi pi-upload',
-            routerLink: '/fileupload'
-          }
-        ]
-      }
-    ];
   }
-
 
 }

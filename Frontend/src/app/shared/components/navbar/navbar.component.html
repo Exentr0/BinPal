@@ -4,7 +4,7 @@
 
     <div class="logo">
       <a [routerLink]="['/']">
-        <img class="logo-img" src="./assets/homeLogo.png"/>
+        <img class="logo-img" src="./assets/homeLogo.png" alt="Logo"/>
       </a>
     </div>
 
@@ -16,34 +16,38 @@
     </span>
 
 
-      <!--    <ng-container *ngIf="isLoggedIn$ | async">-->
-
-      <button class="button" data-tooltip="Add" [routerLink]="['/add']">
-        <i class="pi pi-upload"></i>
-      </button>
-
-      <button class="button" data-tooltip="Saved" [routerLink]="['/account/saved', (currentUser$ | async)?.username]">
-        <i class="pi pi-heart"></i>
-      </button>
+      <!--      <ng-container *ngIf="isLoggedIn$ | async">-->
+      <!--      коли буде норм цекінг юзера поміняю -->
+      <ng-container>
 
 
-      <button class="button" data-tooltip="Cart" [routerLink]="['/cart']">
-        <i class="pi pi-shopping-bag"></i>
-      </button>
+        <button class="button" data-tooltip="Add" [routerLink]="['/add-package/general']">
+          <i class="pi pi-upload"></i>
+        </button>
 
-      <button class="button" data-tooltip="Profile" [routerLink]="['/account', (currentUser$ | async)?.username]">
-        <i class="pi pi-user"></i>
-      </button>
+        <button class="button" data-tooltip="Saved" [routerLink]="['/account/saved', (currentUser$ | async)?.username]">
+          <i class="pi pi-heart"></i>
+        </button>
 
-      <!--    </ng-container>-->
 
-      <!--    <ng-container *ngIf="isAnonymous$ | async">-->
+        <button class="button" data-tooltip="Cart" [routerLink]="['/cart']">
+          <i class="pi pi-shopping-bag"></i>
+        </button>
 
-<!--      <button class="button" data-tooltip="Login" [routerLink]="['/login']">-->
-<!--        <i class="pi pi-sign-in"></i>-->
-<!--      </button>-->
+        <button class="button" data-tooltip="Profile" [routerLink]="['/account', (currentUser$ | async)?.username]">
+          <i class="pi pi-user"></i>
+        </button>
 
-      <!--    </ng-container>-->
+
+      </ng-container>
+
+      <ng-container *ngIf="isAnonymous$ | async">
+
+        <button class="button" data-tooltip="Login" [routerLink]="['/login']">
+          <i class="pi pi-sign-in"></i>
+        </button>
+
+      </ng-container>
     </div>
 
 
