@@ -12,15 +12,15 @@ export class GeneralInfoFormComponentComponent implements OnInit{
 
   submitted: boolean = false;
 
-  constructor(public ticketService: PackageAddingService, private router: Router) {}
+  constructor(public packageAddingService: PackageAddingService, private router: Router) {}
 
   ngOnInit() {
-    this.generalInfo = this.ticketService.getPackageInfo().generalInfo;
+    this.generalInfo = this.packageAddingService.getPackageInfo().generalInfo;
   }
 
   nextPage() {
     if (this.generalInfo.name && this.generalInfo.price && this.generalInfo.description) {
-      this.ticketService.packageInfo.generalInfo = this.generalInfo;
+      this.packageAddingService.packageInfo.generalInfo = this.generalInfo;
       this.router.navigate(['add-package/supported-software']);
       return;
     }

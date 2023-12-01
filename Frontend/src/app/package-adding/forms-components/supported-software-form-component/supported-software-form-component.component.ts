@@ -14,10 +14,10 @@ export class SupportedSoftwareFormComponent implements OnInit {
 
   submitted: boolean = false;
 
-  constructor(public ticketService: PackageAddingService, private router: Router) {}
+  constructor(public packageAddingService: PackageAddingService, private router: Router) {}
 
   ngOnInit() {
-    this.supportedSoftwareList = this.ticketService.getPackageInfo().supportedSoftwareList;
+    this.supportedSoftwareList = this.packageAddingService.getPackageInfo().supportedSoftwareList;
   }
 
   onSoftwareSelectionChange(selectedSoftwareList: SoftwareInterface[]) {
@@ -26,7 +26,7 @@ export class SupportedSoftwareFormComponent implements OnInit {
 
   nextPage() {
     if (true) {
-      this.ticketService.packageInfo.supportedSoftwareList = this.supportedSoftwareList;
+      this.packageAddingService.packageInfo.supportedSoftwareList = this.supportedSoftwareList;
       this.router.navigate(['add-package/required-plugins']);
       return;
     }

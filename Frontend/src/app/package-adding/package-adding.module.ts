@@ -20,6 +20,9 @@ import { SoftwarePluginsSelectorComponent } from './utils/software-plugins-selec
 import {MultiSelectModule} from "primeng/multiselect";
 import { CategoriesFormComponentComponent } from './forms-components/categories-form-component/categories-form-component.component';
 import { SoftwareCategoriesSelectorComponentComponent } from './utils/software-categories-selector-component/software-categories-selector-component.component';
+import { MediaFormComponentComponent } from './forms-components/media-form-component/media-form-component.component';
+import {FileUploadModule} from "primeng/fileupload";
+import { ContentFormComponentComponent } from './forms-components/content-form-component/content-form-component.component';
 
 
 @NgModule({
@@ -32,6 +35,8 @@ import { SoftwareCategoriesSelectorComponentComponent } from './utils/software-c
     SoftwarePluginsSelectorComponent,
     CategoriesFormComponentComponent,
     SoftwareCategoriesSelectorComponentComponent,
+    MediaFormComponentComponent,
+    ContentFormComponentComponent,
   ],
   imports: [
     CommonModule,
@@ -50,11 +55,14 @@ import { SoftwareCategoriesSelectorComponentComponent } from './utils/software-c
           {path: 'general', component: GeneralInfoFormComponentComponent},
           {path: 'supported-software', component: SupportedSoftwareFormComponent},
           {path: 'required-plugins', component: RequiredPluginsFormComponent},
-          {path: 'categories', component: CategoriesFormComponentComponent}
+          {path: 'categories', component: CategoriesFormComponentComponent},
+          {path: 'media', component: MediaFormComponentComponent},
+          {path: 'content', component: ContentFormComponentComponent}
         ]
       }
     ]),
     MultiSelectModule,
+    FileUploadModule,
   ],
   providers: [
     PackageAddingService,

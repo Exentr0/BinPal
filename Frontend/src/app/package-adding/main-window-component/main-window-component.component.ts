@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MenuItem, MessageService } from 'primeng/api';
 import { PackageAddingService } from "../services/packageAddingService";
 import {Subscription} from "rxjs";
@@ -19,7 +19,7 @@ export class MainWindowComponentComponent {
     this.items = [
       {
         label: 'General',
-        routerLink: 'general'
+        routerLink: 'general',
       },
       {
         label: 'Supported Apps',
@@ -27,16 +27,30 @@ export class MainWindowComponentComponent {
       },
       {
         label: 'Required Plugins',
-        routerLink : 'required-plugins'
+        routerLink : 'required-plugins',
       },
       {
         label: 'Categories',
         routerLink: 'categories'
+      },
+      {
+        label: 'Media',
+        routerLink: 'media'
+      },
+      {
+        label: 'Content',
+        routerLink: 'content'
       }
     ];
 
-    this.subscription = this.ticketService.packageUploaded$.subscribe((pe) => {
-      this.messageService.add({ severity: 'success', summary: 'Package Added', detail: 'Your package was Added.' });
+    this.subscription = this.ticketService.packageUploaded$.subscribe((generalInformation) => {
+      this.messageService.add({ severity: 'success', summary: generalInformation.name + ' was Uploaded', detail: 'Your package was Added.' });
     });
   }
+
+    ngOnDestroy() {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
+    }
 }

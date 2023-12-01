@@ -21,7 +21,6 @@ export class SoftwareCategoriesSelectorComponentComponent {
   ngOnInit(): void {
     this.fetchSoftwareCategories();
     this.selectedCategories = [...this.preSelectedCategories];
-    console.log('Selected plugins:', this.selectedCategories);
   }
 
   onSelectionChange() {
@@ -32,7 +31,6 @@ export class SoftwareCategoriesSelectorComponentComponent {
     this.softwareService.getSoftwareCategories(this.software.id).subscribe(
         (categories) => {
           this.categoryOptions = categories;
-          console.log(this.categoryOptions)
         },
         (error) => {
           console.error('Error fetching software categories:', error);

@@ -14,11 +14,11 @@ export class RequiredPluginsFormComponent implements OnInit {
   supportedSoftwareList!: SoftwareInterface[];
   submitted: boolean = false;
 
-  constructor(public ticketService: PackageAddingService, private router: Router) {}
+  constructor(public packageAddingService: PackageAddingService, private router: Router) {}
 
   ngOnInit(): void {
-    this.supportedSoftwareList = this.ticketService.getPackageInfo().supportedSoftwareList;
-    this.requiredPluginsMap = this.ticketService.getPackageInfo().requiredPluginsMap;
+    this.supportedSoftwareList = this.packageAddingService.getPackageInfo().supportedSoftwareList;
+    this.requiredPluginsMap = this.packageAddingService.getPackageInfo().requiredPluginsMap;
   }
 
     getPreSelectedPlugins(softwareId: number): PluginInterface[] {
@@ -31,7 +31,7 @@ export class RequiredPluginsFormComponent implements OnInit {
 
   nextPage() {
     if (true) {
-      this.ticketService.packageInfo.requiredPluginsMap = this.requiredPluginsMap;
+      this.packageAddingService.packageInfo.requiredPluginsMap = this.requiredPluginsMap;
       this.router.navigate(['add-package/categories']);
       return;
     }

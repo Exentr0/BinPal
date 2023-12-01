@@ -49,7 +49,7 @@ namespace Backend.Services.Storage
         // Get the URL for a user's profile picture based on user ID
         public string GetUserPfpUrl(int userId)
         {
-            string blobName = $"{userId}";
+            string blobName = $"{userId}.png";
 
             // Get the BlobClient for the specified blob
             var blobClient = ContainerClient.GetBlobClient(blobName);

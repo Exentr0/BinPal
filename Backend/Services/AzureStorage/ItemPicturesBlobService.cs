@@ -23,7 +23,7 @@ public class ItemPicturesBlobService : AzureBlobService
     public override async Task UploadBlobAsync(int itemId, IFormFile file)
     {
         // Construct the blob name with the specified directory (ItemId)
-        var blobName = $"{itemId}/{Path.GetFileName(file.FileName)}";
+        var blobName = $"{itemId}/{Path.GetFileName(file.FileName)}.png";
                 
         // Get the BlobClient for the specified blob
         var blobClient = ContainerClient.GetBlobClient(blobName);
