@@ -1,4 +1,3 @@
-// приходить стан і дія - вертає новий стан
 import {AuthStateInterface} from "src/app/auth/types/authState.interface";
 import {Action, createReducer, on} from "@ngrx/store";
 import {registerAction, registerFailureAction, registerSuccessAction} from "src/app/auth/store/actions/register.action";
@@ -8,6 +7,7 @@ import {
   getCurrentUserFailureAction,
   getCurrentUserSuccessAction
 } from "./actions/getCurrentUser.action";
+import {routerNavigationAction} from "@ngrx/router-store";
 
 const initialState: AuthStateInterface = {
   isSubmitting: false,
@@ -17,7 +17,7 @@ const initialState: AuthStateInterface = {
   validationErrors: null
 }
 
-//Reducers - міняють стани
+
 const authReducer = createReducer(
   initialState,  // початковий стан (не зайдено в акаунт)
 
@@ -107,6 +107,8 @@ const authReducer = createReducer(
       currentUser: null
     })
   ),
+
+  on(routerNavigationAction, (): AuthStateInterface => initialState)
 
 )
 

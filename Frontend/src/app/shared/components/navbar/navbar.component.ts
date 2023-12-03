@@ -3,7 +3,6 @@ import {Observable} from "rxjs/internal/Observable";
 import {select, Store} from "@ngrx/store";
 import {isLoggedInSelector, isAnonymousSelector, currentUserSelector} from "src/app/auth/store/selectors";
 import {CurrentUserInterface} from "../../types/currentUser.interface";
-import {MenuItem} from "primeng/api";
 
 
 @Component({

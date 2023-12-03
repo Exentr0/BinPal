@@ -39,9 +39,12 @@ const feedReducer = createReducer(
     })
   ),
 
-  on(
-    routerNavigationAction,  //коли починається навігація
-    (): FeedStateInterface => initialState)) //задаємо стан на початковий
+  // on(
+  //   routerNavigationAction,  //коли починається навігація
+  //   (): FeedStateInterface => initialState)//задаємо стан на початковий
+  //
+
+)
 
 
 export function reducers(state: FeedStateInterface, action: Action) {

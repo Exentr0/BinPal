@@ -17,7 +17,7 @@ import {customPasswordValidator} from "../../validators/password.validator";
 
 export class RegisterComponent implements OnInit {
   form!: FormGroup;
-  isSubmitting$!: Observable<boolean>    // Observable дивиться за змінами, тупу підписується на зміни (всі "стостерігачі" в кінці $)
+  isSubmitting$!: Observable<boolean>
   backendErrors$!: Observable<BackendErrorsInterface | null>
 
   constructor(private fb: FormBuilder, private store: Store) {
@@ -30,9 +30,8 @@ export class RegisterComponent implements OnInit {
   }
 
 
-  //задаємо "спостерігачів" через селектори
   initializeValues(): void {
-    this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector)) //pipe - групування операцій
+    this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector))
     this.backendErrors$ = this.store.pipe(select(validationErrorsSelector))
   }
 

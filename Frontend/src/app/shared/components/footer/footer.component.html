@@ -33,7 +33,8 @@
 
       </ng-container>
 
-      <ng-container *ngIf="isAnonymous$ | async">
+      <!--      <ng-container *ngIf="isAnonymous$ | async">-->
+      <ng-container>
 
         <button class="button" data-tooltip="Login" [routerLink]="['/login']">
           <p>Login</p>
