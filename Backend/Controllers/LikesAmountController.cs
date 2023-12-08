@@ -1,4 +1,5 @@
 using Backend.Data;
+using Backend.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers;
@@ -32,5 +33,11 @@ public class LikesAmountController: ControllerBase
         {
             return BadRequest($"An error occurred: {ex.Message}");
         }
+    }
+
+    private void UpdateLikesCount(Item item)
+    {
+        item.LikesAmount = item.LikesAmount;
+        _context.SaveChanges();
     }
 }

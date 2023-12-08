@@ -2,14 +2,14 @@ using Microsoft.AspNetCore.Mvc;
 using Backend.Data;
 using Backend.Models;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace Backend.Controllers;
 
 public class GetProductController: ControllerBase
 {
     private readonly DataContext _context;
-    /*private List<Item> items;*/
-    
     public GetProductController(DataContext context)
     {
         _context = context;
@@ -29,6 +29,7 @@ public class GetProductController: ControllerBase
     [HttpGet("{id}/title")]
     public IActionResult GetItemTitle(int id)
     {
+        
         var item = _context.Items.FirstOrDefault(p => p.Id == id);
         if (item == null)
         {
@@ -63,6 +64,7 @@ public class GetProductController: ControllerBase
     [HttpGet("{id}/favorite")]
     public IActionResult GetItemFavorited(int id)
     {
+       
         var item = _context.Items.FirstOrDefault(p => p.Id == id);
         if (item == null)
         {
@@ -74,6 +76,7 @@ public class GetProductController: ControllerBase
     [HttpGet("{id}/Likes")]
     public IActionResult GetItemLikes(int id)
     {
+        
         var item = _context.Items.FirstOrDefault(p => p.Id == id);
         if (item == null)
         {
