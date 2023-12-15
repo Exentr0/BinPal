@@ -1,6 +1,9 @@
 <div class="top">
     <span class="numberResults">
-        {{ firstProductIndex + 1 }}-{{ lastProductIndex }} of {{ totalProducts }} results
+
+      <span class="font-bold">{{ firstProductIndex + 1 }}-{{ lastProductIndex }}</span>
+       of
+      <span class="font-bold">{{ totalProducts }}</span> results
     </span>
 
   <span class="select">
@@ -9,7 +12,6 @@
               <p-dropdown [options]="sortOptions"
                           [(ngModel)]="sortKey"
                           placeholder="Price High to Low"
-                          [style]="{'height':'40px'}"
                           (onChange)="onSortChange($event)">
               </p-dropdown>
     </span>
@@ -22,9 +24,9 @@
                 [options]="limits"
                 [(ngModel)]="limitProducts"
                 placeholder="{{limitProducts}}"
-                [style]="{'height':'40px'}"
                 (onChange)="sortDropdownChange($event)">
               </p-dropdown>
+<!--        [style]="{'height':'45px'}"-->
         </span>
     </span>
       </span>
