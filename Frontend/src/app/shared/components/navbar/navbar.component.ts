@@ -3,6 +3,7 @@ import {Observable} from "rxjs/internal/Observable";
 import {select, Store} from "@ngrx/store";
 import {isLoggedInSelector, isAnonymousSelector, currentUserSelector} from "src/app/auth/store/selectors";
 import {CurrentUserInterface} from "../../types/currentUser.interface";
+import {ActivatedRoute, Router} from "@angular/router";
 
 
 @Component({
@@ -15,8 +16,9 @@ export class NavbarComponent implements OnInit {
   isLoggedIn$!: Observable<boolean | null>
   isAnonymous$!: Observable<boolean>
   currentUser$!: Observable<CurrentUserInterface | null>
+  searchText?: string
 
-  constructor(private store: Store) {
+  constructor(private store: Store, private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -26,5 +28,14 @@ export class NavbarComponent implements OnInit {
 
 
   }
+
+  onEnter() {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { q: this.searchText },
+      queryParamsHandling: 'merge',
+    });
+  }
+
 
 }

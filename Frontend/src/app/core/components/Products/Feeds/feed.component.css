@@ -22,17 +22,23 @@
 
 
 .container {
-  padding-left: 10px;
-  padding-right: 10px;
+  /*padding-left: 10px;*/
+  /*padding-right: 10px;*/
+  padding: 0;
   max-width: 1300px;
   margin: 0 auto;
 }
 
-.filters-price__slider {
-  width: 300px;
-}
-
-
 .pagination {
   right: 50%;
 }
+
+.product {
+  cursor: pointer;
+  transition: all ease-in-out 0.2s;
+}
+
+.product:hover {
+  transform: translateY(-3px);
+}
+

@@ -1,73 +1,57 @@
 <div class="body">
-    <mc-loading class="loader" *ngIf="isLoading$ | async"></mc-loading>
-    <mc-error-message class="error" *ngIf="error$ | async" [message]="'Error'"></mc-error-message>
+  <mc-loading class="loader" *ngIf="isLoading$ | async"></mc-loading>
+  <mc-error-message class="error" *ngIf="error$ | async" [message]="'Error'"></mc-error-message>
 
 
-    <div *ngIf="feed$ | async">
-        <div class="container">
+  <div *ngIf="feed$ | async">
+    <div class="container">
 
+      <div class="grid">
 
-            <div class="grid">
+        <div class="col-12 sm:col-9 md:col-9 lg:col-9 xl:col-9">
+          <mc-top
+            class="top"
+            [totalProducts]="(feed$ | async)!.articlesCount"
+            [limitProducts]="limitProducts"
+            [currentPage]="currentPage"
+          ></mc-top>
 
-
-                <div class="col-12 sm:col-9 md:col-9 lg:col-9 xl:col-9 p-2 border-0">
-
-                    <mc-top
-                            class="top"
-                            [totalProducts]="(feed$ | async)!.articlesCount"
-                            [limitProducts]="limitProducts"
-                            [currentPage]="currentPage"
-                    ></mc-top>
-
-                    <p-dataView [value]="products" [layout]="'grid'">
-                        <ng-template let-product pTemplate="gridItem">
-                            <div class="sm:col-6 md:col-6 lg:col-4 xl:col-3 p-2">
-                                <div class="p-2 border-0 border-round">
-                                    <mc-product
-                                            [image]="'https://inside-ua.com/files/originals/bili-hory-2.jpg'"
-                                            [seller]="'Test Seller'"
-                                            [title]="product.title"
-                                            [rating]="5"
-                                            [ratingCount]="63"
-                                            [favoritesCount]="product.favoritesCount"
-                                            [price]="199.99">
-                                    </mc-product>
-                                </div>
-                            </div>
-                        </ng-template>
-                    </p-dataView>
-
-                    <mc-pagination
-                            class="pagination"
-                            [totalProducts]="(feed$ | async)!.articlesCount"
-                            [limitProducts]="limitProducts"
-                            [currentPage]="currentPage"
-                    ></mc-pagination>
-
+          <p-dataView [value]="products" [layout]="'grid'" class="border-0">
+            <ng-template let-product pTemplate="gridItem">
+              <div class="sm:col-6 md:col-6 lg:col-4 xl:col-3 p-2 border-0">
+                <div class="p-2 border-0 border-round product">
+                  <mc-product
+                    [image]="'https://inside-ua.com/files/originals/bili-hory-2.jpg'"
+                    [seller]="'Test Seller'"
+                    [title]="product.title"
+                    [rating]="5"
+                    [ratingCount]="63"
+                    [favoritesCount]="product.favoritesCount"
+                    [price]="199.99">
+                  </mc-product>
                 </div>
+              </div>
+            </ng-template>
+          </p-dataView>
 
+          <mc-pagination
+            class="pagination"
+            [totalProducts]="(feed$ | async)!.articlesCount"
+            [limitProducts]="limitProducts"
+            [currentPage]="currentPage"
+          ></mc-pagination>
 
-                <div class="sm:col-3 md:col-3 lg:col-3 xl:col-3 border-0">
-
-                    <div class="filters">
-                        <div class="filters__item filters-price">
-                            <h3 class="filters-price__title">Pricing</h3>
-                            <div class="filters-price__slider">
-                                <p-slider [(ngModel)]="rangePrice" [range]="true" [min]="0" [max]="400"></p-slider>
-                            </div>
-                            <div class="filters-price__inputs">
-                                <input type="text" pInputText [(ngModel)]="rangePrice[0]"/>
-                                <input type="text" pInputText [(ngModel)]="rangePrice[1]"/>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-
-            </div>
         </div>
-    </div>
 
+        <div class="sm:col-3 md:col-3 lg:col-3 xl:col-3 border-1">
+          <mc-filtering
+            class="filtering"
+            [rangePrice]="rangePrice"
+          ></mc-filtering>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
 </div>

@@ -12,7 +12,16 @@
 
     <span class="p-input-icon-left search">
     <i class="pi pi-search search-ico"></i>
-    <input type="text" class="search-input" pInputText pAutoFocus [autofocus]="true" placeholder="Search"/>
+    <input
+      type="text"
+      class="search-input"
+      pInputText
+      pAutoFocus
+      [autofocus]="true"
+      placeholder="Search"
+      (keyup.enter)="onEnter()"
+      [(ngModel)]="searchText"
+    />
     </span>
 
 

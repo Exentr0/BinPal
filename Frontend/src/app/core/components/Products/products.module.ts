@@ -16,6 +16,7 @@ import {InputTextModule} from "primeng/inputtext";
 import {DropdownModule} from "primeng/dropdown";
 import {TopComponent} from "./Top/top.component";
 import {ScrollPanelModule} from "primeng/scrollpanel";
+import {FilteringComponent} from "./Filtering/filtering.component";
 
 
 const routes: Routes = [
@@ -42,7 +43,7 @@ const routes: Routes = [
         ScrollPanelModule
     ],
 
-  declarations: [FeedComponent, GlobalFeedComponent, TopComponent],
+  declarations: [FeedComponent, GlobalFeedComponent, TopComponent, FilteringComponent],
   exports: [FeedComponent],
   providers: [FeedService, GlobalFeedComponent]
 })

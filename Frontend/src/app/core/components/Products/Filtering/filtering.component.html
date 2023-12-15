@@ -1,0 +1,14 @@
+<div class="body">
+  <div class="filters">
+  <div class="filters__item filters-price">
+    <h3 class="filters-price__title">Pricing</h3>
+    <div class="filters-price__slider">
+      <p-slider [(ngModel)]="rangePrice" [range]="true" [min]="0" [max]="400"></p-slider>
+    </div>
+    <div class="filters-price__inputs">
+      <input type="text" pInputText [(ngModel)]="rangePrice[0]"/>
+      <input type="text" pInputText [(ngModel)]="rangePrice[1]"/>
+    </div>
+  </div>
+  </div>
+</div>
