@@ -3,6 +3,7 @@ import { PackageAddingService } from "../../services/packageAddingService";
 import { Router } from "@angular/router";
 import { PluginInterface } from "../../../shared/types/plugin.interface";
 import { SoftwareInterface } from "../../../shared/types/software.interface";
+import {MainWindowComponentComponent} from "../../main-window-component/main-window-component.component";
 
 @Component({
   selector: 'app-required-plugins-form-component',
@@ -12,13 +13,21 @@ import { SoftwareInterface } from "../../../shared/types/software.interface";
 export class RequiredPluginsFormComponent implements OnInit {
   requiredPluginsMap : Map<number, PluginInterface[]> = new Map();
   supportedSoftwareList!: SoftwareInterface[];
-  submitted: boolean = false;
-
   constructor(public packageAddingService: PackageAddingService, private router: Router) {}
 
   ngOnInit(): void {
     this.supportedSoftwareList = this.packageAddingService.getPackageInfo().supportedSoftwareList;
     this.requiredPluginsMap = this.packageAddingService.getPackageInfo().requiredPluginsMap;
+
+    this.cleanUpIfSoftwareWasRemoved();
+  }
+
+  private cleanUpIfSoftwareWasRemoved(){
+    for (const softwareId of Array.from(this.requiredPluginsMap.keys())) {
+      if (!this.supportedSoftwareList.some((software) => software.id === softwareId)) {
+        this.requiredPluginsMap.delete(softwareId);
+      }
+    }
   }
 
     getPreSelectedPlugins(softwareId: number): PluginInterface[] {
@@ -35,7 +44,6 @@ export class RequiredPluginsFormComponent implements OnInit {
       this.router.navigate(['add-package/categories']);
       return;
     }
-    this.submitted = true;
   }
 
   prevPage() {

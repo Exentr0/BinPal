@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, } from '@angular/core';
 import {PackageAddingService} from "../../services/packageAddingService";
 import {Router} from "@angular/router";
 
@@ -7,7 +7,7 @@ import {Router} from "@angular/router";
   templateUrl: './general-info-form-component.component.html',
   styleUrls: ['./general-info-form-component.component.css']
 })
-export class GeneralInfoFormComponentComponent implements OnInit{
+export class GeneralInfoFormComponentComponent implements OnInit {
   generalInfo: any;
 
   submitted: boolean = false;
@@ -18,13 +18,13 @@ export class GeneralInfoFormComponentComponent implements OnInit{
     this.generalInfo = this.packageAddingService.getPackageInfo().generalInfo;
   }
 
+
   nextPage() {
     if (this.generalInfo.name && this.generalInfo.price && this.generalInfo.description) {
       this.packageAddingService.packageInfo.generalInfo = this.generalInfo;
       this.router.navigate(['add-package/supported-software']);
       return;
     }
-
     this.submitted = true;
   }
 }

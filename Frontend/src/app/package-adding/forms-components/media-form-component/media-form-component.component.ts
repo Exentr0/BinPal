@@ -15,24 +15,21 @@ export class MediaFormComponentComponent implements OnInit {
   @ViewChild('fileUpload') fileUpload!: FileUpload;
 
   uploadedPictures: File[] = [];
-  submitted: boolean = false;
 
-  constructor(public ticketService: PackageAddingService, private router: Router, private messageService: MessageService, private imageService : ImageService) {}
+  constructor(public packageAddingService: PackageAddingService, private router: Router, private messageService: MessageService, private imageService : ImageService) {}
 
   ngOnInit(): void {
-    this.uploadedPictures = this.ticketService.getPackageInfo().uploadedPictures;
+    this.uploadedPictures = this.packageAddingService.getPackageInfo().uploadedPictures;
   }
 
   nextPage() {
       if (this.fileUpload && this.fileUpload.files && this.fileUpload.files.length) {
         this.uploadedPictures = this.fileUpload.files;
-        this.ticketService.packageInfo.uploadedPictures = this.uploadedPictures;
-        console.log(this.ticketService.getPackageInfo().uploadedPictures);
+        this.packageAddingService.packageInfo.uploadedPictures = this.uploadedPictures;
+        console.log(this.packageAddingService.getPackageInfo().uploadedPictures);
         this.router.navigate(['add-package/content']);
         return;
       }
-
-    this.submitted = true;
   }
 
 

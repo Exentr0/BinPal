@@ -1,18 +1,16 @@
 // supported-software-form-component.component.ts
 import { Component, OnInit } from '@angular/core';
-import { PackageAddingService } from "../../services/packageAddingService";
-import { Router } from "@angular/router";
-import { SoftwareInterface } from "../../../shared/types/software.interface";
+import { PackageAddingService } from '../../services/packageAddingService';
+import { Router } from '@angular/router';
+import { SoftwareInterface } from '../../../shared/types/software.interface';
 
 @Component({
   selector: 'app-supported-software-form-component',
   templateUrl: './supported-software-form-component.component.html',
-  styleUrls: ['./supported-software-form-component.component.css']
+  styleUrls: ['./supported-software-form-component.component.css'],
 })
 export class SupportedSoftwareFormComponent implements OnInit {
   supportedSoftwareList: SoftwareInterface[] = [];
-
-  submitted: boolean = false;
 
   constructor(public packageAddingService: PackageAddingService, private router: Router) {}
 
@@ -30,8 +28,6 @@ export class SupportedSoftwareFormComponent implements OnInit {
       this.router.navigate(['add-package/required-plugins']);
       return;
     }
-
-    this.submitted = true;
   }
 
   prevPage() {

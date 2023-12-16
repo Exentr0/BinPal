@@ -28,14 +28,11 @@ export class SoftwareSelectorComponent implements OnInit {
     const index = this.selectedSoftwareList.findIndex(s => s.id === software.id);
 
     if (index !== -1) {
-      // Software is already selected, so remove it from the selected list
       this.selectedSoftwareList.splice(index, 1);
     } else {
-      // Software is not selected, so add it to the selected list
       this.selectedSoftwareList.push(software);
     }
 
-    // Emit the updated selected software list
     this.selectionChange.emit(this.selectedSoftwareList);
   }
 

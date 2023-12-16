@@ -3,7 +3,6 @@ import { FileUpload } from 'primeng/fileupload';
 import { MessageService } from 'primeng/api';
 import { PackageAddingService } from '../../services/packageAddingService';
 import { Router } from '@angular/router';
-import * as JSZip from 'jszip';
 
 @Component({
     selector: 'app-content-form-component',
@@ -14,12 +13,11 @@ export class ContentFormComponentComponent implements OnInit{
     @ViewChild('fileUpload') fileUpload!: FileUpload;
 
     releases: File[] = [];
-    submitted: boolean = false;
 
     constructor(public packageAddingService: PackageAddingService, private router: Router, private messageService: MessageService) {}
 
     ngOnInit(): void {
-      this.releases = this.packageAddingService.getPackageInfo().releases
+      this.releases = this.packageAddingService.getPackageInfo().releases;
     }
 
     nextPage() {
@@ -29,12 +27,10 @@ export class ContentFormComponentComponent implements OnInit{
             this.router.navigate(['add-package/general']);
             return;
         }
-        this.submitted = true;
     }
 
     complete() {
         if (true) {
-
             this.packageAddingService.getPackageInfo().releases = this.releases;
 
             this.packageAddingService.upload();

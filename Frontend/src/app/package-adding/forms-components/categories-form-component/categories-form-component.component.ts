@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { CategoryInterface } from '../../../shared/types/category.interface';
 import { SoftwareInterface } from '../../../shared/types/software.interface';
@@ -13,7 +13,6 @@ import { Router } from '@angular/router';
 export class CategoriesFormComponentComponent implements OnInit {
   categoriesMap!: Map<number, CategoryInterface[]>;
   supportedSoftwareList!: SoftwareInterface[];
-  submitted: boolean = false;
 
   constructor(
     public packageAddingService: PackageAddingService, private router: Router, private messageService: MessageService) {}
@@ -21,7 +20,16 @@ export class CategoriesFormComponentComponent implements OnInit {
   ngOnInit(): void {
     this.supportedSoftwareList = this.packageAddingService.getPackageInfo().supportedSoftwareList;
     this.categoriesMap = this.packageAddingService.getPackageInfo().categoriesMap;
-    console.log(this.categoriesMap)
+
+    this.cleanUpIfSoftwareWasRemoved();
+  }
+
+  private cleanUpIfSoftwareWasRemoved(){
+    for (const softwareId of Array.from(this.categoriesMap.keys())) {
+      if (!this.supportedSoftwareList.some((software) => software.id === softwareId)) {
+        this.categoriesMap.delete(softwareId);
+      }
+    }
   }
 
   getPreSelectedCategories(softwareId: number): CategoryInterface[] {
@@ -30,6 +38,7 @@ export class CategoriesFormComponentComponent implements OnInit {
 
   onCategorySelectionChange(selectedCategories: CategoryInterface[], softwareId: number) {
     this.categoriesMap.set(softwareId, selectedCategories);
+    console.log(this.categoriesMap)
   }
 
   nextPage() {
@@ -41,8 +50,6 @@ export class CategoriesFormComponentComponent implements OnInit {
       this.packageAddingService.packageInfo.categoriesMap = this.categoriesMap;
       this.router.navigate(['add-package/media']);
     } else {
-      this.submitted = true;
-
       this.messageService.add({
         severity: 'error',
         summary: 'Error',
