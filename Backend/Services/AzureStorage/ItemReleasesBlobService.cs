@@ -19,8 +19,12 @@ public class ItemReleasesBlobService : AzureBlobService
 
     public override async Task UploadBlobAsync(int itemId, IFormFile file)
     {
+        string contentType = file.ContentType;
+           
+        // Get the file extension from the MIME type
+        string fileExtension = GetFileExtension(contentType);
         // Construct the blob name with the specified directory (ItemId)
-        var blobName = $"{itemId}/{Path.GetFileName(file.FileName)}";
+        var blobName = $"{itemId}/{Path.GetFileName(file.FileName)}{fileExtension}";
 
         // Get the BlobClient for the specified blob
         var blockBlobClient = ContainerClient.GetBlobClient(blobName);
@@ -48,7 +52,7 @@ public class ItemReleasesBlobService : AzureBlobService
         }
     }
     
-    //Get Urls to blobs of Releases of Item
+    // Get URLs to blobs of Releases of Item
     public async Task<List<string>> GetItemReleaseUrlsAsync(int itemId)
     {
         string directory = $"{itemId}";
@@ -67,4 +71,5 @@ public class ItemReleasesBlobService : AzureBlobService
 
         return blobUrls;
     }
+
 }

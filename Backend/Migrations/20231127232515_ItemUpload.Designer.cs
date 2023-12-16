@@ -4,6 +4,7 @@ using Backend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231127232515_ItemUpload")]
+    partial class ItemUpload
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -222,12 +225,7 @@ namespace Backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SoftwareId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("SoftwareId");
 
                     b.ToTable("Plugins");
                 });
@@ -307,6 +305,21 @@ namespace Backend.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("SoftwareCategories");
+                });
+
+            modelBuilder.Entity("Backend.Models.SoftwarePlugin", b =>
+                {
+                    b.Property<int>("SoftwareId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PluginId")
+                        .HasColumnType("int");
+
+                    b.HasKey("SoftwareId", "PluginId");
+
+                    b.HasIndex("PluginId");
+
+                    b.ToTable("SoftwarePlugins");
                 });
 
             modelBuilder.Entity("Backend.Models.User", b =>
@@ -454,17 +467,6 @@ namespace Backend.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Backend.Models.Plugin", b =>
-                {
-                    b.HasOne("Backend.Models.Software", "Software")
-                        .WithMany("SoftwarePlugins")
-                        .HasForeignKey("SoftwareId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Software");
-                });
-
             modelBuilder.Entity("Backend.Models.Purchase", b =>
                 {
                     b.HasOne("Backend.Models.Item", "Item")
@@ -514,6 +516,25 @@ namespace Backend.Migrations
                     b.Navigation("Software");
                 });
 
+            modelBuilder.Entity("Backend.Models.SoftwarePlugin", b =>
+                {
+                    b.HasOne("Backend.Models.Plugin", "Plugin")
+                        .WithMany("SoftwarePlugins")
+                        .HasForeignKey("PluginId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Backend.Models.Software", "Software")
+                        .WithMany("SoftwarePlugins")
+                        .HasForeignKey("SoftwareId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Plugin");
+
+                    b.Navigation("Software");
+                });
+
             modelBuilder.Entity("Backend.Models.Category", b =>
                 {
                     b.Navigation("ItemCategories");
@@ -543,6 +564,8 @@ namespace Backend.Migrations
             modelBuilder.Entity("Backend.Models.Plugin", b =>
                 {
                     b.Navigation("ItemPlugins");
+
+                    b.Navigation("SoftwarePlugins");
                 });
 
             modelBuilder.Entity("Backend.Models.ShoppingCart", b =>

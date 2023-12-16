@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Backend.Data;
 using Backend.Validation;
 using FluentValidation;
@@ -10,7 +11,11 @@ public class Plugin
 {
     [Key] public int Id { get; set; }
     public string Name { get; set; }
-    public List<SoftwarePlugin> SoftwarePlugins { get; set; }
+
+    [ForeignKey("SoftwareId")]
+    public int SoftwareId { get; set; }
+    
+    public Software Software { get; set; }
     
     public List<ItemPlugin>? ItemPlugins { get; set; }
 }
@@ -30,6 +35,10 @@ public class PluginValidator : AbstractValidator<Plugin>
                 .IsUnique(_context, p => p.Id)
                 .WithMessage("Id must be unique");
         });
+
+        RuleFor(p => p.SoftwareId)
+            .NotNull()
+            .WithMessage("SoftwareId can't be null");
 
         RuleFor(p => p.Name)
             .NotNull()

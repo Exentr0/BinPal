@@ -15,7 +15,7 @@ namespace Backend.Models
         public string Name { get; set; }
 
         public List<SoftwareCategory>? SoftwareCategories { get; set; }
-        public List<SoftwarePlugin>? SoftwarePlugins { get; set; }
+        public List<Plugin>? SoftwarePlugins { get; set; }
     }
 
     public class SoftwareValidator : AbstractValidator<Software>
