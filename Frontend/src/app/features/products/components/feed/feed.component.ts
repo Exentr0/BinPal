@@ -4,10 +4,11 @@ import {Observable} from "rxjs/internal/Observable";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {Subscription } from "rxjs";
 import queryString from 'query-string';
-import {ProductInterface} from "../../../../shared/types/product.interface";
+
 import {GetFeedResponseInterface} from "../../types/getFeedResponse.interface";
 import {errorSelector, feedSelector, isLoadingSelector} from "../../store/selectors";
 import {getFeedAction} from "../../store/actions/getFeed.action";
+import {ProductCardInterface} from "../../../../shared/types/productCard.interface";
 
 @Component({
   selector: 'mc-feed',
@@ -25,7 +26,7 @@ export class FeedComponent implements OnInit, OnDestroy {
   currentPage!: number
   limitProducts!: number
   totalProducts!: number
-  products?: ProductInterface[]
+  products?: ProductCardInterface[]
   rangePrice: number[] = [0, 200];
 
 

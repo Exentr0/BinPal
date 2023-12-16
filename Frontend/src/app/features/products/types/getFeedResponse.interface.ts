@@ -1,4 +1,4 @@
-import {ProductInterface} from "../../../shared/types/product.interface";
+import {ProductCardInterface} from "../../../shared/types/productCard.interface";
 
 
 export interface GetFeedResponseInterface {
@@ -7,7 +7,7 @@ export interface GetFeedResponseInterface {
 
 
   // для тестів на https://conduit.productionready.io/api
-  articles: ProductInterface[]
+  articles: ProductCardInterface[]
   articlesCount: number
 
 

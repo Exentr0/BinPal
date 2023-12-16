@@ -1,7 +1,7 @@
 import {createAction, props} from "@ngrx/store";
 import {ActionTypes} from "../actionTypes";
-import {ProductInterface} from "../../../../shared/types/product.interface";
 import {BackendErrorsInterface} from "../../../../shared/types/backendErrors.interface";
+import {ProductInterface} from "../../types/product.interface";
 
 
 

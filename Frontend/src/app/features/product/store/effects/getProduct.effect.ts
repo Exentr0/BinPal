@@ -5,8 +5,8 @@ import {map} from "rxjs/operators";
 import {getProductAction, getProductFailureAction, getProductSuccessAction} from "../actions/getProduct.action";
 
 import {HttpErrorResponse} from "@angular/common/http";
-import {ProductInterface} from "../../../../shared/types/product.interface";
 import {ProductService} from "../../services/product.service";
+import {ProductInterface} from "../../types/product.interface";
 @Injectable()
 
 export class GetProductEffect {
