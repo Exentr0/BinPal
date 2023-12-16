@@ -11,10 +11,11 @@ import { EffectsModule } from '@ngrx/effects';
 import {routerReducer, StoreRouterConnectingModule} from '@ngrx/router-store';
 import { SharedModule } from './shared/shared.module';
 import { PersistenceService } from './core/services/persistence.service';
-import { AuthInterceptor } from './core/services/authinterceptor.service';
-import {ProductsModule} from "./core/components/Products/products.module";
-import {ProductModule} from "./core/components/Product/product.module";
 import {AuthModule} from "./features/auth/auth.module";
+import {ProductModule} from "./features/Product/product.module";
+import {ProductsModule} from "./features/Products/products.module";
+import {CoreModule} from "./core/core.module";
+import {AuthInterceptor} from "./core/interceptors/auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -30,13 +31,14 @@ import {AuthModule} from "./features/auth/auth.module";
     HttpClientModule,
     StoreModule.forRoot({router: routerReducer}),
     EffectsModule.forRoot([]),
-    StoreDevtoolsModule.instrument({  //для розширення браузера, щоб моніторити NgRx
-      maxAge: 25, //максимальна кількість дозволених дій для збереження в дереві історії
-      logOnly: environment.production //працює тільки в режимі розробки
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production
     }),
     StoreRouterConnectingModule.forRoot(),
     SharedModule,
-    StoreRouterConnectingModule.forRoot()
+    StoreRouterConnectingModule.forRoot(),
+    CoreModule
   ],
   providers: [
     PersistenceService,
