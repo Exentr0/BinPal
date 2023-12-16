@@ -2,11 +2,12 @@
 
   <div class="top">
     <span>Refine by</span>
-
   </div>
+
 
   <div class="card justify-content-center">
     <p-accordion [multiple]="true" [activeIndex]="[0,1,2]">
+
 
       <p-accordionTab>
         <ng-template pTemplate="header">
@@ -17,17 +18,39 @@
         </ng-template>
         <div class="pricing">
           <div class="price-slider">
-            <p-slider [(ngModel)]="rangePrice" [range]="true" [min]="0" [max]="400"></p-slider>
+            <p-slider
+              [(ngModel)]="priceSlider"
+              [range]="true"
+              [min]="rangePrice[0]"
+              [max]="rangePrice[1]"
+              (onChange)="onPriceSliderChange($event)"
+            ></p-slider>
           </div>
           <div class="price-inputs">
-            <input type="text" pInputText [(ngModel)]="rangePrice[0]"/>
-            <input type="text" pInputText [(ngModel)]="rangePrice[1]"/>
+            <form [formGroup]="priceForm">
+              <input
+                class="price-inputs1"
+                pInputText pKeyFilter="pint"
+                formControlName="priceLeft"
+                (input)="onInputPriceLeftChange($event)"
+              />
+              <span class="price-inputs-dash">—</span>
+              <input
+                class='price-inputs2'
+                pInputText pKeyFilter="pint"
+                formControlName="priceRight"
+                (input)="onInputPriceRightChange($event)"
+              />
+              <button class='price-inputs-btn' pButton type="submit" icon="pi pi-chevron-right"></button>
+            </form>
           </div>
-          <div class="price-free field-checkbox">
+
+          <div class="price-free">
             <p-checkbox label="Free" value="Free"></p-checkbox>
           </div>
         </div>
       </p-accordionTab>
+
 
       <p-accordionTab>
         <ng-template pTemplate="header">
@@ -40,7 +63,8 @@
           <div class="card flex">
             <div class="flex flex-column gap-0">
               <div *ngFor="let category of categories" class="field-checkbox">
-                <p-checkbox [label]="category.name" name="group" [value]="category" [(ngModel)]="selectedCategories" [inputId]="category.key"></p-checkbox>
+                <p-checkbox [label]="category.name" name="group" [value]="category" [(ngModel)]="selectedCategories"
+                            [inputId]="category.key"></p-checkbox>
               </div>
             </div>
           </div>
@@ -73,7 +97,8 @@
           <div class="card flex">
             <div class="flex flex-column gap-0">
               <div *ngFor="let category of categories2" class="field-checkbox">
-                <p-radioButton [inputId]="category.key" name="category" [value]="category" [(ngModel)]="selectedCategory2"></p-radioButton>
+                <p-radioButton [inputId]="category.key" name="category" [value]="category"
+                               [(ngModel)]="selectedCategory2"></p-radioButton>
                 <label [for]="category.key" class="ml-2">{{ category.name }}</label>
               </div>
             </div>
@@ -94,9 +119,6 @@
 
         </div>
       </p-accordionTab>
-
-
-
 
 
     </p-accordion>

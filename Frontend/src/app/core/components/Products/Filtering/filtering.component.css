@@ -1,3 +1,30 @@
 
+.price-inputs{
+  margin-top: 15px;
+}
+
+.price-inputs1{
+  height: 35px;
+  width: 90px;
+}
+
+.price-inputs-dash{
+  margin: 10px;
+}
 
 
+.price-inputs2{
+  height: 35px;
+  width: 90px;
+}
+
+.price-inputs-btn{
+  margin-left: 20px;
+  height: 35px;
+  width: 35px;
+}
+
+.price-free{
+  margin-top: 15px;
+  /*margin-bottom: 5px;*/
+}

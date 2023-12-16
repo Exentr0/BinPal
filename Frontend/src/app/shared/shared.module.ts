@@ -9,7 +9,6 @@ import {PaginationComponent} from "./components/pagination/pagination.component"
 import {UtilsService} from "../core/services/utils.service";
 import {ProductComponent} from "./components/product/product.component";
 import {FooterComponent} from "./components/footer/footer.component";
-import {SearchBarComponent} from './components/search-bar/search-bar.component';
 import {PaginatorModule} from "primeng/paginator";
 import {ImageModule} from "primeng/image";
 import {MenubarModule} from "primeng/menubar";
@@ -18,6 +17,9 @@ import {DividerModule} from "primeng/divider";
 import {AutoFocusModule} from "primeng/autofocus";
 import {ToastModule} from "primeng/toast";
 import {MenuModule} from "primeng/menu";
+import { KeyFilterModule } from 'primeng/keyfilter';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   imports: [
@@ -32,6 +34,9 @@ import {MenuModule} from "primeng/menu";
     AutoFocusModule,
     ToastModule,
     MenuModule,
+    KeyFilterModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   declarations: [
     NavbarComponent,
@@ -40,8 +45,7 @@ import {MenuModule} from "primeng/menu";
     BackendErrorMessagesComponent,
     LoadingComponent,
     PaginationComponent,
-    ProductComponent,
-    SearchBarComponent],
+    ProductComponent],
   exports: [
     NavbarComponent,
     FooterComponent,

@@ -2,7 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {Observable} from "rxjs/internal/Observable";
 import {CurrentUserInterface} from "../../types/currentUser.interface";
 import {select, Store} from "@ngrx/store";
-import {currentUserSelector, isAnonymousSelector, isLoggedInSelector} from "../../../auth/store/selectors";
+import {currentUserSelector, isAnonymousSelector, isLoggedInSelector} from "../../../features/auth/store/selectors";
 
 @Component({
   selector: 'mc-footer',

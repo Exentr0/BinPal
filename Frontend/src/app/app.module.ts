@@ -1,10 +1,8 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import {AppRoutingModule} from "./app-routing.module";
 import {AppComponent} from './app.component';
-import {AuthModule} from "./auth/auth.module";
 import {StoreModule} from "@ngrx/store";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 import {environment} from "src/environments/environment";
@@ -15,6 +13,8 @@ import { SharedModule } from './shared/shared.module';
 import { PersistenceService } from './core/services/persistence.service';
 import { AuthInterceptor } from './core/services/authinterceptor.service';
 import {ProductsModule} from "./core/components/Products/products.module";
+import {ProductModule} from "./core/components/Product/product.module";
+import {AuthModule} from "./features/auth/auth.module";
 
 @NgModule({
   declarations: [
@@ -25,6 +25,7 @@ import {ProductsModule} from "./core/components/Products/products.module";
     BrowserAnimationsModule,
     AppRoutingModule,
     ProductsModule,
+    ProductModule,
     AuthModule,
     HttpClientModule,
     StoreModule.forRoot({router: routerReducer}),

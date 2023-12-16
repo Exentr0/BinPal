@@ -1,9 +1,9 @@
 import {Component, OnInit} from "@angular/core";
 import {Observable} from "rxjs/internal/Observable";
 import {select, Store} from "@ngrx/store";
-import {isLoggedInSelector, isAnonymousSelector, currentUserSelector} from "src/app/auth/store/selectors";
 import {CurrentUserInterface} from "../../types/currentUser.interface";
 import {ActivatedRoute, Router} from "@angular/router";
+import {currentUserSelector, isAnonymousSelector, isLoggedInSelector} from "../../../features/auth/store/selectors";
 
 
 @Component({
@@ -30,12 +30,23 @@ export class NavbarComponent implements OnInit {
   }
 
   onEnter() {
-    this.router.navigate([], {
-      relativeTo: this.route,
+    this.router.navigate([''], {
       queryParams: { q: this.searchText },
       queryParamsHandling: 'merge',
     });
   }
+
+  // onEnter() {
+  //   const currentParams = { ...this.route.snapshot.queryParams };
+  //   delete currentParams['page'];
+  //   const mergedParams = { ...currentParams, q: this.searchText };
+  //   this.router.navigate([], {
+  //     relativeTo: this.route,
+  //     queryParams: mergedParams,
+  //     queryParamsHandling: 'merge',
+  //   });
+  // }
+
 
 
 }

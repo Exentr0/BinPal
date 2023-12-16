@@ -1,0 +1,48 @@
+
+<mc-loading class="loader"
+            *ngIf="isLoading$ | async"
+></mc-loading>
+
+<mc-backend-error-messages
+        class="error"
+        *ngIf="backendErrors$ | async"
+        [backendErrors]="backendErrors$ | async"
+></mc-backend-error-messages>
+
+
+<div class="body">
+    <div  *ngIf="product">
+    <div class="grid">
+
+
+        <div class="col-8 border-0">
+
+
+            <div class="container">
+
+                        {{product.productId}}
+                        {{product.pictureUrl}}
+                       product.title
+                       product.description
+                       product.quantity
+                      product.price
+
+            </div>
+
+        </div>
+
+<!--        <div class="col-4 border-0">-->
+<!--            <mc-create-order-->
+<!--                    [productId]="slug"-->
+<!--                    [price]="product.price"-->
+<!--            ></mc-create-order>-->
+
+<!--        </div>-->
+
+    </div>
+
+
+    </div>
+
+
+</div>

@@ -25,7 +25,7 @@ export class FeedComponent implements OnInit, OnDestroy {
   currentPage!: number
   limitProducts!: number
   products?: ProductInterface[]
-  rangePrice: number[] = [20, 200];
+  rangePrice: number[] = [0, 200];
 
 
 

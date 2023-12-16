@@ -11,7 +11,7 @@ import { reducers } from "./Feeds/store/reducer";
 import { SharedModule } from "src/app/shared/shared.module";
 import {DataViewModule} from "primeng/dataview";
 import {SliderModule} from "primeng/slider";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {InputTextModule} from "primeng/inputtext";
 import {DropdownModule} from "primeng/dropdown";
 import {TopComponent} from "./Top/top.component";
@@ -22,6 +22,8 @@ import {DividerModule} from "primeng/divider";
 import {CheckboxModule} from "primeng/checkbox";
 import {RatingModule} from "primeng/rating";
 import {RadioButtonModule} from "primeng/radiobutton";
+import {ButtonModule} from "primeng/button";
+import {KeyFilterModule} from "primeng/keyfilter";
 
 
 const routes: Routes = [
@@ -50,7 +52,10 @@ const routes: Routes = [
     DividerModule,
     CheckboxModule,
     RatingModule,
-    RadioButtonModule
+    RadioButtonModule,
+    ButtonModule,
+    KeyFilterModule,
+    ReactiveFormsModule
   ],
 
   declarations: [FeedComponent, GlobalFeedComponent, TopComponent, FilteringComponent],
