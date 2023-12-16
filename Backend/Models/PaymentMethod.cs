@@ -19,7 +19,7 @@ namespace Backend.Models
         public User User { get; set; }
 
         [ForeignKey("PaymentInfoId")]
-        public int PaymentInfoId { get; set; }
+        public int PaymentDetailsId { get; set; }
 
         public PaymentDetails PaymentDetails { get; set; }
     }
@@ -51,16 +51,16 @@ namespace Backend.Models
                 .NotNull()
                 .WithMessage("UserId can't be null");
 
-            RuleFor(pm => pm.PaymentInfoId)
+            RuleFor(pm => pm.PaymentDetailsId)
                 .NotNull()
                 .WithMessage("PaymentInfoId can't be null");
 
             // Custom validation rule to check if a user has more payment methods with the same PaymentInfoId
-            RuleFor(pm => pm.PaymentInfoId)
+            RuleFor(pm => pm.PaymentDetailsId)
                 .Must((paymentMethod, paymentInfoId) =>
                 {
                     // Check if there are other payment methods with the same PaymentInfoId for the same user
-                    return !context.UserPaymentMethods.Any(pm => pm.UserId == paymentMethod.UserId && pm.PaymentInfoId == paymentInfoId);
+                    return !context.UserPaymentMethods.Any(pm => pm.UserId == paymentMethod.UserId && pm.PaymentDetailsId == paymentInfoId);
                 })
                 .WithMessage("A user can't have multiple payment methods with the same PaymentInfoId");
         }
