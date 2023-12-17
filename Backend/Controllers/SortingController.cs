@@ -44,7 +44,7 @@ public class SortingController : Controller
             {
                 query = query.Where(p => p.Rating >= (double)model.MinRating.Value);
             }
-
+            
             // Сортування
             switch (model.Sorting)
             {
@@ -55,7 +55,6 @@ public class SortingController : Controller
                     query = query.OrderBy(p => p.Price);
                     break;
             }
-
             var totalCount = await query.CountAsync();
             var items = await query.ToListAsync();
 
@@ -71,6 +70,28 @@ public class SortingController : Controller
         }
     }
 
+    [HttpGet("/{page}")]
+    public async Task<ActionResult<List<Item>>> GetProduct(int page)
+    {
+        if (_context.Items == null)
+        {
+            return NotFound();
+        }
+
+        var pageResults = 3f;
+        var pageCount = Math.Ceiling(_context.Items.Count() / pageResults);
+        var products = await _context.Items
+            .Skip((page - 1) * (int)pageResults).Take((int)pageResults).ToListAsync();
+
+        var response = new ItemResponse
+        {
+            Items = products,
+            CurrentPage = page,
+            Pages = (int)pageCount
+        };
+
+        return Ok(response);
+    }
 
     public class SortingRequestModel
     {
