@@ -45,7 +45,7 @@ namespace Backend.Data
                 modelBuilder.Entity<PaymentMethod>()
                     .HasOne(pm => pm.PaymentDetails) 
                     .WithOne(pi => pi.PaymentMethod)
-                    .HasForeignKey<PaymentMethod>(pm => pm.PaymentInfoId) 
+                    .HasForeignKey<PaymentMethod>(pm => pm.PaymentDetailsId) 
                     .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
                 

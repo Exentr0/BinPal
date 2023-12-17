@@ -67,6 +67,21 @@ namespace Backend.Storage
                throw;
            }
        }
+        
+       protected string GetFileExtension(string contentType)
+       {
+           // Map MIME type to file extension (you may need a more comprehensive mapping)
+           switch (contentType)
+           {
+               case "image/jpeg":
+                   return ".jpg";
+               case "image/png":
+                   return ".png";
+               // Add more cases as needed for other file types
+               default:
+                   return ".dat"; // Default to a generic extension if the MIME type is not recognized
+           }
+       }
 
     }
 }
