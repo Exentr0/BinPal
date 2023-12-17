@@ -14,7 +14,6 @@ public class Item
     public string Name { get; set; }
 
     public float Rating { get; set; }
-    public float RatingValue { get; set; }
 
     public int LikesAmount { get; set; } = 0;
     

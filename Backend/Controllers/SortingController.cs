@@ -1,4 +1,6 @@
 using Backend.Data;
+using Backend.Models;
+using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,55 +15,38 @@ public class SortingController : Controller
         _context = context;
     }
 
-    [HttpGet("item/sorting")]
-    public async Task<ActionResult<object>> SortingProducts(
-        [FromQuery] string searchQuery,
-        [FromQuery] int limit,
-        [FromQuery] int offset,
-        [FromQuery] decimal? minPrice,
-        [FromQuery] decimal? maxPrice,
-        [FromQuery] int sorting,
-        [FromQuery] decimal? minRating)
+    [HttpPost("item/sorting")]
+    public async Task<ActionResult<object>> SortingProducts([FromBody] SortingRequestModel model)
     {
         try
         {
             var query = _context.Items.AsQueryable();
 
             // Фільтрація за ім'ям продукту
-            if (!string.IsNullOrEmpty(searchQuery))
+            if (!string.IsNullOrEmpty(model.SearchQuery))
             {
-                query = query.Where(p => p.Name.Contains(searchQuery));
-            }
-            else
-            {
-                var dataContext = _context.Items
-                    .Include(c => c.Name)
-                    .Include(c => c.ItemCategories)
-                    .Include(c => c.Price)
-                    .Include(c => c.Rating)
-                    .Include(c => c.RatingValue)
-                    .Include(c => c.LikesAmount);
+                query = query.Where(p => p.Name.Contains(model.SearchQuery));
             }
 
             // Фільтрація за ціною
-            if (minPrice.HasValue)
+            if (model.MinPrice.HasValue)
             {
-                query = query.Where(p => p.Price >= minPrice.Value);
+                query = query.Where(p => p.Price >= model.MinPrice.Value);
             }
 
-            if (maxPrice.HasValue)
+            if (model.MaxPrice.HasValue)
             {
-                query = query.Where(p => p.Price <= maxPrice.Value);
+                query = query.Where(p => p.Price <= model.MaxPrice.Value);
             }
 
             // Фільтрація за мінімальним значенням рейтингу
-            if (minRating.HasValue)
+            if (model.MinRating.HasValue)
             {
-                query = query.Where(p => p.Rating >= (double)minRating.Value);
+                query = query.Where(p => p.Rating >= (double)model.MinRating.Value);
             }
 
             // Сортування
-            switch (sorting)
+            switch (model.Sorting)
             {
                 case 1: // Спадання
                     query = query.OrderByDescending(p => p.Price);
@@ -71,18 +56,14 @@ public class SortingController : Controller
                     break;
             }
 
-            int totalCount = await query.CountAsync();
+            var totalCount = await query.CountAsync();
+            var items = await query.ToListAsync();
 
-            // Сортування, пагінація та отримання товарів
-            var items = await query.Skip(offset).Take(limit).ToListAsync();
-
-            var result = new
+            return new
             {
                 TotalCount = totalCount,
                 Products = items
             };
-
-            return Ok(result);
         }
         catch (Exception ex)
         {
@@ -90,37 +71,16 @@ public class SortingController : Controller
         }
     }
 
-    /*public async Task<IActionResult> Indexs(string search)
+
+    public class SortingRequestModel
     {
-        try
-        {
-            if (string.IsNullOrEmpty(search))
-            {
-                var dataContext = _context.Items
-                    .Include(c => c.Name)
-                    .Include(c => c.ItemCategories)
-                    .Include(c => c.Price)
-                    .Include(c => c.Rating)
-                    .Include(c => c.RatingValue)
-                    .Include(c => c.LikesAmount);
-
-                var items = await dataContext.ToListAsync();
-                return new JsonResult(items);
-            }
-            else
-            {
-                var searchItems = await _context.Items
-                    .Include(c => c.Name)
-                    .Where(s => s.Name.Contains(search))
-                    .ToListAsync();
-
-                return new JsonResult(searchItems);
-            }
-        }
-        catch (Exception ex)
-        {
-            return BadRequest($"Error");
-        }
+        public int Limit { get; set; }
+        public int Offset { get; set; }
+        public string SearchQuery { get; set; }
+        public string ReleaseDate { get; set; }
+        public int Sorting { get; set; }
+        public decimal? MinPrice { get; set; }
+        public decimal? MaxPrice { get; set; }
+        public decimal? MinRating { get; set; }
     }
-}    */
 }
