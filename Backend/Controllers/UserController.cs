@@ -27,12 +27,6 @@ namespace Backend.Controllers
                 // Upload the profile picture to Azure Blob Storage
                 await _userPfpBlobService.UploadBlobAsync(userId, profilePicture);
 
-                // Get the URL for the user's profile picture
-                var newProfilePictureUrl = _userPfpBlobService.GetUserPfpUrl(userId);
-
-                // Update the user's profile picture URL in the database
-                await _userService.UpdatePFP(userId, newProfilePictureUrl);
-
                 return Ok("Profile picture updated successfully");
             }
             catch (InvalidOperationException ex)
