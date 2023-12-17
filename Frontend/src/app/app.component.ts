@@ -6,6 +6,7 @@ import {getCurrentUserAction} from "./features/auth/store/actions/getCurrentUser
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 
 export class AppComponent implements OnInit{
