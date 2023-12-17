@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {select, Store} from "@ngrx/store";
 import {ActivatedRoute} from "@angular/router";
 import {Subscription,} from "rxjs";
@@ -8,7 +8,6 @@ import {BackendErrorsInterface} from "../../../../shared/types/backendErrors.int
 import {errorSelector, isLoadingSelector, productSelector} from "../../store/selectors";
 import {getProductAction} from "../../store/actions/getProduct.action";
 import {ProductInterface} from "../../types/product.interface";
-import {Galleria} from "primeng/galleria";
 
 
 

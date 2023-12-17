@@ -30,7 +30,7 @@ export class NavbarComponent implements OnInit {
   }
 
   onEnter() {
-    this.router.navigate([''], {
+    this.router.navigate(['search'], {
       queryParams: { q: this.searchText },
       queryParamsHandling: 'merge',
     });

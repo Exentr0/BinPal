@@ -2,13 +2,12 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {select, Store} from "@ngrx/store";
 import {Observable} from "rxjs/internal/Observable";
 import {ActivatedRoute, Params, Router} from "@angular/router";
-import {Subscription } from "rxjs";
-import queryString from 'query-string';
-
+import {Subscription} from "rxjs";
 import {GetFeedResponseInterface} from "../../types/getFeedResponse.interface";
 import {errorSelector, feedSelector, isLoadingSelector} from "../../store/selectors";
 import {getFeedAction} from "../../store/actions/getFeed.action";
 import {ProductCardInterface} from "../../../../shared/types/productCard.interface";
+import {feedRequestInterface} from "../../types/feedRequest.interface";
 
 @Component({
   selector: 'mc-feed',
@@ -18,17 +17,17 @@ import {ProductCardInterface} from "../../../../shared/types/productCard.interfa
 export class FeedComponent implements OnInit, OnDestroy {
   @Input('apiUrl') apiUrlProps!: string
 
+  feedRequest!: feedRequestInterface
   isLoading$!: Observable<boolean>
   error$!: Observable<string | null>
   feed$!: Observable<GetFeedResponseInterface | null>
   baseUrl!: string
+
   queryParamsSubscription!: Subscription
   currentPage!: number
-  limitProducts!: number
   totalProducts!: number
   products?: ProductCardInterface[]
   rangePrice: number[] = [0, 200];
-
 
 
   constructor(private store: Store, private router: Router, private route: ActivatedRoute) {
@@ -48,11 +47,7 @@ export class FeedComponent implements OnInit, OnDestroy {
     this.isLoading$ = this.store.pipe(select(isLoadingSelector))
     this.error$ = this.store.pipe(select(errorSelector))
     this.feed$ = this.store.pipe(select(feedSelector))
-
-
-
     this.baseUrl = this.router.url.split('?')[0]  //базова url до '?'
-
 
     this.feed$.subscribe(response => {
       if (response) {
@@ -64,29 +59,23 @@ export class FeedComponent implements OnInit, OnDestroy {
   }
 
   fetchFeed(): void {
-    const offset = this.currentPage * this.limitProducts - this.limitProducts //зсув (індекс першого товара(в загальній множині товарів) на поточній сторінці)
-    //за допомогою бібліотеки query-string створюю url з параметрами:
-    const parsedUrl = queryString.parseUrl(this.apiUrlProps)
-    const stringifiedParams = queryString.stringify({
-      limit: this.limitProducts,
-      offset,
-      ...parsedUrl.query
-    })
-    const apiUrlWithParams = `${parsedUrl.url}?${stringifiedParams}`
-    this.store.dispatch(getFeedAction({url: apiUrlWithParams}))
+    this.store.dispatch(getFeedAction({url: this.apiUrlProps, feedRequest: this.feedRequest}))
   }
-
 
 
   initializeListeners(): void {
     this.queryParamsSubscription = this.route.queryParams.subscribe(
       (params: Params) => {
+        this.feedRequest = {limit: 24, offset: 0}
+        this.feedRequest.searchQuery = String(params['q'])
+        this.feedRequest.limit = Number(params['limit'] || '24')
+
         this.currentPage = Number(params['page'] || '1')
-        this.limitProducts = Number(params['limit'] || '24')
+        this.feedRequest.offset = this.currentPage * this.feedRequest.limit - this.feedRequest.limit
         this.fetchFeed()
       })
-  }
 
+  }
 
 
 }

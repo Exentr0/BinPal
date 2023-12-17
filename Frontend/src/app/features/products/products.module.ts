@@ -28,7 +28,7 @@ import {FeedService} from "./services/feed.service";
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'search',
     component: GlobalFeedComponent
   }
 ]

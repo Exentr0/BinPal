@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     if (this.form.valid) {
       const request: LoginRequestInterface = this.form.value  //отримуємо значення з форми
-      this.store.dispatch(loginAction({request})) //відправляємо
+      this.store.dispatch(loginAction({request}))
     }
   }
 

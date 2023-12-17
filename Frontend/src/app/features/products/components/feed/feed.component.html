@@ -10,7 +10,7 @@
         <mc-top
           class="top"
           [totalProducts]="totalProducts"
-          [limitProducts]="limitProducts"
+          [limitProducts]="feedRequest.limit"
           [currentPage]="currentPage"
         ></mc-top>
 
@@ -42,7 +42,7 @@
           <mc-pagination
             class="pagination"
             [totalProducts]="totalProducts"
-            [limitProducts]="limitProducts"
+            [limitProducts]="feedRequest.limit"
             [currentPage]="currentPage"
           ></mc-pagination>
         </div>
