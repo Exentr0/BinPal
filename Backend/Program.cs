@@ -11,6 +11,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using FluentValidation.AspNetCore;
+using Microsoft.IdentityModel.Logging;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -61,15 +63,26 @@ builder.Services.AddSwaggerGen(options =>
     
     options.OperationFilter<SecurityRequirementsOperationFilter>();
 });
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddCookie(cfg => cfg.SlidingExpiration = true).AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
-        ValidateAudience = false,
-        ValidateIssuer = false,
+        ValidateAudience = true,
+        ValidateIssuer = true,
+        ValidIssuer = "http://localhost:5000",
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value!))
     };
+    options.Audience = "http://localhost:3000/";
+    options.Authority = "http://localhost:5000";
+    options.RequireHttpsMetadata = false;
+    options.SaveToken = true;
+    options.Audience = "BinPal";
+    options.Configuration = new OpenIdConnectConfiguration();
 });
 builder.Services.AddDbContext<DataContext>(options =>
 {
@@ -96,5 +109,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+IdentityModelEventSource.ShowPII = true;
 
 app.Run();

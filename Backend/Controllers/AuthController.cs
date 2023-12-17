@@ -29,10 +29,17 @@ namespace Backend.Controllers
             _httpContextAccessor = httpContextAccessor;
         }
         
-        [HttpGet, Authorize]
+        [HttpGet("get-current-username"), Authorize]
         public ActionResult<string> GetMyName()
         {
-            return Ok(_userService.GetMyName());
+            try
+            {
+                return Ok(_userService.GetMyName());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
 
         [HttpPost("register")]
