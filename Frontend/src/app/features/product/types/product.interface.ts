@@ -1,12 +1,19 @@
+import {RelatedProductsInterface} from "./relatedProducts.interface";
+
 export interface ProductInterface {
-  // image: string
-  // seller: string
-  // title: string
-  // rating: number
-  // ratingCount: number
-  // favorited: boolean
-  // favoritesCount: number
-  // price: number
+  id: string
+  name: string
+  price: string
+  owner: string
+  rating: number
+  overview: string
+  publisherInfo: string
+  license: string
+  pictures: {
+    result: string[]
+  }
+  relatedItems: RelatedProductsInterface[]
+
 
   // для тестів на https://conduit.productionready.io/api
   // title: string
@@ -24,27 +31,13 @@ export interface ProductInterface {
   // favorited: boolean
   // favoritesCount: number
 
-  // для тестів на https://fakestoreapi.com/
-  // id: number
-  // title: string
-  // price: number
-  // description: string
-  // category: string
-  // image: string
-  // rating: {rate: number, count: number}
-
   //для тестів на джанго
-  productId: number
-  title: string
-  description: string
-  price: number
-  quantity: number
-  pictureUrl: string
-
-
-
-
-
+  // productId: number
+  // title: string
+  // description: string
+  // price: number
+  // quantity: number
+  // pictureUrl: string
 
 
 }

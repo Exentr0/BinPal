@@ -1,4 +1,5 @@
 import {Component, Input} from "@angular/core";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'mc-productCard',
@@ -7,6 +8,7 @@ import {Component, Input} from "@angular/core";
 })
 
 export class ProductCardComponent {
+  @Input('productId') productId!: string
   @Input('image') image!: string
   @Input('seller') seller?: string
   @Input('title') title?: string
@@ -14,4 +16,8 @@ export class ProductCardComponent {
   @Input('ratingCount') ratingCount?: number
   @Input('favoritesCount') favoritesCount?: number
   @Input('price') price?: number
+
+
+
+
 }

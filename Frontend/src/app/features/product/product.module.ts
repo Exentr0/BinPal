@@ -24,7 +24,7 @@ import {DividerModule} from "primeng/divider";
 
 const routes: Routes = [
   {
-    path: 'products/:slug',
+    path: 'items/:slug',
     component: ProductComponent
   }
 ]

@@ -15,3 +15,12 @@ export interface GetFeedResponseInterface {
 
 
 
+// export interface GetFeedResponseInterface {
+//   products: ProductCardInterface[]
+//   productsCount: number
+//   prices?: {
+//     min: number
+//     max: number
+//   }
+//
+// }

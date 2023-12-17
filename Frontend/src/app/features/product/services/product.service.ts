@@ -13,8 +13,7 @@ export class ProductService {
     }
 
     getProduct(slug: string): Observable<ProductInterface> {
-        // const fullUrl = `${environment.apiUrl}/products/${slug}`
-        const fullUrl = `http://127.0.0.1:8000/products/${slug}`
+        const fullUrl = `${environment.apiUrl}/items/${slug}`
         return this.http.get<ProductInterface>(fullUrl)
     }
 

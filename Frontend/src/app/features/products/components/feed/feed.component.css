@@ -34,12 +34,4 @@
   right: 50%;
 }
 
-.product {
-  cursor: pointer;
-  transition: all ease-in-out 0.2s;
-}
-
-.product:hover {
-  transform: translateY(-3px);
-}
 
