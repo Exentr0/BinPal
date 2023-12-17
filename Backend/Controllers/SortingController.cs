@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Controllers;
 
-public class SortingController : ControllerBase
+public class SortingController : Controller
 {
     private readonly DataContext _context;
 
@@ -17,7 +17,11 @@ public class SortingController : ControllerBase
     public async Task<ActionResult<object>> SortingProducts(
         [FromQuery] string searchQuery,
         [FromQuery] int limit,
-        [FromQuery] int offset)
+        [FromQuery] int offset,
+        [FromQuery] decimal? minPrice,
+        [FromQuery] decimal? maxPrice,
+        [FromQuery] int sorting,
+        [FromQuery] decimal? minRating)
     {
         try
         {
@@ -27,6 +31,44 @@ public class SortingController : ControllerBase
             if (!string.IsNullOrEmpty(searchQuery))
             {
                 query = query.Where(p => p.Name.Contains(searchQuery));
+            }
+            else
+            {
+                var dataContext = _context.Items
+                    .Include(c => c.Name)
+                    .Include(c => c.ItemCategories)
+                    .Include(c => c.Price)
+                    .Include(c => c.Rating)
+                    .Include(c => c.RatingValue)
+                    .Include(c => c.LikesAmount);
+            }
+
+            // Фільтрація за ціною
+            if (minPrice.HasValue)
+            {
+                query = query.Where(p => p.Price >= minPrice.Value);
+            }
+
+            if (maxPrice.HasValue)
+            {
+                query = query.Where(p => p.Price <= maxPrice.Value);
+            }
+
+            // Фільтрація за мінімальним значенням рейтингу
+            if (minRating.HasValue)
+            {
+                query = query.Where(p => p.Rating >= (double)minRating.Value);
+            }
+
+            // Сортування
+            switch (sorting)
+            {
+                case 1: // Спадання
+                    query = query.OrderByDescending(p => p.Price);
+                    break;
+                case 2: // Зростання
+                    query = query.OrderBy(p => p.Price);
+                    break;
             }
 
             int totalCount = await query.CountAsync();
@@ -48,15 +90,7 @@ public class SortingController : ControllerBase
         }
     }
 
-
-    [Route("item/{min}/{max}")]
-    public IActionResult SortingSlider(decimal min, decimal max)
-    {
-        var item = _context.Items.Where(p => p.Price >= min && p.Price <= max);
-        return new JsonResult(item);
-    }
-
-    public async Task<IActionResult> Index(string search)
+    /*public async Task<IActionResult> Indexs(string search)
     {
         try
         {
@@ -88,4 +122,5 @@ public class SortingController : ControllerBase
             return BadRequest($"Error");
         }
     }
-}    
+}    */
+}
