@@ -53,6 +53,7 @@ public class ItemController : ControllerBase
                 Price = i.Price,
                 Rating = i.Rating,
                 Overview = i.Description,
+                PictureUrl = _itemPicturesBlobService.GetItemPictureUrlsAsync(i.Id).Result.FirstOrDefault()
                 // Add other properties as needed
             }).ToList(),
         };
