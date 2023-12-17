@@ -6700,11 +6700,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Files\\Programs\\BinPal\\sixth\\BinPal\\Backend\\Backend.csproj",
+      "projectUniqueName": "C:\\Files\\Programs\\BinPal\\seventh\\BinPal\\Backend\\Backend.csproj",
       "projectName": "Backend",
-      "projectPath": "C:\\Files\\Programs\\BinPal\\sixth\\BinPal\\Backend\\Backend.csproj",
+      "projectPath": "C:\\Files\\Programs\\BinPal\\seventh\\BinPal\\Backend\\Backend.csproj",
       "packagesPath": "C:\\Users\\Ivan\\.nuget\\packages\\",
-      "outputPath": "C:\\Files\\Programs\\BinPal\\sixth\\BinPal\\Backend\\obj\\",
+      "outputPath": "C:\\Files\\Programs\\BinPal\\seventh\\BinPal\\Backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Ivan\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -5,6 +5,7 @@ using Backend.Models;
 using Backend.Services;
 namespace Backend.Controllers;
 using Backend.Services.Storage;
+using System.Linq;
 [Route("api/items")]
 [ApiController]
 public class ItemController : ControllerBase
@@ -27,8 +28,14 @@ public class ItemController : ControllerBase
         }
 
         var owner = _context.Users.FirstOrDefault(u => u.Id == item.PublisherId);
+        var items = _context.Items
+            .Where(i => i.PublisherId == owner.Id && i.Id != id) // Exclude the current item
+            .Take(4)
+            .ToList(); // Execute the query to get the items
+
         var itemPictureUrls = _itemPicturesBlobService.GetItemPictureUrlsAsync(id);
-        var result = new
+
+        var result1 = new
         {
             Id = id,
             Name = item.Name,
@@ -37,10 +44,20 @@ public class ItemController : ControllerBase
             Rating = item.Rating,
             Overview = item.Description,
             PublisherInfo = item.PublisherInfo,
-            License = item.License, 
-            Pictures = itemPictureUrls
+            License = item.License,
+            Pictures = itemPictureUrls,
+            RelatedItems = items.Select(i => new
+            {
+                Id = i.Id,
+                Name = i.Name,
+                Price = i.Price,
+                Rating = i.Rating,
+                Overview = i.Description,
+                // Add other properties as needed
+            }).ToList(),
         };
-
-        return new JsonResult(result);
+        
+        
+        return new JsonResult(result1);
     }
 }

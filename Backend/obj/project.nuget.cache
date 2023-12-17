@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4KfMYFpv2xiZjk3mBvVPtZ3X9esKllsCbtbg0Wkoz3OQngAQJeGMfrCGq4UMNMJE73qhHsObhl7N+NOSxbWDvw==",
+  "dgSpecHash": "54IgNvF4V0pVk8tOUUWFcD37q8zN6lqStLx5EQUI3mIjtIdK2DxMLliAC4lg+kkAI+ix5B5IaPS5WpxhlbLNhA==",
   "success": true,
-  "projectFilePath": "C:\\Files\\Programs\\BinPal\\sixth\\BinPal\\Backend\\Backend.csproj",
+  "projectFilePath": "C:\\Files\\Programs\\BinPal\\seventh\\BinPal\\Backend\\Backend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Ivan\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\Ivan\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
