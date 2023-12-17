@@ -1,6 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
+using System.Text;
 using Backend.Models;
 using Backend.Registration___Authorization;
 using Backend.Services;
@@ -29,7 +30,8 @@ namespace Backend.Controllers
             _httpContextAccessor = httpContextAccessor;
         }
         
-        [HttpGet("get-current-username"), Authorize]
+        [HttpGet("get-current-username")]
+        [Authorize]
         public ActionResult<string> GetMyName()
         {
             try
@@ -80,8 +82,7 @@ namespace Backend.Controllers
             // Return the newly registered user
             return Ok(newUser);
         }
-
-
+        
         [HttpPost("login")]
         public async Task<ActionResult<User>> Login(UserDtoLogin request)
         {
@@ -94,9 +95,9 @@ namespace Backend.Controllers
                 };
             }
 
-            string token = await CreateToken(loggedInUser);
+            string token = CreateToken(loggedInUser);
 
-            var refreshToken = await GenerateRefreshToken(); 
+            var refreshToken = GenerateRefreshToken(); 
             await SetRefreshToken(refreshToken);
             
             var response = new
@@ -122,14 +123,14 @@ namespace Backend.Controllers
                 return Unauthorized("Token expired.");
             }
 
-            string token = await CreateToken(_user);
-            var newRefreshToken = await GenerateRefreshToken();
+            string token = CreateToken(_user);
+            var newRefreshToken = GenerateRefreshToken();
             await SetRefreshToken(newRefreshToken);
 
             return Ok(token);
         }
 
-        private async Task<RefreshToken> GenerateRefreshToken()
+        private  RefreshToken GenerateRefreshToken()
         {
             var refreshToken = new RefreshToken
             {
@@ -155,22 +156,23 @@ namespace Backend.Controllers
         }
                 
         
-        private async Task<string> CreateToken(User user)
+        private string CreateToken(User user)
         {
             List<Claim> claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.Username),
                 new Claim(ClaimTypes.Role, "User")
             };
-
-            var key = GenerateKey(64); 
-
-            var creds = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha512);
+            
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value!));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
                 claims: claims,
                 expires: DateTime.Now.AddDays(1),
-                signingCredentials: creds
+                signingCredentials: credentials,
+                audience:"BinPal",
+                issuer: "http://localhost:5000"
             );
 
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);

@@ -23,7 +23,7 @@ namespace Backend.Services
             var result = string.Empty;
             if (_httpContextAccessor.HttpContext is not null)
             {
-                result = _httpContextAccessor.HttpContext.User.FindFirstValue("Username");
+                result = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
             }
 
             return result;
