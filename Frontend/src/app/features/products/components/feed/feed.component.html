@@ -9,7 +9,7 @@
 
         <mc-top
           class="top"
-          [totalProducts]="totalProducts"
+          [totalProducts]="(feed$ | async)?.totalCount || 0"
           [limitProducts]="feedRequest.limit"
           [currentPage]="currentPage"
           [selectedSorting]="feedRequest.sorting"
@@ -28,13 +28,14 @@
                   <mc-productCard
                     [productId]="product.id"
                     [image]="'https://inside-ua.com/files/originals/bili-hory-2.jpg'"
-                    [seller]="'Test Seller'"
-                    [title]="product.title"
-                    [rating]="5"
+                    [seller]="product.username"
+                    [title]="product.name"
+                    [rating]="product.rating"
                     [ratingCount]="63"
-                    [favoritesCount]="product.favoritesCount"
-                    [price]="199.99">
+                    [favoritesCount]="product.likesAmount"
+                    [price]="product.price">
                   </mc-productCard>
+<!--                  [image]="product.images[1]"-->
                 </div>
               </div>
             </ng-template>

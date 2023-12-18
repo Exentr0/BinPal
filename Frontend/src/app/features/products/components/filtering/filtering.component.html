@@ -6,7 +6,7 @@
 
 
   <div class="card justify-content-center">
-    <p-accordion [multiple]="true" [activeIndex]="[0,1,2]">
+    <p-accordion [multiple]="true" [activeIndex]="[0,1,2,3]">
 
 
       <p-accordionTab>
@@ -32,6 +32,7 @@
                 class="price-inputs1"
                 pInputText pKeyFilter="pint"
                 formControlName="priceLeft"
+                [max] = 20
                 (input)="onInputPriceLeftChange($event)"
               />
               <span class="price-inputs-dash">—</span>

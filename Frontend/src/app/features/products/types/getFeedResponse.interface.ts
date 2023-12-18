@@ -3,7 +3,7 @@ import {ProductCardInterface} from "../../../shared/types/productCard.interface"
 
 export interface GetFeedResponseInterface {
   products: ProductCardInterface[]
-  productsCount: number
+  totalCount: number
 
 
   // для тестів на https://conduit.productionready.io/api

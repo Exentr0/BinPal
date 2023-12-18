@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from "@angular/core";
-import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 
 
@@ -13,6 +13,8 @@ export class FilteringComponent implements OnInit {
   @Input('rangePrice') rangePrice!: number[]
   priceForm!: FormGroup;
   priceSlider: number[] = [];
+
+  //----------------
   rating?: number
   test = 4;
 
@@ -34,14 +36,16 @@ export class FilteringComponent implements OnInit {
     {name: '1 year ago', key: '3'}
   ];
 
-
+//-----------------------
   constructor(private fb: FormBuilder) {
   }
 
 
   ngOnInit() {
     this.initializePriceForm()
+    //-----------------------
     this.selectedCategory2 = this.categories2[0];
+    //-----------------------
   }
 
 
@@ -49,11 +53,11 @@ export class FilteringComponent implements OnInit {
     this.priceForm = this.fb.group({
       priceLeft: [
         this.rangePrice[0],
-        [Validators.min(this.rangePrice[0]), this.maxValueValidator(this.rangePrice[1])],
+        [Validators.min(this.rangePrice[0])],
       ],
       priceRight: [
         this.rangePrice[1],
-        [Validators.min(this.rangePrice[0]), this.maxValueValidator(this.rangePrice[1])],
+        [Validators.min(this.rangePrice[0])],
       ],
     });
 
@@ -80,17 +84,6 @@ export class FilteringComponent implements OnInit {
     this.priceSlider[1] = +event.target.value;
   }
 
-  maxValueValidator(maxValue: number) {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-      const value = parseFloat(control.value);
-
-      if (!isNaN(value) && value > maxValue) {
-        return { 'maxValue': { 'max': maxValue, 'actual': control.value } };
-      }
-
-      return null;
-    };
-  }
 
 
 }

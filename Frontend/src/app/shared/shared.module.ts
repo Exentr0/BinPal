@@ -16,6 +16,7 @@ import {MenuModule} from "primeng/menu";
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {ProductCardComponent} from "./components/productCard/productCard.component";
+import {RatingStarsComponent} from "./components/ratingStars/ratingStars.component";
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import {ProductCardComponent} from "./components/productCard/productCard.compone
   ],
   declarations: [
     ErrorMessageComponent,
+    RatingStarsComponent,
     BackendErrorMessagesComponent,
     LoadingComponent,
     PaginationComponent,

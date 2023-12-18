@@ -12,7 +12,7 @@ export class ProductCardComponent {
   @Input('image') image!: string
   @Input('seller') seller?: string
   @Input('title') title?: string
-  @Input('rating') rating?: number
+  @Input('rating') rating!: number
   @Input('ratingCount') ratingCount?: number
   @Input('favoritesCount') favoritesCount?: number
   @Input('price') price?: number

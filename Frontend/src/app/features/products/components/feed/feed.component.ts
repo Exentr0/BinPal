@@ -51,7 +51,7 @@ export class FeedComponent implements OnInit, OnDestroy {
     this.feed$.subscribe(response => {
       if (response) {
         this.products = response.products;
-        this.totalProducts = response.productsCount;
+        this.totalProducts = response.totalCount;
       }
     });
 

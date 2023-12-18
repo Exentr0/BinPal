@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from "@angular/core";
 import {DropdownChangeEvent} from "primeng/dropdown";
 import {ActivatedRoute, Router} from "@angular/router";
 
@@ -14,7 +14,7 @@ interface Sorting {
   styleUrls: ['./top.component.css']
 })
 
-export class TopComponent implements OnInit {
+export class TopComponent implements OnInit, OnChanges  {
   @Input('totalProducts') totalProducts!: number
   @Input('limitProducts') limitProducts!: number
   @Input('currentPage') currentPage!: number
@@ -34,6 +34,12 @@ export class TopComponent implements OnInit {
     this.calculateProductIndexes()
     this.sortingDropdown()
     this.limitsDropdown()
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes["totalProducts"] && !changes["totalProducts"].firstChange) {
+      this.calculateProductIndexes();
+    }
   }
 
 
