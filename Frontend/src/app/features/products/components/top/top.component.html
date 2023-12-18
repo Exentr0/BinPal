@@ -9,10 +9,11 @@
   <span class="select">
     <span class="selectSorting">
               Sort by
-              <p-dropdown [options]="sortOptions"
-                          [(ngModel)]="sortKey"
-                          placeholder="Price High to Low"
-                          (onChange)="onSortChange($event)">
+              <p-dropdown [options]="sortingOptions"
+                          [(ngModel)]="selectedSorting"
+                          optionLabel="name"
+                          placeholder="{{selectedSorting.name}}"
+                          (onChange)="sortingChange($event)">
               </p-dropdown>
     </span>
 
@@ -24,7 +25,7 @@
                 [options]="limits"
                 [(ngModel)]="limitProducts"
                 placeholder="{{limitProducts}}"
-                (onChange)="sortDropdownChange($event)">
+                (onChange)="limitDropdownChange($event)">
               </p-dropdown>
 <!--        [style]="{'height':'45px'}"-->
         </span>

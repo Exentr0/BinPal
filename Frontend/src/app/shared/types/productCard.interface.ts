@@ -1,12 +1,22 @@
 export interface ProductCardInterface {
-  // image: string
-  // seller: string
-  // title: string
-  // rating: number
-  // ratingCount: number
-  // favorited: boolean
-  // favoritesCount: number
-  // price: number
+  id: number
+  image: string
+  seller: string
+  sellerId: number
+  title: string
+  rating: number
+  ratingCount: number
+  favoritesCount: number
+  price: number
+  favorited: boolean //зараз не обов'язково
+
+
+
+
+
+
+
+
 
   // для тестів на https://conduit.productionready.io/api
   // title: string
@@ -34,12 +44,12 @@ export interface ProductCardInterface {
   // rating: {rate: number, count: number}
 
   //для тестів на джанго
-  productId: number
-  title: string
-  description: string
-  price: number
-  quantity: number
-  pictureUrl: string
+  // productId: number
+  // title: string
+  // description: string
+  // price: number
+  // quantity: number
+  // pictureUrl: string
 
 
 

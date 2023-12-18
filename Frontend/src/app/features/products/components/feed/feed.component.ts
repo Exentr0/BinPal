@@ -27,11 +27,10 @@ export class FeedComponent implements OnInit, OnDestroy {
   currentPage!: number
   totalProducts!: number
   products?: ProductCardInterface[]
-  rangePrice: number[] = [0, 200];
+  rangePrice: number[] = [0, 9999];
 
 
-  constructor(private store: Store, private router: Router, private route: ActivatedRoute) {
-  }
+  constructor(private store: Store, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.initializeListeners()
@@ -51,8 +50,8 @@ export class FeedComponent implements OnInit, OnDestroy {
 
     this.feed$.subscribe(response => {
       if (response) {
-        this.products = response.articles;
-        this.totalProducts = response.articlesCount;
+        this.products = response.products;
+        this.totalProducts = response.productsCount;
       }
     });
 
@@ -66,10 +65,19 @@ export class FeedComponent implements OnInit, OnDestroy {
   initializeListeners(): void {
     this.queryParamsSubscription = this.route.queryParams.subscribe(
       (params: Params) => {
-        this.feedRequest = {limit: 24, offset: 0}
+        this.feedRequest =
+          {limit: 24,
+            offset: 0,
+            searchQuery: null,
+            releaseDate: null,
+            sorting: 1,
+            minPrice: null,
+            maxPrice: null,
+            minRating: null
+          }
         this.feedRequest.searchQuery = String(params['q'])
         this.feedRequest.limit = Number(params['limit'] || '24')
-
+        this.feedRequest.sorting = Number(params['sorting'] || '1')
         this.currentPage = Number(params['page'] || '1')
         this.feedRequest.offset = this.currentPage * this.feedRequest.limit - this.feedRequest.limit
         this.fetchFeed()

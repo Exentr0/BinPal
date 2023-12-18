@@ -15,14 +15,14 @@ export class FilteringComponent implements OnInit {
   priceSlider: number[] = [];
   rating?: number
   test = 4;
-  testa = [4, 100];
+
 
   selectedCategories: any[] = [];
   categories: any[] = [
-    {name: 'Test', key: 'A'},
-    {name: 'Test1', key: 'M'},
-    {name: 'Test2', key: 'P'},
-    {name: 'Test3', key: 'R'}
+    {name: '3D', key: 'A'},
+    {name: 'Audio', key: 'M'},
+    {name: 'Presets', key: 'P'},
+    {name: 'Templates', key: 'R'}
   ];
 
   selectedCategory2: any = 0;
@@ -57,17 +57,15 @@ export class FilteringComponent implements OnInit {
       ],
     });
 
-    // Initialize priceSlider with default values
+
     this.priceSlider = [this.rangePrice[0], this.rangePrice[1]];
 
-    // Subscribe to form control changes to update priceSlider
     this.priceForm.valueChanges.subscribe((values) => {
       this.priceSlider = [values.priceLeft, values.priceRight];
     });
   }
 
   onPriceSliderChange(event: any): void {
-    // Update form values when slider changes
     this.priceForm.patchValue({
       priceLeft: event.values[0],
       priceRight: event.values[1],
@@ -75,12 +73,10 @@ export class FilteringComponent implements OnInit {
   }
 
   onInputPriceLeftChange(event: any): void {
-    // Update slider value when left input changes
     this.priceSlider[0] = +event.target.value;
   }
 
   onInputPriceRightChange(event: any): void {
-    // Update slider value when right input changes
     this.priceSlider[1] = +event.target.value;
   }
 
