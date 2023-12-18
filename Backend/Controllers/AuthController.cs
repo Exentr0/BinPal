@@ -21,13 +21,11 @@ namespace Backend.Controllers
         private static User _user = new User();
         private readonly IConfiguration _configuration;
         private readonly IUserService _userService;
-        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public AuthController(IConfiguration configuration, IUserService userService, IHttpContextAccessor httpContextAccessor)
         {
             _configuration = configuration;
             _userService = userService;
-            _httpContextAccessor = httpContextAccessor;
         }
         
         [HttpGet("get-current-username")]
@@ -160,7 +158,9 @@ namespace Backend.Controllers
         {
             List<Claim> claims = new List<Claim>
             {
+                new Claim("Id", user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.Username),
+                new Claim("AvatarUrl",user.AvatarUrl),
                 new Claim(ClaimTypes.Role, "User")
             };
             

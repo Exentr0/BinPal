@@ -38,6 +38,7 @@ builder.Services.AddScoped<IValidator<SoftwareCategory>, SoftwareCategoryValidat
 builder.Services.AddScoped<IValidator<PaymentMethod>, PaymentMethodValidator>();
 builder.Services.AddScoped<IValidator<Plugin>, PluginValidator>();
 builder.Services.AddScoped<IValidator<ItemPlugin>, ItemPluginValidator>();
+builder.Services.AddScoped<IUserProfileService, UserProfileService>();
 
 //Add Fluent Validation 
 builder.Services.AddFluentValidation(fv =>

@@ -28,6 +28,47 @@ namespace Backend.Services
 
             return result;
         }
+
+        public string GetMyAvatarUrl()
+        {
+            var result = string.Empty;
+            if (_httpContextAccessor.HttpContext is not null)
+            {
+                var user = _httpContextAccessor.HttpContext.User;
+                var avatarUrlClaim = user.Claims.FirstOrDefault(c => c.Type == "AvatarUrl");
+                
+                if (avatarUrlClaim != null)
+                {
+                    result = avatarUrlClaim.Value;
+                }
+            }
+
+            return result;
+        }
+        
+        public int GetUserIdFromToken()
+        {
+            var userIdClaim = _httpContextAccessor.HttpContext?.User?.Claims.FirstOrDefault(c => c.Type == "Id");
+
+            if (userIdClaim != null && int.TryParse(userIdClaim.Value, out var userId))
+            {
+                return userId;
+            }
+            else
+            {
+                // Вивести відладкові повідомлення, щоб дізнатися, чому не вдалося отримати ідентифікатор користувача
+                if (userIdClaim == null)
+                {
+                    Console.WriteLine("Claim 'Id' not found in user claims.");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to parse 'Id' claim value.");
+                }
+
+                return -1;
+            }
+        }
         
         public async Task<User> Register(User user)
         {

@@ -8,6 +8,7 @@ namespace Backend.Data
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
         
         public DbSet<User> Users => Set<User>(); 
+        public DbSet<Comment> Comments => Set<Comment>();
         public DbSet<ShoppingCart> ShoppingCarts => Set<ShoppingCart>();
         public DbSet<PaymentMethod> UserPaymentMethods => Set<PaymentMethod>();
         public DbSet<PaymentDetails> AccountInfos => Set<PaymentDetails>();
@@ -173,6 +174,20 @@ namespace Backend.Data
                     .HasForeignKey(ip => ip.ItemId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
+                
+                // Зв'язок один до багатьох між User і Comment (коментарі, які залишили користувачі)
+                modelBuilder.Entity<User>()
+                    .HasMany(u => u.CommentsLeft)
+                    .WithOne(c => c.CommenterUser)
+                    .HasForeignKey(c => c.CommenterUserId)
+                    .OnDelete(DeleteBehavior.Restrict); 
+
+                // Зв'язок один до багатьох між User і Comment (коментарі, які користувач отримав від інших)
+                modelBuilder.Entity<User>()
+                    .HasMany(u => u.CommentsReceived)
+                    .WithOne(c => c.CommentedUser)
+                    .HasForeignKey(c => c.CommentedUserId)
+                    .OnDelete(DeleteBehavior.Restrict);
                 
             base.OnModelCreating(modelBuilder);
         }

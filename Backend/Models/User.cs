@@ -31,6 +31,16 @@ public class User
     public List<Item>? PublishedPackages { get; set; }
     public List<Purchase>? Purchases { get; set; }
     public List<ItemReview>? ItemReviews { get; set; }
+    
+    // for profile
+    // Навігаційна властивість до коментарів, які залишили користувачі
+    public List<Comment>? CommentsLeft { get; set; }
+
+    // Навігаційна властивість до коментарів, які він отримав від інших користувачів
+    public List<Comment>? CommentsReceived { get; set; }
+    // public List<Comment>? Comments { get; set; }
+    public string MainVideo { get; set; } = string.Empty;
+    public string AvatarUrl { get; set; } = "/images/default-avatar.jpg";
 }
 
 public class UserValidator : AbstractValidator<User>
