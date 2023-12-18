@@ -152,15 +152,12 @@ namespace Backend.Controllers
             _user.TokenCreated = newRefreshToken.CreatedAt;
             _user.TokenExpires = newRefreshToken.ExpiresAt;
         }
-                
         
         private string CreateToken(User user)
         {
             List<Claim> claims = new List<Claim>
             {
                 new Claim("Id", user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.Username),
-                new Claim("AvatarUrl",user.AvatarUrl),
                 new Claim(ClaimTypes.Role, "User")
             };
             

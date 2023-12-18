@@ -21,28 +21,48 @@ namespace Backend.Services
         public string GetMyName()
         {
             var result = string.Empty;
-            if (_httpContextAccessor.HttpContext is not null)
-            {
-                result = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
-            }
+            
+            var userIdClaim = _httpContextAccessor.HttpContext?.User?.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
 
+            if (!string.IsNullOrEmpty(userIdClaim))
+            {
+                var user = _dataContext.Users.Find(int.Parse(userIdClaim));
+
+                if (user != null)
+                {
+                    string username = user.Username;
+
+                    if (!string.IsNullOrEmpty(username))
+                    {
+                        result = username;
+                    }
+                }
+            }
+            
             return result;
         }
 
         public string GetMyAvatarUrl()
         {
             var result = string.Empty;
-            if (_httpContextAccessor.HttpContext is not null)
+            
+            var userIdClaim = _httpContextAccessor.HttpContext?.User?.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
+
+            if (!string.IsNullOrEmpty(userIdClaim))
             {
-                var user = _httpContextAccessor.HttpContext.User;
-                var avatarUrlClaim = user.Claims.FirstOrDefault(c => c.Type == "AvatarUrl");
-                
-                if (avatarUrlClaim != null)
+                var user = _dataContext.Users.Find(int.Parse(userIdClaim));
+
+                if (user != null)
                 {
-                    result = avatarUrlClaim.Value;
+                    string avatarUrl = user.AvatarUrl;
+
+                    if (!string.IsNullOrEmpty(avatarUrl))
+                    {
+                        result = avatarUrl;
+                    }
                 }
             }
-
+            
             return result;
         }
         
