@@ -180,14 +180,14 @@ namespace Backend.Data
                     .HasMany(u => u.CommentsLeft)
                     .WithOne(c => c.CommenterUser)
                     .HasForeignKey(c => c.CommenterUserId)
-                    .OnDelete(DeleteBehavior.Restrict); 
+                    .OnDelete(DeleteBehavior.NoAction); 
 
                 // Зв'язок один до багатьох між User і Comment (коментарі, які користувач отримав від інших)
                 modelBuilder.Entity<User>()
                     .HasMany(u => u.CommentsReceived)
                     .WithOne(c => c.CommentedUser)
                     .HasForeignKey(c => c.CommentedUserId)
-                    .OnDelete(DeleteBehavior.Restrict);
+                    .OnDelete(DeleteBehavior.NoAction);
                 
             base.OnModelCreating(modelBuilder);
         }

@@ -5,13 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers
 {
-    public class CommentRequestModel
-    {
-        public int CommentedUserId { get; set; }
-        public string Text { get; set; }
-        public float Rating { get; set; }
-    }
-    
     public class UserEditModel
     {
         public string Username { get; set; }
@@ -51,7 +44,19 @@ namespace Backend.Controllers
                     return NotFound();
                 }
                 
-                return Ok(userProfile);
+                // return Ok(userProfile);
+                return new JsonResult(new
+                {
+                    userProfile.Id,
+                    userProfile.Username,
+                    userProfile.Bio,
+                    userProfile.AvatarUrl,
+                    userProfile.Email,
+                    userProfile.MainVideo,
+                    userProfile.Purchases,
+                    userProfile.ItemReviews,
+                    userProfile.PublishedPackages
+                });
             }
             catch (InvalidOperationException ex)
             {
@@ -62,7 +67,7 @@ namespace Backend.Controllers
         // Comments
         [HttpPost("user-profile/add-comment")]
         [Authorize]
-        public async Task<IActionResult> AddComment([FromBody] CommentRequestModel commentRequest)
+        public async Task<IActionResult> AddComment([FromBody] CommentRequest commentRequest)
         {
             try
             {
@@ -102,11 +107,13 @@ namespace Backend.Controllers
         
         // Edit protile
         [HttpPut("user-profile/{userId}")]
-        public IActionResult UpdateUser(int userId, [FromBody] UpdateUser model)
+        [Authorize]
+        public IActionResult UpdateUser([FromBody] UpdateUser model)
         {
             try
             {
-                // Оновити користувача
+                int userId =  _userService.GetUserIdFromToken(); 
+               
                 _userProfileService.UpdateUser(userId, model);
 
                 return Ok("User updated successfully");
@@ -141,6 +148,8 @@ namespace Backend.Controllers
             }
             catch (Exception ex)
             {
+                Console.WriteLine("Exception: " + ex.Message);
+                Console.WriteLine("Inner Exception: " + ex.InnerException?.Message);
                 return BadRequest(new { message = ex.Message });
             }
         }

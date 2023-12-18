@@ -421,13 +421,13 @@ namespace Backend.Migrations
                     b.HasOne("Backend.Models.User", "CommentedUser")
                         .WithMany("CommentsReceived")
                         .HasForeignKey("CommentedUserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Backend.Models.User", "CommenterUser")
                         .WithMany("CommentsLeft")
                         .HasForeignKey("CommenterUserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("CommentedUser");

@@ -28,11 +28,6 @@ namespace Backend.Services
 
             if (user != null)
             {
-                _dataContext.Entry(user).Property(u => u.Username);
-                _dataContext.Entry(user).Property(u => u.AvatarUrl);
-                _dataContext.Entry(user).Property(u => u.Bio);
-                _dataContext.Entry(user).Property(u => u.MainVideo);
-                _dataContext.Entry(user).Property(u => u.Email);
                 await _dataContext.Entry(user).Reference(u => u.ShoppingCart).LoadAsync();
                 await _dataContext.Entry(user).Collection(u => u.PaymentMethods).LoadAsync();
                 await _dataContext.Entry(user).Collection(u => u.PublishedPackages).LoadAsync();
@@ -119,15 +114,28 @@ namespace Backend.Services
         
         public async Task DeleteUser(int userId)
         {
-            var user = await _dataContext.Users.FindAsync(userId);
-
-            if (user == null)
+            try
             {
-                throw new Exception("User not found");
-            }
+                var user = await _dataContext.Users.FindAsync(userId);
 
-            _dataContext.Users.Remove(user);
-            _dataContext.SaveChanges();
+                if (user == null)
+                {
+                    throw new Exception("User not found");
+                }
+                
+                // Видалення коментарів, які посилаються на цього користувача
+                var commentsToDelete = _dataContext.Comments.Where(c => c.CommenterUserId == userId || c.CommentedUserId == userId);
+                _dataContext.Comments.RemoveRange(commentsToDelete);
+
+                _dataContext.Users.Remove(user);
+                _dataContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception: " + ex.Message);
+                Console.WriteLine("Inner Exception: " + ex.InnerException?.Message);
+                throw; // Передача виключення у контролер
+            }
         }
     }
 }
