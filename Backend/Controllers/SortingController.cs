@@ -19,7 +19,7 @@ public class SortingController : Controller
 
     [HttpPost("/api/Sorting")]
    public async Task<ActionResult<object>> SortingProducts([FromBody] SortingRequestModel model)
-{
+   {
     try
     {
         var query = _context.Items.AsQueryable();
@@ -46,7 +46,7 @@ public class SortingController : Controller
         {
             query = query.Where(p => p.Rating >= (double)model.MinRating.Value);
         }
-
+        
         // Сортування
         switch (model.Sorting)
         {
@@ -76,6 +76,7 @@ public class SortingController : Controller
                 p.User.Username,
                 Images = _itemPicturesBlobService.GetItemPictureUrlsAsync(p.Id).Result,
             })
+            
             .ToListAsync();
 
         var totalCount = await query.CountAsync();
@@ -90,48 +91,48 @@ public class SortingController : Controller
     catch (Exception ex)
     {
         return BadRequest($"Error: {ex.Message}");
-    }
-}
+    } 
+   }
 
-    [HttpGet("/api/item")]
-    public async Task<ActionResult<object>> GetProducts([FromQuery] int page = 1, [FromQuery] int limit = 24)
-    {
-        try
-        {
-            if (_context.Items == null)
-            {
-                return NotFound();
-            }
+   [HttpGet("/api/{page}")]
+   public async Task<ActionResult<object>> GetProducts([FromQuery] int page = 1, [FromQuery] int limit = 24)
+   {
+       try
+       {
+           if (_context.Items == null)
+           {
+               return NotFound();
+           }
 
-            var pageResults = (float)limit;
-            var pageCount = Math.Ceiling(_context.Items.Count() / pageResults);
-            var products = await _context.Items
-                .Skip((page - 1) * limit).Take(limit).ToListAsync();
+           var pageResults = (float)limit;
+           var pageCount = Math.Ceiling(_context.Items.Count() / pageResults);
+           var products = await _context.Items
+               .Skip((page - 1) * limit).Take(limit).ToListAsync();
 
-            var response = new
-            {
-                TotalPages = (int)pageCount,
-                CurrentPage = page,
-                Items = products
-            };
+           var response = new
+           {
+               TotalPages = (int)pageCount,
+               CurrentPage = page,
+               Items = products
+           };
 
-            return Ok(response);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest($"Error: {ex.Message}");
-        }
-    }
+           return Ok(response);
+       }
+       catch (Exception ex)
+       {
+           return BadRequest($"Error: {ex.Message}");
+       }
+   }
 
-    public class SortingRequestModel
-    {
-        public int Limit { get; set; }
-        public int Offset { get; set; }
-        public string SearchQuery { get; set; }
-        public string ReleaseDate { get; set; }
-        public int Sorting { get; set; }
-        public decimal? MinPrice { get; set; }
-        public decimal? MaxPrice { get; set; }
-        public decimal? MinRating { get; set; }
-    }
+       public class SortingRequestModel
+       {
+           public int Limit { get; set; }
+           public int Offset { get; set; }
+           public string SearchQuery { get; set; }
+           public string ReleaseDate { get; set; }
+           public int Sorting { get; set; }
+           public decimal? MinPrice { get; set; }
+           public decimal? MaxPrice { get; set; }
+           public decimal? MinRating { get; set; }
+       }
 }
