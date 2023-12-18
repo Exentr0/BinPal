@@ -94,37 +94,6 @@ public class SortingController : Controller
         return BadRequest($"Error: {ex.Message}");
     } 
    }
-
-   [HttpGet("/api/{page}")]
-   public async Task<ActionResult<object>> GetProducts([FromQuery] int page = 1, [FromQuery] int limit = 24)
-   {
-       try
-       {
-           if (_context.Items == null)
-           {
-               return NotFound();
-           }
-
-           var pageResults = (float)limit;
-           var pageCount = Math.Ceiling(_context.Items.Count() / pageResults);
-           var products = await _context.Items
-               .Skip((page - 1) * limit).Take(limit).ToListAsync();
-
-           var response = new
-           {
-               TotalPages = (int)pageCount,
-               CurrentPage = page,
-               Items = products
-           };
-
-           return Ok(response);
-       }
-       catch (Exception ex)
-       {
-           return BadRequest($"Error: {ex.Message}");
-       }
-   }
-
        public class SortingRequestModel
        {
            public int Limit { get; set; }
