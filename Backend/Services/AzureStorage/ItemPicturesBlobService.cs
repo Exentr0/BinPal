@@ -57,7 +57,6 @@ public class ItemPicturesBlobService : AzureBlobService
             await DeleteBlobAsync(blobItem.Name);
         }
     }
-
     // Get a list of URLs for pictures associated with a specified item
     public async Task<List<string>> GetItemPictureUrlsAsync(int itemId)
     {

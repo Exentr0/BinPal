@@ -1,4 +1,4 @@
-
+/*
 using Microsoft.AspNetCore.Mvc;
 using Backend.Data;
 using Backend.Models;
@@ -16,8 +16,9 @@ public class GetProductController: ControllerBase
         _context = context;
     }
     
-    [HttpGet("{id}/price")]
-    public IActionResult GetItemPrice(int id)
+    
+    [HttpGet("{id}/price")] */
+    /*public IActionResult GetItemPrice(int id)
     {
         var item = _context.Items.FirstOrDefault(p => p.Id == id);
         if (item == null)
@@ -72,8 +73,8 @@ public class GetProductController: ControllerBase
             return NotFound();
         }
         return Ok(item.LikesAmount);
-    }
+    }*/
     
-}
+/*}*/
 
 /*для сторінки результатів пошуку я би хотів отримати продукти в такому форматі*/
