@@ -107,5 +107,42 @@ namespace Backend.Controllers
 
             return Ok(cartItems);
         }
+        [HttpDelete("clear-cart")]
+        [Authorize]
+        public IActionResult ClearCart()
+        {
+            var userName = _userService.GetMyName();
+            var user = _context.Users.Include(u => u.ShoppingCart).ThenInclude(sc => sc.CartItems)
+                .FirstOrDefault(u => u.Username == userName);
+
+            if (user == null || user.ShoppingCart == null)
+            {
+                return NotFound("User or shopping cart not found.");
+            }
+
+            // Remove all items from the shopping cart
+            user.ShoppingCart.CartItems.Clear();
+    
+            _context.SaveChanges();
+
+            return Ok("Shopping cart cleared.");
+        }
+        [HttpGet("total-price")]
+        [Authorize]
+        public IActionResult GetTotalPrice()
+        {
+            var userName = _userService.GetMyName();
+            var user = _context.Users.Include(u => u.ShoppingCart).ThenInclude(sc => sc.CartItems).ThenInclude(ci => ci.Item)
+                .FirstOrDefault(u => u.Username == userName);
+
+            if (user == null || user.ShoppingCart == null)
+            {
+                return NotFound("User or shopping cart not found.");
+            }
+
+            decimal totalPrice = user.ShoppingCart.CartItems.Sum(ci => ci.Item.Price);
+
+            return Ok(new { TotalPrice = totalPrice });
+        }
     }
 }
