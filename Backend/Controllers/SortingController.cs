@@ -16,7 +16,6 @@ public class SortingController : Controller
         _itemPicturesBlobService = itemPicturesBlobService;
         _context = context;
     }
-
     [HttpPost("/api/Sorting")]
    public async Task<ActionResult<object>> SortingProducts([FromBody] SortingRequestModel model)
    {
@@ -60,6 +59,10 @@ public class SortingController : Controller
 
         query = query.Include(p => p.User);
 
+        var totalCount = await query.CountAsync();
+        var offset = model.Offset;
+        var startIndex = Math.Max(0, offset);
+        var endIndex = Math.Min(totalCount, startIndex + model.Limit);
         // Повернення результатів
         var items = await query
             .Select(p => new
@@ -76,12 +79,10 @@ public class SortingController : Controller
                 p.User.Username,
                 Images = _itemPicturesBlobService.GetItemPictureUrlsAsync(p.Id).Result,
             })
-            
+            .Skip(startIndex)
+            .Take(endIndex - startIndex)
             .ToListAsync();
-
-        var totalCount = await query.CountAsync();
-
-
+        
         return new
         {
             TotalCount = totalCount,
