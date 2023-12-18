@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using Backend.Data;
 using Backend.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
@@ -11,11 +12,14 @@ namespace Backend.Services
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly DataContext _dataContext;
+        private readonly IPasswordHasher<User> _passwordHasher;
+        private IUserProfileService _userProfileServiceImplementation;
 
-        public UserProfileService(IHttpContextAccessor httpContextAccessor, DataContext dataContext)
+        public UserProfileService(IHttpContextAccessor httpContextAccessor, DataContext dataContext,IPasswordHasher<User> passwordHasher)
         {
             _httpContextAccessor = httpContextAccessor;
             _dataContext = dataContext; 
+            _passwordHasher = passwordHasher;
         }
         
         public async Task<User> GetUserProfile(int userId)
@@ -67,6 +71,63 @@ namespace Backend.Services
             }
             
             return user?.CommentsReceived ?? new List<Comment>();
+        }
+        
+
+        // Profile edit
+        public User GetUserById(int userId)
+        {
+            return _dataContext.Users.Find(userId);
+        }
+
+        public async Task UpdateUser(int userId, UpdateUser model)
+        {
+            var user = await _dataContext.Users.FindAsync(userId);
+
+            if (user == null)
+            {
+                throw new Exception("User not found");
+            }
+
+            // Оновлення інших полів користувача
+            user.Username = model.Username;
+            user.Email = model.Email;
+            user.Bio = model.Bio;
+            user.MainVideo = model.MainVideo;
+            user.AvatarUrl = model.AvatarUrl;
+
+            // Зміна паролю, якщо вказано новий пароль
+            if (!string.IsNullOrWhiteSpace(model.NewPassword))
+            {
+                // Перевірка поточного паролю
+                var passwordVerificationResult = _passwordHasher.VerifyHashedPassword(user, user.Password, model.CurrentPassword);
+
+                if (passwordVerificationResult == PasswordVerificationResult.Failed)
+                {
+                    throw new Exception("Incorrect current password");
+                }
+
+                // Генерація нового хеша для нового паролю
+                var newPasswordHash = _passwordHasher.HashPassword(user, model.NewPassword);
+
+                // Оновлення паролю в базі даних
+                user.Password = newPasswordHash;
+            }
+            
+            _dataContext.SaveChanges();
+        }
+        
+        public async Task DeleteUser(int userId)
+        {
+            var user = await _dataContext.Users.FindAsync(userId);
+
+            if (user == null)
+            {
+                throw new Exception("User not found");
+            }
+
+            _dataContext.Users.Remove(user);
+            _dataContext.SaveChanges();
         }
     }
 }

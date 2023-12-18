@@ -12,6 +12,16 @@ namespace Backend.Controllers
         public float Rating { get; set; }
     }
     
+    public class UserEditModel
+    {
+        public string Username { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string Bio { get; set; }
+        public string MainVideo { get; set; }
+        public string AvatarUrl { get; set; }
+    }
+    
     [Route("api/[controller]")]
     [ApiController]
 
@@ -49,6 +59,7 @@ namespace Backend.Controllers
             }
         }
         
+        // Comments
         [HttpPost("user-profile/add-comment")]
         [Authorize]
         public async Task<IActionResult> AddComment([FromBody] CommentRequestModel commentRequest)
@@ -88,5 +99,51 @@ namespace Backend.Controllers
                 return NotFound($"User with ID {userId} not found. {ex.Message}");
             }
         }
+        
+        // Edit protile
+        [HttpPut("user-profile/{userId}")]
+        public IActionResult UpdateUser(int userId, [FromBody] UpdateUser model)
+        {
+            try
+            {
+                // Оновити користувача
+                _userProfileService.UpdateUser(userId, model);
+
+                return Ok("User updated successfully");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Error updating user: {ex.Message}");
+            }
+        }
+        
+        [HttpDelete("user-profile/delete")]
+        public async Task<IActionResult> DeleteUser()
+        {
+            try
+            {
+                int userId = _userService.GetUserIdFromToken();
+                await _userProfileService.DeleteUser(userId);
+                return Ok("User was deleted");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+        [HttpDelete("{userId}")]
+        public async Task<IActionResult> DeleteUser(int userId)
+        {
+            try
+            {
+                await _userProfileService.DeleteUser(userId);
+                return Ok("User was deleted");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+        
     }
 }
