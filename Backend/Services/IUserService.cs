@@ -9,5 +9,6 @@ namespace Backend.Services
         Task<User> Register(User user);
         Task<User> Login(string username, string password);
         Task<User> GetUserByName(string username);
+        
     }
 }

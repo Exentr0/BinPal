@@ -61,7 +61,7 @@ namespace Backend.Controllers
 
             // Validate the new user using FluentValidation
             ValidationResult validationResult = await validator.ValidateAsync(newUser);
-
+            
             // Check if validation failed
             if (!validationResult.IsValid)
             {
@@ -81,7 +81,7 @@ namespace Backend.Controllers
             {
                 newUser.Password = BCrypt.Net.BCrypt.HashPassword(request.Password);
                 // If validation succeeded, register the new user
-                await _userService.Register(newUser);   
+                await _userService.Register(newUser);
             }
             // Return the newly registered user
             return Ok(newUser);
