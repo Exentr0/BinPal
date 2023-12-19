@@ -21,19 +21,55 @@ namespace Backend.Services
         public string GetMyName()
         {
             var result = string.Empty;
-            if (_httpContextAccessor.HttpContext is not null)
-            {
-                result = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
-            }
+            
+            var userIdClaim = _httpContextAccessor.HttpContext?.User?.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
 
+            if (!string.IsNullOrEmpty(userIdClaim))
+            {
+                var user = _dataContext.Users.Find(int.Parse(userIdClaim));
+
+                if (user != null)
+                {
+                    string username = user.Username;
+
+                    if (!string.IsNullOrEmpty(username))
+                    {
+                        result = username;
+                    }
+                }
+            }
+            
             return result;
+        }
+
+        public int GetUserIdFromToken()
+        {
+            var userIdClaim = _httpContextAccessor.HttpContext?.User?.Claims.FirstOrDefault(c => c.Type == "Id");
+
+            if (userIdClaim != null && int.TryParse(userIdClaim.Value, out var userId))
+            {
+                return userId;
+            }
+            else
+            {
+                // Вивести відладкові повідомлення, щоб дізнатися, чому не вдалося отримати ідентифікатор користувача
+                if (userIdClaim == null)
+                {
+                    Console.WriteLine("Claim 'Id' not found in user claims.");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to parse 'Id' claim value.");
+                }
+
+                return -1;
+            }
         }
         
         public async Task<User> Register(User user)
         {
             // Додаємо користувача до бази даних і зберігаємо зміни
             await _dataContext.Users.AddAsync(user);
-            
             await _dataContext.SaveChangesAsync();
             return user;
         }
