@@ -21,13 +21,11 @@ namespace Backend.Controllers
         private static User _user = new User();
         private readonly IConfiguration _configuration;
         private readonly IUserService _userService;
-        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public AuthController(IConfiguration configuration, IUserService userService, IHttpContextAccessor httpContextAccessor)
         {
             _configuration = configuration;
             _userService = userService;
-            _httpContextAccessor = httpContextAccessor;
         }
         
         [HttpGet("get-current-username")]
@@ -36,7 +34,9 @@ namespace Backend.Controllers
         {
             try
             {
-                return Ok(_userService.GetMyName());
+                string username = _userService.GetMyName();
+                var response = new { Username = username };
+                return Ok(response);
             }
             catch (Exception ex)
             {
@@ -154,13 +154,12 @@ namespace Backend.Controllers
             _user.TokenCreated = newRefreshToken.CreatedAt;
             _user.TokenExpires = newRefreshToken.ExpiresAt;
         }
-                
         
         private string CreateToken(User user)
         {
             List<Claim> claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.Username),
+                new Claim("Id", user.Id.ToString()),
                 new Claim(ClaimTypes.Role, "User")
             };
             

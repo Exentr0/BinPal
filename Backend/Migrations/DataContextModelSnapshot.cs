@@ -54,6 +54,47 @@ namespace Backend.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("Backend.Models.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AvatarUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CommentedUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CommenterUserId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<float>("Rating")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CommentedUserId");
+
+                    b.HasIndex("CommenterUserId");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("Backend.Models.Item", b =>
                 {
                     b.Property<int>("Id")
@@ -194,7 +235,7 @@ namespace Backend.Migrations
                     b.Property<bool>("IsDefault")
                         .HasColumnType("bit");
 
-                    b.Property<int>("PaymentInfoId")
+                    b.Property<int>("PaymentDetailsId")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
@@ -202,7 +243,7 @@ namespace Backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PaymentInfoId")
+                    b.HasIndex("PaymentDetailsId")
                         .IsUnique();
 
                     b.HasIndex("UserId");
@@ -317,11 +358,19 @@ namespace Backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("AvatarUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Bio")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MainVideo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -365,6 +414,25 @@ namespace Backend.Migrations
                     b.Navigation("Item");
 
                     b.Navigation("ShoppingCart");
+                });
+
+            modelBuilder.Entity("Backend.Models.Comment", b =>
+                {
+                    b.HasOne("Backend.Models.User", "CommentedUser")
+                        .WithMany("CommentsReceived")
+                        .HasForeignKey("CommentedUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Backend.Models.User", "CommenterUser")
+                        .WithMany("CommentsLeft")
+                        .HasForeignKey("CommenterUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("CommentedUser");
+
+                    b.Navigation("CommenterUser");
                 });
 
             modelBuilder.Entity("Backend.Models.Item", b =>
@@ -439,7 +507,7 @@ namespace Backend.Migrations
                 {
                     b.HasOne("Backend.Models.PaymentDetails", "PaymentDetails")
                         .WithOne("PaymentMethod")
-                        .HasForeignKey("Backend.Models.PaymentMethod", "PaymentInfoId")
+                        .HasForeignKey("Backend.Models.PaymentMethod", "PaymentDetailsId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -559,6 +627,10 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Backend.Models.User", b =>
                 {
+                    b.Navigation("CommentsLeft");
+
+                    b.Navigation("CommentsReceived");
+
                     b.Navigation("ItemReviews");
 
                     b.Navigation("PaymentMethods");

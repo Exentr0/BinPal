@@ -14,6 +14,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,6 +39,8 @@ builder.Services.AddScoped<IValidator<SoftwareCategory>, SoftwareCategoryValidat
 builder.Services.AddScoped<IValidator<PaymentMethod>, PaymentMethodValidator>();
 builder.Services.AddScoped<IValidator<Plugin>, PluginValidator>();
 builder.Services.AddScoped<IValidator<ItemPlugin>, ItemPluginValidator>();
+builder.Services.AddScoped<IUserProfileService, UserProfileService>();
+builder.Services.AddScoped<IPasswordHasher<Backend.Models.User>, PasswordHasher<Backend.Models.User>>();
 
 //Add Fluent Validation 
 builder.Services.AddFluentValidation(fv =>
