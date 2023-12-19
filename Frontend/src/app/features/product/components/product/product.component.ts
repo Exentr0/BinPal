@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {select, Store} from "@ngrx/store";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Params} from "@angular/router";
 import {Subscription,} from "rxjs";
 import {Observable} from "rxjs/internal/Observable";
 
@@ -45,14 +45,23 @@ export class ProductComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initializeValues()
-    this.fetchData()
     this.initializeListeners()
-
+    this.initializeRouteSubscription();
   }
 
   ngOnDestroy() {
     this.productSubscription.unsubscribe()
   }
+
+  initializeRouteSubscription(): void {
+    this.route.params.subscribe((params: Params) => {
+      if (params['slug']) {
+        this.slug = params['slug'];
+        this.fetchData();
+      }
+    });
+  }
+
 
   initializeListeners(): void {
     this.productSubscription = this.store
@@ -62,9 +71,6 @@ export class ProductComponent implements OnInit, OnDestroy {
 
       })
   }
-
-
-
 
 
   initializeValues(): void {

@@ -48,8 +48,8 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(): void {
     if (this.form.valid) {
-      const request: RegisterRequestInterface = this.form.value  //отримуємо значення з форми
-      this.store.dispatch(registerAction({request})) //відправляємо
+      const request: RegisterRequestInterface = this.form.value
+      this.store.dispatch(registerAction({request}))
     }
   }
 

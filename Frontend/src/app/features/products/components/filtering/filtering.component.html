@@ -27,12 +27,11 @@
             ></p-slider>
           </div>
           <div class="price-inputs">
-            <form [formGroup]="priceForm">
+            <form [formGroup]="priceForm" (ngSubmit)="onPriceSubmit()">
               <input
                 class="price-inputs1"
                 pInputText pKeyFilter="pint"
                 formControlName="priceLeft"
-                [max] = 20
                 (input)="onInputPriceLeftChange($event)"
               />
               <span class="price-inputs-dash">—</span>
@@ -42,12 +41,17 @@
                 formControlName="priceRight"
                 (input)="onInputPriceRightChange($event)"
               />
-              <button class='price-inputs-btn' pButton type="submit" icon="pi pi-chevron-right"></button>
+              <button class='price-inputs-btn'
+                      pButton
+                      type="submit"
+                      icon="pi pi-chevron-right"
+                      [disabled]="!priceForm.valid"
+              ></button>
             </form>
           </div>
 
           <div class="price-free">
-            <p-checkbox label="Free" value="Free"></p-checkbox>
+            <p-checkbox label="Free" value="Free" (click)="onInputPriceFreeChange($event)"></p-checkbox>
           </div>
         </div>
       </p-accordionTab>
@@ -80,7 +84,7 @@
                 </span>
         </ng-template>
         <div class="ratings">
-          <p-rating [(ngModel)]="rating"></p-rating>
+          <p-rating [(ngModel)]="rating" (click)="onInputRatingChange($event)"></p-rating>
           <span>& Up</span>
         </div>
       </p-accordionTab>

@@ -48,7 +48,9 @@ import {RatingStarsComponent} from "./components/ratingStars/ratingStars.compone
     BackendErrorMessagesComponent,
     LoadingComponent,
     PaginationComponent,
-    ProductCardComponent],
+    ProductCardComponent,
+    RatingStarsComponent
+  ],
   providers: []
 })
 

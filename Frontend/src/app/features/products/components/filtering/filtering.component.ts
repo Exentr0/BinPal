@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from "@angular/core";
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-
+import {ActivatedRoute, Router} from "@angular/router";
 
 
 @Component({
@@ -13,6 +13,7 @@ export class FilteringComponent implements OnInit {
   @Input('rangePrice') rangePrice!: number[]
   priceForm!: FormGroup;
   priceSlider: number[] = [];
+  priceFree: boolean = false;
 
   //----------------
   rating?: number
@@ -37,7 +38,7 @@ export class FilteringComponent implements OnInit {
   ];
 
 //-----------------------
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute) {
   }
 
 
@@ -52,15 +53,19 @@ export class FilteringComponent implements OnInit {
   initializePriceForm(): void {
     this.priceForm = this.fb.group({
       priceLeft: [
-        this.rangePrice[0],
-        [Validators.min(this.rangePrice[0])],
+        this.rangePrice[0], Validators.compose([
+          Validators.required,
+          Validators.min(this.rangePrice[0]),
+          Validators.max(this.rangePrice[1])]),
       ],
       priceRight: [
-        this.rangePrice[1],
-        [Validators.min(this.rangePrice[0])],
+        this.rangePrice[1], Validators.compose([
+          Validators.required,
+          Validators.min(this.rangePrice[0]),
+          Validators.max(this.rangePrice[1])
+        ])
       ],
     });
-
 
     this.priceSlider = [this.rangePrice[0], this.rangePrice[1]];
 
@@ -77,13 +82,60 @@ export class FilteringComponent implements OnInit {
   }
 
   onInputPriceLeftChange(event: any): void {
-    this.priceSlider[0] = +event.target.value;
+    if (+event.target.value > this.rangePrice[1]) {
+      this.priceSlider[0] = this.rangePrice[1];
+    } else {
+      this.priceSlider[0] = +event.target.value;
+    }
   }
 
   onInputPriceRightChange(event: any): void {
     this.priceSlider[1] = +event.target.value;
   }
 
+  onPriceSubmit(): void {
+    if (this.priceForm.valid) {
+      const priceParam =
+        `${this.priceForm.controls['priceLeft'].value}-${this.priceForm.controls['priceRight'].value}`;
+      this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: {price: priceParam},
+        queryParamsHandling: "merge",
+      });
+    }
+  }
+
+  onInputPriceFreeChange($event: any): void {
+    this.priceFree = !this.priceFree
+    if (this.priceFree) {
+      this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: {price: '0-0'},
+        queryParamsHandling: "merge",
+      });
+
+    } else {
+      const currentParams = {...this.route.snapshot.queryParams};
+      if (currentParams.hasOwnProperty('price')) {
+        delete currentParams['price'];
+      }
+      this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: currentParams
+      });
+    }
+
+
+  }
+
+
+  onInputRatingChange(event: any): void {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {rating: this.rating},
+      queryParamsHandling: "merge",
+    });
+  }
 
 
 }

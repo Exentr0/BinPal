@@ -12,7 +12,8 @@ export class RatingStarsComponent implements OnInit {
   emptyStars!: number
 
   ngOnInit() {
-    this.fullStars = Math.ceil(this.rating);
+    // this.fullStars = Math.ceil(this.rating);
+    this.fullStars = Math.floor(this.rating);
     this.emptyStars = 5 - this.fullStars
   }
 

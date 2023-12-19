@@ -27,8 +27,9 @@
                 <div class="p-2 border-0 border-round product">
                   <mc-productCard
                     [productId]="product.id"
-                    [image]="'https://inside-ua.com/files/originals/bili-hory-2.jpg'"
+                    [image]="'https://kiinlightroompresets.com/cdn/shop/products/04_KIINpresets_lightroompresets_mobilepresets_influencerpreset_familypreset_naturalpreset_lightroommobilepresets_presetfilter_instagrampreset_outfitpreset_504dfd62-82b8-48cf-8a8b-b2ebcf03e6dc.jpg?v=1619619246&width=1946'"
                     [seller]="product.username"
+                    [publisherId]="product.publisherId"
                     [title]="product.name"
                     [rating]="product.rating"
                     [ratingCount]="63"
@@ -41,13 +42,14 @@
             </ng-template>
           </p-dataView>
 
-
+        <div *ngIf='(feed$ | async)!.totalCount > 0'>
           <mc-pagination
             class="pagination"
             [totalProducts]="totalProducts"
             [limitProducts]="feedRequest.limit"
             [currentPage]="currentPage"
           ></mc-pagination>
+        </div>
         </div>
 
       </div>

@@ -2,7 +2,7 @@ export interface ProductCardInterface {
   id: number
   image: string
   seller: string
-  sellerId: number
+  publisherId: number
   title: string
   rating: number
   ratingCount: number

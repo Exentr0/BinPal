@@ -12,12 +12,12 @@
   </a>
 
   <div class="product__seller">
-    <a class="product__sellerName" href="https://assetstore.unity.com/?q=3d&orderBy=1">
+    <a class="product__sellerName" [routerLink]="['/users', productId]">
       {{seller}}
     </a>
   </div>
 
-  <a class="product__link" href="https://assetstore.unity.com/?q=3d&orderBy=1">
+  <a class="product__link" [routerLink]="['/items', productId]">
     <div class="product__title">{{title}}</div>
 
     <div class="product__props">

@@ -30,7 +30,8 @@ export class FeedComponent implements OnInit, OnDestroy {
   rangePrice: number[] = [0, 9999];
 
 
-  constructor(private store: Store, private router: Router, private route: ActivatedRoute) {}
+  constructor(private store: Store, private router: Router, private route: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
     this.initializeListeners()
@@ -66,7 +67,8 @@ export class FeedComponent implements OnInit, OnDestroy {
     this.queryParamsSubscription = this.route.queryParams.subscribe(
       (params: Params) => {
         this.feedRequest =
-          {limit: 24,
+          {
+            limit: 24,
             offset: 0,
             searchQuery: null,
             releaseDate: null,
@@ -78,7 +80,13 @@ export class FeedComponent implements OnInit, OnDestroy {
         this.feedRequest.searchQuery = String(params['q'])
         this.feedRequest.limit = Number(params['limit'] || '24')
         this.feedRequest.sorting = Number(params['sorting'] || '1')
+        this.feedRequest.minRating = Number(params['rating'] || null)
         this.currentPage = Number(params['page'] || '1')
+
+        const priceValues = (params['price'] || '').split('-').map(Number);
+        this.feedRequest.minPrice = priceValues[0] ?? null;
+        this.feedRequest.maxPrice = priceValues[1] ?? null;
+
         this.feedRequest.offset = this.currentPage * this.feedRequest.limit - this.feedRequest.limit
         this.fetchFeed()
       })
