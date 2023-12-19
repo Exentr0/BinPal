@@ -22,13 +22,8 @@ public class ItemPicturesBlobService : AzureBlobService
     // Upload a blob (picture) for a Item
     public override async Task UploadBlobAsync(int itemId, IFormFile file)
     {
-        string contentType = file.ContentType;
-           
-        // Get the file extension from the MIME type
-        string fileExtension = GetFileExtension(contentType);
-
         // Construct the blob name with the specified directory (ItemId)
-        var blobName = $"{itemId}/{Path.GetFileName(file.FileName)}{fileExtension}";
+        var blobName = $"{itemId}/{Path.GetFileName(file.FileName)}";
                 
         // Get the BlobClient for the specified blob
         var blobClient = ContainerClient.GetBlobClient(blobName);
@@ -37,7 +32,7 @@ public class ItemPicturesBlobService : AzureBlobService
         {
             // Upload the image to the blob
             await using var stream = file.OpenReadStream();
-            await blobClient.UploadAsync(stream, true);
+            await blobClient.UploadAsync(stream, false);
         }
         catch (RequestFailedException ex)
         {

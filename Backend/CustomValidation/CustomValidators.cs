@@ -26,9 +26,9 @@ public static class CustomValidators
     
     
     // Check if the number is greater than or equal to 0.01 and has at least 2 digits after the decimal point
-    public static bool IsValidFloat(float Number)
+    public static bool IsValidDecimal(decimal Number)
     {
-        return Number >= 0.01 && (Number * 100) % 1 == 0;   
+        return Number >= 0 && decimal.Round(Number, 2) == Number;
     }
     
     //Checks that date is in the future

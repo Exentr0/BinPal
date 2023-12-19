@@ -33,6 +33,7 @@ namespace Backend.Services
         {
             // Додаємо користувача до бази даних і зберігаємо зміни
             await _dataContext.Users.AddAsync(user);
+            
             await _dataContext.SaveChangesAsync();
             return user;
         }

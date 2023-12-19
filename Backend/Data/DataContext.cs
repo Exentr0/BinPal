@@ -20,7 +20,8 @@ namespace Backend.Data
         public DbSet<Software> Software => Set<Software>();
         public DbSet<SoftwareCategory> SoftwareCategories => Set<SoftwareCategory>();
         public DbSet<Plugin> Plugins => Set<Plugin>();
-        public DbSet<ItemPlugin> ItemPlugins => Set<ItemPlugin>();
+        public DbSet<ItemSoftware> ItemSoftware=> Set<ItemSoftware>();
+        public DbSet<ItemPlugin> ItemPlugins=> Set<ItemPlugin>();
  
         //Specify relationships
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -110,7 +111,7 @@ namespace Backend.Data
                     .IsRequired();
                 
                 modelBuilder.Entity<ItemCategory>()
-                    .HasKey(ci => new { ci.ItemId, ci.CategoryId });
+                    .HasKey(ic => new { ic.ItemId, ic.CategoryId });
                 
                 //Item to Item Category (one-to-many)
                 modelBuilder.Entity<Item>()
@@ -154,7 +155,24 @@ namespace Backend.Data
                     .HasForeignKey(p => p.SoftwareId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
+  
                 
+                modelBuilder.Entity<ItemSoftware>()
+                    .HasKey(si => new { si.ItemId, si.SoftwareId });
+
+                modelBuilder.Entity<Item>()
+                    .HasMany(i => i.ItemSoftware)
+                    .WithOne(isp => isp.Item)
+                    .HasForeignKey(isp => isp.ItemId).OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired();
+
+                modelBuilder.Entity<Software>()
+                    .HasMany(s => s.SoftwareItem)
+                    .WithOne(isp => isp.Software)
+                    .HasForeignKey(isp => isp.SoftwareId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired();
+            
                 modelBuilder.Entity<ItemPlugin>()
                     .HasKey(ip => new { ip.ItemId, ip.PluginId });
             
@@ -173,7 +191,7 @@ namespace Backend.Data
                     .HasForeignKey(ip => ip.ItemId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
-                
+                 
             base.OnModelCreating(modelBuilder);
         }
     }

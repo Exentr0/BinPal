@@ -3,34 +3,33 @@ import { Component, OnInit } from '@angular/core';
 import { PackageAddingService } from '../../services/packageAddingService';
 import { Router } from '@angular/router';
 import { SoftwareInterface } from '../../../shared/types/software.interface';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-supported-software-form-component',
   templateUrl: './supported-software-form-component.component.html',
   styleUrls: ['./supported-software-form-component.component.css'],
 })
-export class SupportedSoftwareFormComponent implements OnInit {
+export class SupportedSoftwareFormComponent {
   supportedSoftwareList: SoftwareInterface[] = [];
 
-  constructor(public packageAddingService: PackageAddingService, private router: Router) {}
-
-  ngOnInit() {
-    this.supportedSoftwareList = this.packageAddingService.getPackageInfo().supportedSoftwareList;
-  }
+  constructor(public packageAddingService: PackageAddingService, private router: Router, private messageService: MessageService) { }
 
   onSoftwareSelectionChange(selectedSoftwareList: SoftwareInterface[]) {
     this.supportedSoftwareList = selectedSoftwareList;
   }
 
+
   nextPage() {
-    if (true) {
+    if (this.supportedSoftwareList.length > 0) {
       this.packageAddingService.packageInfo.supportedSoftwareList = this.supportedSoftwareList;
       this.router.navigate(['add-package/required-plugins']);
-      return;
+    } else {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'You must choose at least one supported software.',
+      });
     }
-  }
-
-  prevPage() {
-    this.router.navigate(['add-package/general']);
   }
 }

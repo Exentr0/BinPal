@@ -1,7 +1,9 @@
-// software-selector-compoent.component.ts
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { SoftwareInterface } from "../../../shared/types/software.interface";
-import { SoftwareService } from "../../../shared/services/softwareService";
+import {select, Store} from "@ngrx/store";
+import {getSoftwareAction} from "./store/actions/getSoftware.action";
+import {errorSelector, isLoadingSelector, softwareSuccessSelector} from "./store/selectors";
+import {Observable} from "rxjs/internal/Observable";
 
 @Component({
   selector: 'app-software-selector-component',
@@ -9,15 +11,25 @@ import { SoftwareService } from "../../../shared/services/softwareService";
   styleUrls: ['./software-selector-compoent.component.css']
 })
 export class SoftwareSelectorComponent implements OnInit {
-  @Output() selectionChange = new EventEmitter<SoftwareInterface[]>(); // Change any[] to SoftwareInterface[]
 
-  softwareOptionsList: SoftwareInterface[] = [];
   @Input() selectedSoftwareList: SoftwareInterface[] = [];
 
-  constructor(private softwareService: SoftwareService) {}
+  @Output() selectionChange = new EventEmitter<SoftwareInterface[]>();
+
+  isLoading$ : Observable<boolean>;
+
+  error$ : Observable<string | null>;
+
+  softwareOptions$ : Observable<SoftwareInterface[]>;
+
+  constructor(private store: Store) {
+    this.isLoading$ = this.store.pipe(select(isLoadingSelector));
+    this.error$ = this.store.pipe(select(errorSelector));
+    this.softwareOptions$ = this.store.pipe(select(softwareSuccessSelector))
+  }
 
   ngOnInit(): void {
-    this.loadSoftwareList();
+    this.store.dispatch(getSoftwareAction());
   }
 
   isSelected(software: SoftwareInterface): boolean {
@@ -34,16 +46,5 @@ export class SoftwareSelectorComponent implements OnInit {
     }
 
     this.selectionChange.emit(this.selectedSoftwareList);
-  }
-
-  private loadSoftwareList() {
-    this.softwareService.getAllSoftware().subscribe({
-      next: (data: SoftwareInterface[]) => {
-        this.softwareOptionsList = data;
-      },
-      error: (error) => {
-        console.error('Error loading software list:', error);
-      }
-    });
   }
 }

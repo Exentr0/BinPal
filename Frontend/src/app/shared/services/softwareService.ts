@@ -11,17 +11,9 @@ export class SoftwareService {
     constructor(private http: HttpClient) {}
 
     // Fetch all software items from the backend
-    getAllSoftware(): Observable<SoftwareInterface[]> {
+    async getAllSoftware(): Promise<SoftwareInterface[] | undefined> {
         const url = environment.apiUrl + '/software/get-all-software';
-        return this.http.get<any[]>(url).pipe(
-            map((backendResponse) =>
-                backendResponse.map((item) => ({
-                    id : item.id,
-                    name: item.name,
-                    iconUrl: item.iconUrl,
-                }))
-            )
-        );
+        return await this.http.get<SoftwareInterface[]>(url).toPromise();
     }
 
     // Fetch plugins for a specific software item

@@ -3,32 +3,64 @@ import { Subject } from 'rxjs';
 import { SoftwareInterface } from '../../shared/types/software.interface';
 import { PluginInterface } from '../../shared/types/plugin.interface';
 import { CategoryInterface } from '../../shared/types/category.interface';
+import { HttpClient } from '@angular/common/http';
+import { environment } from "../../../environments/environment";
 
 @Injectable()
 export class PackageAddingService {
-  packageInfo = {
-    generalInfo: {
-      name: '',
-      price: null,
-      description: '',
-    },
-    supportedSoftwareList: [] as SoftwareInterface[],
-    requiredPluginsMap: new Map<number, PluginInterface[]>(),
-    categoriesMap: new Map<number, CategoryInterface[]>(),
-    uploadedPictures: [] as File[],
-    releases: [] as File[],
-  };
+    packageInfo = {
+        generalInfo: {
+            name: '',
+            price: null,
+            description: '',
+        },
+        supportedSoftwareList: [] as SoftwareInterface[],
+        requiredPluginsList: [] as PluginInterface[],
+        categoriesList: [] as CategoryInterface[],
+        uploadedPictures: [] as File[],
+        releases:[] as File[],
+    };
 
-  private packageUploaded = new Subject<any>();
+    constructor(private http: HttpClient) {}
 
-  packageUploaded$ = this.packageUploaded.asObservable();
+    private packageUploaded = new Subject<any>();
+    packageUploaded$ = this.packageUploaded.asObservable();
+
+    getPackageInfo() {
+        return this.packageInfo;
+    }
+
+    upload() {
+        const url = environment.apiUrl + "/Item/upload-package";
+
+        const formData: FormData = new FormData();
 
 
-  getPackageInfo() {
-    return this.packageInfo;
-  }
 
-  upload() {
-    this.packageUploaded.next(this.packageInfo.generalInfo);
-  }
+        // Append files to FormData
+        this.packageInfo.uploadedPictures.forEach((file, index) => {
+            formData.append(`UploadedPictures[${index}]`, file);
+        });
+
+        this.packageInfo.releases.forEach((file, index) => {
+            formData.append(`Releases[${index}]`, file);
+        });
+
+        this.packageInfo.releases = [];
+        this.packageInfo.uploadedPictures = [];
+        // Append data to FormData
+        formData.append('packageInfo', JSON.stringify(this.packageInfo));
+
+        console.log(formData)
+
+        this.http.post(url, formData).subscribe(
+            (response) => {
+                console.log('Package uploaded successfully', response);
+                this.packageUploaded.next({ packageInfo: this.packageInfo });
+            },
+            (error) => {
+                console.error('Error uploading package', error);
+            }
+        );
+    }
 }

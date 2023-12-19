@@ -21,6 +21,7 @@ builder.Services.AddScoped<UserPFPBlobService>();
 builder.Services.AddScoped<ItemPicturesBlobService>();
 builder.Services.AddScoped<ItemReleasesBlobService>();
 builder.Services.AddScoped<SoftwarePicturesBlobService>();
+builder.Services.AddScoped<ItemAddingService>();
 
 // Add services to the container.
 builder.Services.AddScoped<IValidator<User>, UserValidator>();
@@ -36,6 +37,7 @@ builder.Services.AddScoped<IValidator<Software>, SoftwareValidator>();
 builder.Services.AddScoped<IValidator<SoftwareCategory>, SoftwareCategoryValidator>();
 builder.Services.AddScoped<IValidator<PaymentMethod>, PaymentMethodValidator>();
 builder.Services.AddScoped<IValidator<Plugin>, PluginValidator>();
+builder.Services.AddScoped<IValidator<ItemSoftware>, SoftwareItemValidator>();
 builder.Services.AddScoped<IValidator<ItemPlugin>, ItemPluginValidator>();
 
 //Add Fluent Validation 
@@ -48,6 +50,10 @@ builder.Services.AddFluentValidation(fv =>
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddControllersWithViews()
+    .AddNewtonsoftJson(options =>
+        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+    );
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddSwaggerGen(options =>

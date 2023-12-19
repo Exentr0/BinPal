@@ -19,12 +19,8 @@ public class SoftwarePicturesBlobService : AzureBlobService
 
     public override async Task UploadBlobAsync(int softwareId, IFormFile file)
     {
-        string contentType = file.ContentType;
-           
-        // Get the file extension from the MIME type
-        string fileExtension = GetFileExtension(contentType);
 
-        string blobName = $"{softwareId}{fileExtension}";
+        string blobName = $"{softwareId}";
             
         // Get the BlobClient for the specified blob
         var blobClient = ContainerClient.GetBlobClient(blobName);

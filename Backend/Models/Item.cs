@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Backend.Data;
 using Backend.Validation;
 using FluentValidation;
+using Newtonsoft.Json;
 
 namespace Backend.Models;
 
@@ -17,7 +18,7 @@ public class Item
 
     public int LikesAmount { get; set; } = 0;
     
-    public int Price { get; set; }
+    public decimal Price { get; set; }
     
     public string Description { get; set; }
     
@@ -34,7 +35,9 @@ public class Item
     public List<CartItem>? CartItems { get; set; }
     public List<Purchase>? Purchases { get; set; }
     public List<ItemReview>? Reviews { get; set; }
+    
     public List<ItemCategory>? ItemCategories { get; set; }
+    public List<ItemSoftware>? ItemSoftware { get; set; }
     public List<ItemPlugin>? ItemPlugins { get; set; }
 }
 
@@ -51,9 +54,7 @@ public class ItemValidator : AbstractValidator<Item>
             .WithMessage("Id can't be null");
         When(i => i.Id != null, () =>
             {
-                RuleFor(i => i.Id)
-                    .IsUnique(context, i => i.Id)
-                    .WithMessage("Id Should be unique");
+                
             });
         
         RuleFor(i => i.Name)
@@ -84,7 +85,7 @@ public class ItemValidator : AbstractValidator<Item>
         When(i => i.LikesAmount != null, () =>
         {
             RuleFor(i => i.LikesAmount)
-                .GreaterThan(0)
+                .GreaterThan(-1)
                 .WithMessage("LikesAmount must be greater than 0.");
         });
         
@@ -94,7 +95,7 @@ public class ItemValidator : AbstractValidator<Item>
         When(i => i.Price != null, () =>
         {
             RuleFor(i => i.Price)
-                .Must(price => CustomValidators.IsValidFloat(price));
+                .Must(price => CustomValidators.IsValidDecimal(price));
         });
 
         RuleFor(i => i.Description)

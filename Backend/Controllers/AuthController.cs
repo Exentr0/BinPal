@@ -18,15 +18,11 @@ namespace Backend.Controllers
     public class AuthController : ControllerBase
     {
         private static User _user = new User();
-        private readonly IConfiguration _configuration;
         private readonly IUserService _userService;
-        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AuthController(IConfiguration configuration, IUserService userService, IHttpContextAccessor httpContextAccessor)
+        public AuthController(IUserService userService)
         {
-            _configuration = configuration;
             _userService = userService;
-            _httpContextAccessor = httpContextAccessor;
         }
         
         [HttpGet, Authorize]
@@ -68,7 +64,7 @@ namespace Backend.Controllers
             {
                 newUser.Password = BCrypt.Net.BCrypt.HashPassword(request.Password);
                 // If validation succeeded, register the new user
-                await _userService.Register(newUser);   
+                await _userService.Register(newUser);
             }
             // Return the newly registered user
             return Ok(newUser);

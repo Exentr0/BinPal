@@ -11,20 +11,19 @@ import {SoftwareService} from "../../../shared/services/softwareService";
 export class SoftwareCategoriesSelectorComponentComponent {
   @Input() software!: SoftwareInterface;
   categoryOptions: CategoryInterface[] = [];
-  @Input() preSelectedCategories: CategoryInterface[] = [];
   @Output() selectionChange = new EventEmitter<CategoryInterface[]>();
 
-  selectedCategories : CategoryInterface[] = [];
+  selectedCategories : number[] = [];
 
   constructor(private softwareService: SoftwareService) {}
 
   ngOnInit(): void {
     this.fetchSoftwareCategories();
-    this.selectedCategories = [...this.preSelectedCategories];
   }
 
   onSelectionChange() {
-    this.selectionChange.emit(this.selectedCategories);
+    let selected = this.categoryOptions.filter(c => this.selectedCategories.some(sc => sc == c.id));
+    this.selectionChange.emit(selected);
   }
 
   private fetchSoftwareCategories() {

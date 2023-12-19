@@ -26,7 +26,7 @@ namespace Backend.Models
             RuleFor(sc => sc.SoftwareId)
                 .NotNull()
                 .WithMessage("SoftwareId can't be null");
-
+            
             RuleFor(sc => sc.CategoryId)
                 .NotNull()
                 .WithMessage("CategoryId can't be null");

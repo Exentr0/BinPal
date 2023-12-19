@@ -9,37 +9,27 @@ import { Router } from '@angular/router';
     templateUrl: './content-form-component.component.html',
     styleUrls: ['./content-form-component.component.css'],
 })
-export class ContentFormComponentComponent implements OnInit{
+export class ContentFormComponentComponent{
     @ViewChild('fileUpload') fileUpload!: FileUpload;
 
     releases: File[] = [];
 
     constructor(public packageAddingService: PackageAddingService, private router: Router, private messageService: MessageService) {}
 
-    ngOnInit(): void {
-      this.releases = this.packageAddingService.getPackageInfo().releases;
-    }
-
-    nextPage() {
-        if (true) {
-            this.releases = this.fileUpload.files;
-            this.packageAddingService.getPackageInfo().releases = this.releases;
-            this.router.navigate(['add-package/general']);
-            return;
-        }
+    onUpload(event: any){
+        this.releases.push(...event.files);
     }
 
     complete() {
-        if (true) {
+        if (this.releases.length > 0) {
             this.packageAddingService.getPackageInfo().releases = this.releases;
-
             this.packageAddingService.upload();
         } else {
-            console.error('Files exceed the maximum allowed size.');
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Error',
+                detail: 'You must select at least one file.',
+            });
         }
-    }
-
-    prevPage() {
-        this.router.navigate(['add-package/media']);
     }
 }

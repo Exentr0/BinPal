@@ -23,8 +23,14 @@ import { SoftwareCategoriesSelectorComponentComponent } from './utils/software-c
 import { MediaFormComponentComponent } from './forms-components/media-form-component/media-form-component.component';
 import {FileUploadModule} from "primeng/fileupload";
 import { ContentFormComponentComponent } from './forms-components/content-form-component/content-form-component.component';
+import {StoreModule} from "@ngrx/store";
+import {reducers} from "./utils/software-selector-component/store/reducer";
+import {SharedModule} from "../shared/shared.module";
+import {EffectsModule} from "@ngrx/effects";
+import {GetSoftwareEffect} from "./utils/software-selector-component/store/effects/getSoftware.effect";
 
 
+// @ts-ignore
 @NgModule({
   declarations: [
     MainWindowComponentComponent,
@@ -47,6 +53,8 @@ import { ContentFormComponentComponent } from './forms-components/content-form-c
     InputTextModule,
     FormsModule,
     DropdownModule,
+    StoreModule.forFeature('software', reducers),
+    EffectsModule.forFeature([GetSoftwareEffect]),
     RouterModule.forChild([
       {
         path: '',
@@ -63,6 +71,7 @@ import { ContentFormComponentComponent } from './forms-components/content-form-c
     ]),
     MultiSelectModule,
     FileUploadModule,
+    SharedModule,
   ],
   providers: [
     PackageAddingService,

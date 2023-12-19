@@ -11,42 +11,20 @@ import {MainWindowComponentComponent} from "../../main-window-component/main-win
   styleUrls: ['./required-plugins-form.component.css']
 })
 export class RequiredPluginsFormComponent implements OnInit {
-  requiredPluginsMap : Map<number, PluginInterface[]> = new Map();
+    requiredPluginsMap : Map<number, PluginInterface[]> = new Map();
   supportedSoftwareList!: SoftwareInterface[];
   constructor(public packageAddingService: PackageAddingService, private router: Router) {}
 
   ngOnInit(): void {
     this.supportedSoftwareList = this.packageAddingService.getPackageInfo().supportedSoftwareList;
-    this.requiredPluginsMap = this.packageAddingService.getPackageInfo().requiredPluginsMap;
-
-    this.cleanUpIfSoftwareWasRemoved();
   }
 
-  private cleanUpIfSoftwareWasRemoved(){
-    for (const softwareId of Array.from(this.requiredPluginsMap.keys())) {
-      if (!this.supportedSoftwareList.some((software) => software.id === softwareId)) {
-        this.requiredPluginsMap.delete(softwareId);
-      }
-    }
-  }
-
-    getPreSelectedPlugins(softwareId: number): PluginInterface[] {
-        return this.requiredPluginsMap.get(softwareId) || [];
-    }
-
-  onPluginSelectionChange(selectedPlugins: PluginInterface[], softwareId: number) {
+    onPluginSelectionChange(selectedPlugins: PluginInterface[], softwareId: number) {
       this.requiredPluginsMap.set(softwareId, selectedPlugins);
-  }
-
+    }
   nextPage() {
-    if (true) {
-      this.packageAddingService.packageInfo.requiredPluginsMap = this.requiredPluginsMap;
+      this.packageAddingService.packageInfo.requiredPluginsList = Array.from(this.requiredPluginsMap.values()).flat();
       this.router.navigate(['add-package/categories']);
       return;
-    }
-  }
-
-  prevPage() {
-    this.router.navigate(['add-package/supported-software']);
   }
 }

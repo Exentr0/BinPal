@@ -26,13 +26,7 @@ namespace Backend.Services.Storage
         // Upload a blob (profile picture) for a user
         public override async Task UploadBlobAsync(int userId, IFormFile file)
         {
-            string contentType = file.ContentType;
-           
-               // Get the file extension from the MIME type
-               string fileExtension = GetFileExtension(contentType);
-           
-               // Construct the blob name using the file extension
-               string blobName = $"{userId}{fileExtension}";
+               string blobName = $"{userId}";
             
             // Get the BlobClient for the specified blob
             var blobClient = ContainerClient.GetBlobClient(blobName);

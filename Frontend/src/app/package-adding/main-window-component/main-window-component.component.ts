@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MenuItem, MessageService } from 'primeng/api';
 import { PackageAddingService } from '../services/packageAddingService';
 import { Subscription } from 'rxjs';
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-main-window-component',
@@ -12,10 +13,7 @@ export class MainWindowComponentComponent implements OnInit, OnDestroy {
     items: MenuItem[] = [];
     subscription: Subscription = new Subscription();
 
-    constructor(
-        public messageService: MessageService,
-        public packageAddingService: PackageAddingService,
-    ) {}
+    constructor(public messageService: MessageService, public packageAddingService: PackageAddingService, private router: Router) {}
 
     ngOnInit() {
         this.items = [
@@ -58,5 +56,9 @@ export class MainWindowComponentComponent implements OnInit, OnDestroy {
         if (this.subscription) {
             this.subscription.unsubscribe();
         }
+    }
+
+    closeComponent() {
+        this.router.navigate(['/']);
     }
 }

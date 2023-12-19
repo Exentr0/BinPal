@@ -1,4 +1,4 @@
-.grid-container {
+grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 16px;
@@ -12,6 +12,7 @@
   background-color: #B3B3B3;
   transition: background-color 0.3s;
 }
+
 
 .card-content img {
   margin-bottom: 10px;
@@ -27,3 +28,12 @@
 .card-content div {
   font-size: 20px;
 }
+
+/* Add styles for the loader */
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px; /* Adjust the height as needed */
+}
+

@@ -77,8 +77,8 @@ namespace Backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("PublisherId")
                         .HasColumnType("int");
@@ -159,6 +159,26 @@ namespace Backend.Migrations
                     b.ToTable("ItemReviews");
                 });
 
+            modelBuilder.Entity("Backend.Models.ItemSoftware", b =>
+                {
+                    b.Property<int>("ItemId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SoftwareId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PluginId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ItemId", "SoftwareId");
+
+                    b.HasIndex("PluginId");
+
+                    b.HasIndex("SoftwareId");
+
+                    b.ToTable("ItemSoftware");
+                });
+
             modelBuilder.Entity("Backend.Models.PaymentDetails", b =>
                 {
                     b.Property<int>("Id")
@@ -194,7 +214,7 @@ namespace Backend.Migrations
                     b.Property<bool>("IsDefault")
                         .HasColumnType("bit");
 
-                    b.Property<int>("PaymentInfoId")
+                    b.Property<int>("PaymentDetailsId")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
@@ -202,7 +222,7 @@ namespace Backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PaymentInfoId")
+                    b.HasIndex("PaymentDetailsId")
                         .IsUnique();
 
                     b.HasIndex("UserId");
@@ -435,11 +455,34 @@ namespace Backend.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Backend.Models.ItemSoftware", b =>
+                {
+                    b.HasOne("Backend.Models.Item", "Item")
+                        .WithMany("ItemSoftware")
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Backend.Models.Plugin", null)
+                        .WithMany("ItemSoftwarePlugins")
+                        .HasForeignKey("PluginId");
+
+                    b.HasOne("Backend.Models.Software", "Software")
+                        .WithMany("SoftwareItem")
+                        .HasForeignKey("SoftwareId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Item");
+
+                    b.Navigation("Software");
+                });
+
             modelBuilder.Entity("Backend.Models.PaymentMethod", b =>
                 {
                     b.HasOne("Backend.Models.PaymentDetails", "PaymentDetails")
                         .WithOne("PaymentMethod")
-                        .HasForeignKey("Backend.Models.PaymentMethod", "PaymentInfoId")
+                        .HasForeignKey("Backend.Models.PaymentMethod", "PaymentDetailsId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -529,6 +572,8 @@ namespace Backend.Migrations
 
                     b.Navigation("ItemPlugins");
 
+                    b.Navigation("ItemSoftware");
+
                     b.Navigation("Purchases");
 
                     b.Navigation("Reviews");
@@ -543,6 +588,8 @@ namespace Backend.Migrations
             modelBuilder.Entity("Backend.Models.Plugin", b =>
                 {
                     b.Navigation("ItemPlugins");
+
+                    b.Navigation("ItemSoftwarePlugins");
                 });
 
             modelBuilder.Entity("Backend.Models.ShoppingCart", b =>
@@ -553,6 +600,8 @@ namespace Backend.Migrations
             modelBuilder.Entity("Backend.Models.Software", b =>
                 {
                     b.Navigation("SoftwareCategories");
+
+                    b.Navigation("SoftwareItem");
 
                     b.Navigation("SoftwarePlugins");
                 });

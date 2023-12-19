@@ -11,21 +11,19 @@ import {SoftwareService} from "../../../shared/services/softwareService";
 export class SoftwarePluginsSelectorComponent implements OnInit {
     @Input() software!: SoftwareInterface;
     pluginOptions: PluginInterface[] = [];
-    @Input() preSelectedPlugins: PluginInterface[] = [];
     @Output() selectionChange = new EventEmitter<PluginInterface[]>();
 
-    selectedPlugins: PluginInterface[] = [];
+    selectedPlugins: number[] = [];
 
     constructor(private softwareService: SoftwareService) {}
 
     ngOnInit(): void {
         this.fetchSoftwarePlugins();
-        this.selectedPlugins = [...this.preSelectedPlugins];
-        console.log('Selected plugins:', this.selectedPlugins);
     }
 
     onSelectionChange() {
-        this.selectionChange.emit(this.selectedPlugins);
+        let selected = this.pluginOptions.filter(p => this.selectedPlugins.some(sp => sp == p.id));
+        this.selectionChange.emit(selected);
     }
 
     private fetchSoftwarePlugins() {
