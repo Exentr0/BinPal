@@ -34,7 +34,9 @@ namespace Backend.Controllers
         {
             try
             {
-                return Ok(_userService.GetMyName());
+                string username = _userService.GetMyName();
+                var response = new { Username = username };
+                return Ok(response);
             }
             catch (Exception ex)
             {
