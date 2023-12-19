@@ -3,7 +3,6 @@
 export interface AuthResponseInterface {
   username: string
   image: string | null
-  token: string
-  refreshToken: string
+  accessToken: string
   // user: CurrentUserInterface
 }

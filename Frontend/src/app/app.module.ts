@@ -16,6 +16,7 @@ import {ProductModule} from "./features/Product/product.module";
 import {ProductsModule} from "./features/Products/products.module";
 import {CoreModule} from "./core/core.module";
 import {AuthInterceptor} from "./core/interceptors/auth.interceptor";
+import {PackageAddingModule} from "./features/package-adding/package-adding.module";
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import {AuthInterceptor} from "./core/interceptors/auth.interceptor";
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    PackageAddingModule,
     ProductsModule,
     ProductModule,
     AuthModule,

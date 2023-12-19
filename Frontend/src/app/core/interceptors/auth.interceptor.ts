@@ -14,7 +14,6 @@ export class AuthInterceptor implements HttpInterceptor {
     const token = this.persistenceService.get('accessToken')
     request = request.clone({
       setHeaders: {
-        // Authorization: token ? `Token ${token}` : ''
         Authorization: token ? `Bearer ${token}` : ''
       }
     })

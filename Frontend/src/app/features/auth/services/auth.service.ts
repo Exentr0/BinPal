@@ -35,6 +35,12 @@ export class AuthService {
     return this.http.get<AuthResponseInterface>(url).pipe(map(this.getUser))
   }
 
+  // getCurrentUser(): Observable<any> {
+  //   const url = environment.apiUrl + '/Auth/get-current-username'
+  //   return this.http.get<any>(url)
+  // }
+  //
+
 
 }
 
