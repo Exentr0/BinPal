@@ -1,9 +1,11 @@
 import {Component, OnInit} from "@angular/core";
 import {Observable} from "rxjs/internal/Observable";
 import {select, Store} from "@ngrx/store";
-import {ActivatedRoute, NavigationExtras, Router} from "@angular/router";
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {currentUserSelector, isAnonymousSelector, isLoggedInSelector} from "../../../features/auth/store/selectors";
 import {CurrentUserInterface} from "../../../shared/types/currentUser.interface";
+import {filter} from "rxjs";
+import {PersistenceService} from "../../services/persistence.service";
 
 
 @Component({
@@ -17,8 +19,12 @@ export class NavbarComponent implements OnInit {
   isAnonymous$!: Observable<boolean>
   currentUser$!: Observable<CurrentUserInterface | null>
   searchText?: string
+  test = true
 
-  constructor(private store: Store, private router: Router, private route: ActivatedRoute) {
+  constructor(private store: Store,
+              private router: Router,
+              private route: ActivatedRoute,
+              private persistenceService: PersistenceService) {
   }
 
   ngOnInit(): void {
@@ -29,28 +35,24 @@ export class NavbarComponent implements OnInit {
 
   }
 
+
+
   onEnter() {
     this.router.navigate(['search'], {
-      queryParams: { q: this.searchText },
+      queryParams: {q: this.searchText},
       queryParamsHandling: 'merge',
     });
   }
 
-  // onEnter() {
-  //   const currentParams = { ...this.route.snapshot.queryParams };
-  //   delete currentParams['page'];
-  //
-  //   const mergedParams = { ...currentParams, q: this.searchText };
-  //
-  //   const navigationExtras: NavigationExtras = {
-  //     queryParams: mergedParams,
-  //     queryParamsHandling: 'merge',
-  //   };
-  //
-  //   this.router.navigate([], navigationExtras);
-  // }
+  onSignOutClick() {
+    this.removeAccessToken();
+    this.router.navigate(['/login']);
+  }
 
 
+  private removeAccessToken() {
+    this.persistenceService.remove("accessToken");
+  }
 
 
 }

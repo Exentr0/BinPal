@@ -13,16 +13,16 @@ const initialState: AuthStateInterface = {
   isSubmitting: false,
   isLoading: false,
   currentUser: null,
-  isLoggedIn: null,
+  isLoggedIn: false,
   validationErrors: null
 }
 
 
 const authReducer = createReducer(
-  initialState,  // початковий стан (не зайдено в акаунт)
+  initialState,
 
   on(
-    registerAction, //дія, яка міняє стан (нажали Sign in)
+    registerAction,
     (state): AuthStateInterface => ({  //міняємо стан
       ...state, //всі попередні поля не чіпаємо
       isSubmitting: true,
@@ -45,6 +45,7 @@ const authReducer = createReducer(
     (state, action): AuthStateInterface => ({
       ...state,
       isSubmitting: false,
+      isLoggedIn: false,
       validationErrors: action.errors
     })
   ),
@@ -64,8 +65,8 @@ const authReducer = createReducer(
     (state, action): AuthStateInterface => ({
       ...state,
       isSubmitting: false,
-      currentUser: action.currentUser,
-      isLoggedIn: true
+      isLoggedIn: true,
+      currentUser: action.currentUser
     })
   ),
 
@@ -74,6 +75,7 @@ const authReducer = createReducer(
     (state, action): AuthStateInterface => ({
       ...state,
       isSubmitting: false,
+      isLoggedIn: false,
       validationErrors: action.errors
     })
   ),
@@ -83,7 +85,8 @@ const authReducer = createReducer(
     getCurrentUserAction,
     (state): AuthStateInterface => ({
       ...state,
-      isLoading: true
+      isLoading: true,
+      isLoggedIn: false,
     })
   ),
 

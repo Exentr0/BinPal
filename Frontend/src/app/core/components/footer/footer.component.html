@@ -12,6 +12,7 @@
 
       <!--      <ng-container *ngIf="isLoggedIn$ | async">-->
       <!--      коли буде норм цекінг юзера поміняю -->
+      <ng-container *ngIf="(currentUser$ | async)">
       <ng-container>
 
         <button class="button" data-tooltip="Add" [routerLink]="['/add-package/general']">
@@ -32,8 +33,9 @@
         </button>
 
       </ng-container>
+      </ng-container>
 
-      <!--      <ng-container *ngIf="isAnonymous$ | async">-->
+      <ng-container *ngIf="!(currentUser$ | async)">
       <ng-container>
 
         <button class="button" data-tooltip="Login" [routerLink]="['/login']">
@@ -44,6 +46,7 @@
           <p>Need an account?</p>
         </button>
 
+      </ng-container>
       </ng-container>
 
     </div>

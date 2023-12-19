@@ -25,8 +25,7 @@
     </span>
 
 
-            <ng-container *ngIf="isLoggedIn$ | async">
-      <!--      коли буде норм цекінг юзера поміняю -->
+            <ng-container *ngIf="(isLoggedIn$ | async)">
       <ng-container>
 
 
@@ -46,12 +45,15 @@
           <i class="pi pi-user"></i>
         </button>
 
+        <button class="button" data-tooltip="Sign out" (click)="onSignOutClick()">
+          <i class="pi pi-sign-out"></i>
+        </button>
 
       </ng-container>
       </ng-container>
 
 
-<!--      <ng-container *ngIf="isAnonymous$ | async">-->
+      <ng-container *ngIf="!(isLoggedIn$ | async)">
         <ng-container>
 
 
@@ -59,6 +61,7 @@
           <i class="pi pi-sign-in"></i>
         </button>
 
+      </ng-container>
       </ng-container>
     </div>
 

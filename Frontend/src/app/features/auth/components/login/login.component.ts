@@ -7,6 +7,7 @@ import {LoginRequestInterface} from "../../types/loginRequest.interface";
 import {loginAction} from "../../store/actions/login.action";
 import {customPasswordValidator} from "../../validators/password.validator";
 import {isSubmittingSelector, validationErrorsSelector} from "../../store/selectors";
+import {getCurrentUserAction} from "../../store/actions/getCurrentUser.action";
 
 
 

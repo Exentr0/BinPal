@@ -8,6 +8,7 @@ import {customPasswordValidator} from "../../validators/password.validator";
 import {isSubmittingSelector, validationErrorsSelector} from "../../store/selectors";
 import {RegisterRequestInterface} from "../../types/registerRequest.interface";
 import {registerAction} from "../../store/actions/register.action";
+import {getCurrentUserAction} from "../../store/actions/getCurrentUser.action";
 
 @Component({
   selector: 'mc-register',
