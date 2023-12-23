@@ -20,10 +20,9 @@ namespace Backend.Data
         public DbSet<Software> Software => Set<Software>();
         public DbSet<SoftwareCategory> SoftwareCategories => Set<SoftwareCategory>();
         public DbSet<Plugin> Plugins => Set<Plugin>();
-        public DbSet<ItemSoftware> ItemSoftware=> Set<ItemSoftware>();
-        public DbSet<ItemPlugin> ItemPlugins=> Set<ItemPlugin>();
+        public DbSet<ItemSoftware> ItemSoftware => Set<ItemSoftware>();
+        public DbSet<ItemPlugin> ItemPlugins => Set<ItemPlugin>();
  
-        //Specify relationships
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
                 //User Cart To User (one-to-one)
@@ -147,34 +146,36 @@ namespace Backend.Data
                     .HasForeignKey(sc => sc.SoftwareId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
-            
-                //Software to Plugin (one-to-many)
-                modelBuilder.Entity<Software>()
-                    .HasMany(s => s.SoftwarePlugins)
-                    .WithOne(p => p.Software)
-                    .HasForeignKey(p => p.SoftwareId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .IsRequired();
-  
+                
                 
                 modelBuilder.Entity<ItemSoftware>()
                     .HasKey(si => new { si.ItemId, si.SoftwareId });
+                
+                                
+                modelBuilder.Entity<Item>()
+                    .Property(i => i.Price)
+                    .HasColumnType("decimal(18,2)");
 
+                //Item to ItemSoftware (one-to-many)
                 modelBuilder.Entity<Item>()
                     .HasMany(i => i.ItemSoftware)
-                    .WithOne(isp => isp.Item)
-                    .HasForeignKey(isp => isp.ItemId).OnDelete(DeleteBehavior.Restrict)
+                    .WithOne(its => its.Item)
+                    .HasForeignKey(its => its.ItemId).OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
 
+                //Software to ItemSoftware(one-to-many)
                 modelBuilder.Entity<Software>()
                     .HasMany(s => s.SoftwareItem)
-                    .WithOne(isp => isp.Software)
-                    .HasForeignKey(isp => isp.SoftwareId)
+                    .WithOne(its => its.Software)
+                    .HasForeignKey(its => its.SoftwareId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
             
+                
+                
                 modelBuilder.Entity<ItemPlugin>()
                     .HasKey(ip => new { ip.ItemId, ip.PluginId });
+
             
                 //Plugin To Item Plugin(one-to-many)
                 modelBuilder.Entity<Plugin>()
@@ -184,7 +185,7 @@ namespace Backend.Data
                     .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
                 
-                //Item To Item Plugin
+                //Item To Item Plugin(one-to-many)
                 modelBuilder.Entity<Item>()
                     .HasMany(i => i.ItemPlugins)
                     .WithOne(ip => ip.Item)

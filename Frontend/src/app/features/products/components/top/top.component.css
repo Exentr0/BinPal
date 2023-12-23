@@ -1,0 +1,30 @@
+
+.top {
+  margin-left: 27px;
+  margin-right: 27px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.select{
+  display: flex;
+}
+
+.selectSorting{
+
+}
+
+.selectLimitProducts{
+  margin-left: 50px;
+}
+
+
+
+.selectSorting p-dropdown,
+.selectLimitProducts p-dropdown {
+  margin-left: 10px;
+
+}
+
+

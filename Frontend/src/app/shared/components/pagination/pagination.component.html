@@ -1,14 +1,10 @@
-<ul>
-  <li
-    *ngFor="let page of pages"
-    class="page-item"
-    [ngClass]="{active: currentPageProps === page}"
-  >
-    <a [routerLink]="urlProps" [queryParams]="{page: page}">
-      {{page}}
-    </a>
-  </li>
-</ul>
+<p-paginator
+  (onPageChange)="onPageChange($event)"
+  [first]="first"
+  [rows]="limitProducts"
+  [totalRecords]="totalProducts">
+</p-paginator>
+
 
 
 

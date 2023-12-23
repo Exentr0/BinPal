@@ -1,0 +1,37 @@
+
+.body{
+
+}
+
+
+.container {
+  padding: 0;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+}
+
+
+
+.error {
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+}
+
+
+
+
+.pagination {
+  right: 50%;
+}
+
+

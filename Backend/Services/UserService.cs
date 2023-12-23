@@ -93,16 +93,7 @@ namespace Backend.Services
             // Якщо користувач і пароль відповідають, повертаємо об'єкт користувача.
             return user;
         }
-
-        public async Task<User> GetUserByIdAsync(int userId)
-        {
-            var user = await _dataContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
-            if (user == null)
-            {
-                throw new InvalidOperationException($"User with ID {userId} not found.");
-            }
-            return user;
-        }
+        
 
         
         public async Task<User> GetUserByName(string username)

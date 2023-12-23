@@ -6,15 +6,16 @@ const routes: Routes = [
   {
     path: 'add-package',
     loadChildren: () =>
-        import('./package-adding/package-adding.module').then(
-            (m) => m.PackageAddingModule
-        ),
+      import('./features/package-adding/package-adding.module').then(
+        (m) => m.PackageAddingModule
+      ),
   },
 ];
+
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-

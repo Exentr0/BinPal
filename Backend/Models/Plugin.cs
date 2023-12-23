@@ -17,7 +17,6 @@ public class Plugin
     
     public Software Software { get; set; }
     
-    public List<ItemSoftware>? ItemSoftwarePlugins { get; set; }
     public List<ItemPlugin>? ItemPlugins { get; set; }
 }
 

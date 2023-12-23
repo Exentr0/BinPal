@@ -2,11 +2,23 @@
 @import "primeng/resources/themes/mdc-dark-deeppurple/theme.css";
 @import "primeng/resources/primeng.css";
 
+:root {
+  --color-dark: #1E1E1E;
+  --color-more-dark: #121212;
+  --color-light: #FFFFFF;
+  --color-gray: #B3B3B3;
+  --color-accent: #ce93d8;
+  /*--color-accent: #AA7EDF;*/
+}
+
+
 body {
-  background-color: #1e1e1e;
+  background-color: var(--color-dark);
+  margin: 0;
+  padding: 0;
 }
 
 
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+

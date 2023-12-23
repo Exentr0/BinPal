@@ -25,5 +25,15 @@ export class PersistenceService {
         }
     }
 
+
+  remove(key: string): void {
+    try {
+      localStorage.removeItem(key);
+    } catch (e) {
+      console.error('Error removing data from localStorage', e);
+    }
+  }
+
+
 }
 

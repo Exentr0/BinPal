@@ -1,10 +1,8 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import {AppRoutingModule} from "./app-routing.module";
 import {AppComponent} from './app.component';
-import {AuthModule} from "./auth/auth.module";
 import {StoreModule} from "@ngrx/store";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 import {environment} from "src/environments/environment";
@@ -13,31 +11,36 @@ import { EffectsModule } from '@ngrx/effects';
 import {routerReducer, StoreRouterConnectingModule} from '@ngrx/router-store';
 import { SharedModule } from './shared/shared.module';
 import { PersistenceService } from './core/services/persistence.service';
-import { AuthInterceptor } from './core/services/authinterceptor.service';
-import {ProductsModule} from "./core/components/Products/products.module";
-import { PackageAddingModule } from "./package-adding/package-adding.module";
+import {AuthModule} from "./features/auth/auth.module";
+import {ProductModule} from "./features/Product/product.module";
+import {ProductsModule} from "./features/Products/products.module";
+import {CoreModule} from "./core/core.module";
+import {AuthInterceptor} from "./core/interceptors/auth.interceptor";
+import {PackageAddingModule} from "./features/package-adding/package-adding.module";
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    ProductsModule,
-    AuthModule,
     PackageAddingModule,
+    ProductsModule,
+    ProductModule,
+    AuthModule,
     HttpClientModule,
     StoreModule.forRoot({router: routerReducer}),
     EffectsModule.forRoot([]),
-    StoreDevtoolsModule.instrument({  //для розширення браузера, щоб моніторити NgRx
-      maxAge: 25, //максимальна кількість дозволених дій для збереження в дереві історії
-      logOnly: environment.production //працює тільки в режимі розробки
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production
     }),
     StoreRouterConnectingModule.forRoot(),
     SharedModule,
-    StoreRouterConnectingModule.forRoot()
+    StoreRouterConnectingModule.forRoot(),
+    CoreModule
   ],
   providers: [
     PersistenceService,

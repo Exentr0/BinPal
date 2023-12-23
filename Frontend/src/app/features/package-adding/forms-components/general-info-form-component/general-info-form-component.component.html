@@ -1,0 +1,54 @@
+<div class="stepsdemo-content">
+    <p-card>
+        <ng-template pTemplate="title">General Information</ng-template>
+        <ng-template pTemplate="subtitle">Enter your package general information</ng-template>
+        <ng-template pTemplate="content">
+            <div class="p-fluid">
+                <div class="field">
+                    <label for="name">Name</label>
+                    <input
+                        #name="ngModel"
+                        id="name"
+                        type="text"
+                        required
+                        pInputText
+                        [(ngModel)]="generalInfo.name"
+                        [ngClass]="{ 'ng-dirty': (name.invalid && submitted) || (name.dirty && name.invalid) }"
+                    />
+                    <small *ngIf="(name.invalid && submitted) || (name.dirty && name.invalid)" class="p-error">Name is required.</small>
+                </div>
+                <div class="field">
+                    <label for="price">Price</label>
+                    <input
+                        #price="ngModel"
+                        id="price"
+                        type="number"
+                        required
+                        pInputText
+                        [(ngModel)]="generalInfo.price"
+                        [ngClass]="{ 'ng-dirty': (price.invalid && submitted) || (price.dirty && price.invalid) }"
+                    />
+                    <small *ngIf="(price.invalid && submitted) || (price.dirty && price.invalid)" class="p-error">Price is required.</small>
+                </div>
+                <div class="field">
+                    <label for="description">Description</label>
+                    <input
+                        #description="ngModel"
+                        id="description"
+                        type="text"
+                        required
+                        pInputText
+                        [(ngModel)]="generalInfo.description"
+                        [ngClass]="{ 'ng-dirty': (description.invalid && submitted) || (description.dirty && description.invalid) }"
+                    />
+                    <small *ngIf="(description.invalid && submitted) || (description.dirty && description.invalid)" class="p-error">Description is required.</small>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <div class="grid grid-nogutter justify-content-end">
+                <p-button label="Next" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right"></p-button>
+            </div>
+        </ng-template>
+    </p-card>
+</div>

@@ -1,0 +1,143 @@
+<div class="body">
+
+  <mc-loading class="loader"
+              *ngIf="isLoading$ | async"
+  ></mc-loading>
+
+  <mc-backend-error-messages
+    class="error"
+    *ngIf="backendErrors$ | async"
+    [backendErrors]="backendErrors$ | async"
+  ></mc-backend-error-messages>
+
+
+  <div class="container">
+
+
+    <div *ngIf="product">
+      <div class="grid border-0">
+
+        <div class="col-8 border-0">
+
+          <div class="card border-0">
+            <p-galleria
+              [value]="product.pictures.result"
+              [responsiveOptions]="responsiveOptions"
+              [showItemNavigators]="true"
+              [circular]="true"
+              [containerStyle]="{ 'max-width': '800px' , 'max-height': '400px'}"
+              [numVisible]="6">
+              <ng-template pTemplate="item" let-item>
+                <div class="photoContainer">
+                  <img class="image"
+                       [src]="item"
+                       alt="product image">
+                </div>
+              </ng-template>
+
+              <ng-template pTemplate="thumbnail" let-item>
+                <div class="photoContainerThumbnail grid grid-nogutter justify-content-center">
+                  <img class="imageThumbnail"
+                       [src]="item"
+                       alt="product image"
+                       style="width: 70px; height: 50px; border-radius: 3px;">
+                </div>
+              </ng-template>
+            </p-galleria>
+          </div>
+
+
+          <div class="information">
+            <p-tabView>
+              <p-tabPanel header="Overview">
+                <p>
+                  {{ product.overview }}
+                </p>
+              </p-tabPanel>
+              <p-tabPanel header="Item Content">
+                <p>
+                  test Item Content
+                </p>
+              </p-tabPanel>
+              <p-tabPanel header="Releases">
+                <p>
+                  test Releases
+                </p>
+              </p-tabPanel>
+
+              <p-tabPanel header="Reviews">
+                <p>
+                  test Reviews
+                </p>
+              </p-tabPanel>
+
+              <p-tabPanel header="Publisher info">
+                <p>
+                  {{ product.publisherInfo }}
+                </p>
+              </p-tabPanel>
+
+            </p-tabView>
+          </div>
+
+
+        </div>
+
+        <div class="col-4 border-0">
+          <div class="title">
+            {{ product.name }}
+          </div>
+          <div class="price">
+            ${{ product.price }}
+          </div>
+          <div class="seller">
+            {{ product.owner }}
+          </div>
+          <div class="rating">
+            <span class="ratingStars"> <mc-ratingStars [rating]="product.rating"></mc-ratingStars> </span>
+            <span class="ratingCount">(45)</span>
+          </div>
+
+<div class="btn">
+  <p-button class="buy" icon='pi pi-shopping-cart' label="Add to cart"></p-button>
+  <p-button class="add" icon="pi pi-heart" [rounded]="true"></p-button>
+</div>
+
+
+
+        </div>
+
+      </div>
+
+
+      <p-divider type="solid"></p-divider>
+      <div class="moreProducts">
+        <div class="moreProductsTitle">
+          More from {{ product.owner }}
+        </div>
+        <p-dataView [value]="product.relatedItems" [layout]="'grid'" class="border-0">
+          <ng-template let-relatedProduct pTemplate="gridItem">
+            <div class="sm:col-6 md:col-6 lg:col-4 xl:col-3 p-2 border-0">
+              <div class="p-2 border-0 border-round product">
+                <mc-productCard
+                  [productId]="relatedProduct.id"
+                  [image]="relatedProduct.pictureUrl"
+                  [seller]="product.owner"
+                  [title]="relatedProduct.name"
+                  [rating]="relatedProduct.rating"
+                  [ratingCount]="63"
+                  [favoritesCount]="45"
+                  [price]="relatedProduct.price">
+                </mc-productCard>
+              </div>
+            </div>
+          </ng-template>
+        </p-dataView>
+      </div>
+
+
+    </div>
+
+
+  </div>
+</div>

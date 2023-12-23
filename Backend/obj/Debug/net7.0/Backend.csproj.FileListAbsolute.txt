@@ -431,3 +431,191 @@ C:\Users\User\Desktop\BinPal\Backend\obj\Debug\net7.0\ref\Backend.dll
 C:\Users\User\Desktop\BinPal\Backend\bin\Debug\net7.0\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\User\Desktop\BinPal\Backend\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\User\Desktop\BinPal\Backend\bin\Debug\net7.0\Newtonsoft.Json.Bson.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\appsettings.Development.json
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\appsettings.json
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Backend.exe
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Backend.deps.json
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Backend.runtimeconfig.json
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Backend.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Backend.pdb
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Azure.Core.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Azure.Identity.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Azure.Storage.Blobs.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Azure.Storage.Common.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\BCrypt.Net-Next.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\FluentValidation.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\FluentValidation.AspNetCore.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Humanizer.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.AspNetCore.OpenApi.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.Azure.KeyVault.Core.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.Azure.Storage.Blob.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.Azure.Storage.Common.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.Data.SqlClient.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.Identity.Client.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.OpenApi.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.SqlServer.Server.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Mono.TextTemplating.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Newtonsoft.Json.Bson.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Scrutor.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Swashbuckle.AspNetCore.Filters.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Swashbuckle.AspNetCore.Filters.Abstractions.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\System.CodeDom.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\System.Configuration.ConfigurationManager.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\System.Drawing.Common.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\System.IO.Hashing.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\System.Memory.Data.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\System.Runtime.Caching.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\System.Security.Permissions.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\System.Windows.Extensions.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\Backend.csproj.AssemblyReference.cache
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\Backend.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\Backend.AssemblyInfoInputs.cache
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\Backend.AssemblyInfo.cs
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\Backend.csproj.CoreCompileInputs.cache
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\Backend.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\Backend.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\staticwebassets\msbuild.Backend.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\staticwebassets\msbuild.build.Backend.props
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.Backend.props
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.Backend.props
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\staticwebassets.pack.json
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\staticwebassets.build.json
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\staticwebassets.development.json
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\scopedcss\bundle\Backend.styles.css
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\Backend.csproj.CopyComplete
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\Backend.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\refint\Backend.dll
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\Backend.pdb
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\Backend.genruntimeconfig.cache
+C:\Users\evkalipt\Downloads\BinPal-Feature-Package-Adding (1)\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\ref\Backend.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\appsettings.Development.json
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\appsettings.json
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Backend.exe
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Backend.deps.json
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Backend.runtimeconfig.json
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Backend.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Backend.pdb
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Azure.Core.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Azure.Identity.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Azure.Storage.Blobs.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Azure.Storage.Common.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\BCrypt.Net-Next.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\FluentValidation.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\FluentValidation.AspNetCore.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Humanizer.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.AspNetCore.OpenApi.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.Azure.KeyVault.Core.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.Azure.Storage.Blob.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.Azure.Storage.Common.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.Data.SqlClient.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.Identity.Client.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.OpenApi.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.SqlServer.Server.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Mono.TextTemplating.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Newtonsoft.Json.Bson.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Scrutor.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Swashbuckle.AspNetCore.Filters.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Swashbuckle.AspNetCore.Filters.Abstractions.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\System.CodeDom.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\System.Configuration.ConfigurationManager.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\System.Drawing.Common.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\System.IO.Hashing.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\System.Memory.Data.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\System.Runtime.Caching.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\System.Security.Permissions.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\System.Windows.Extensions.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\Backend.csproj.AssemblyReference.cache
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\Backend.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\Backend.AssemblyInfoInputs.cache
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\Backend.AssemblyInfo.cs
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\Backend.csproj.CoreCompileInputs.cache
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\Backend.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\Backend.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\staticwebassets\msbuild.Backend.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\staticwebassets\msbuild.build.Backend.props
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.Backend.props
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.Backend.props
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\staticwebassets.pack.json
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\staticwebassets.build.json
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\staticwebassets.development.json
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\scopedcss\bundle\Backend.styles.css
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\Backend.csproj.CopyComplete
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\Backend.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\refint\Backend.dll
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\Backend.pdb
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\Backend.genruntimeconfig.cache
+C:\Users\Ivan\Desktop\BinPal-Feature-Package-Adding\Backend\obj\Debug\net7.0\ref\Backend.dll

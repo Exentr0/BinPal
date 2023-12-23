@@ -38,7 +38,6 @@ namespace Backend.Migrations
                 {
                     ItemId = table.Column<int>(type: "int", nullable: false),
                     SoftwareId = table.Column<int>(type: "int", nullable: false),
-                    PluginId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -50,23 +49,13 @@ namespace Backend.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_ItemSoftware_Plugins_PluginId",
-                        column: x => x.PluginId,
-                        principalTable: "Plugins",
-                        principalColumn: "Id");
-                    table.ForeignKey(
                         name: "FK_ItemSoftware_Software_SoftwareId",
                         column: x => x.SoftwareId,
                         principalTable: "Software",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ItemSoftware_PluginId",
-                table: "ItemSoftware",
-                column: "PluginId");
-
+            
             migrationBuilder.CreateIndex(
                 name: "IX_ItemSoftware_SoftwareId",
                 table: "ItemSoftware",

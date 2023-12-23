@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="nav">
+
+
+    <div class="logo">
+      <a [routerLink]="['/']">
+        <img class="logo-img" src="./assets/homeLogoText.png" alt="Logo"/>
+      </a>
+    </div>
+
+    <div class="nologo">
+
+      <!--      <ng-container *ngIf="isLoggedIn$ | async">-->
+      <!--      коли буде норм цекінг юзера поміняю -->
+      <ng-container *ngIf="(currentUser$ | async)">
+      <ng-container>
+
+        <button class="button" data-tooltip="Add" [routerLink]="['/add-package/general']">
+          <p>Add</p>
+        </button>
+
+        <button class="button" data-tooltip="Saved" [routerLink]="['/account/saved', (currentUser$ | async)?.username]">
+          <p>Saved</p>
+        </button>
+
+
+        <button class="button" data-tooltip="Cart" [routerLink]="['/cart']">
+          <p>Cart</p>
+        </button>
+
+        <button class="button" data-tooltip="Profile" [routerLink]="['/account', (currentUser$ | async)?.username]">
+          <p>Profile</p>
+        </button>
+
+      </ng-container>
+      </ng-container>
+
+      <ng-container *ngIf="!(currentUser$ | async)">
+      <ng-container>
+
+        <button class="button" data-tooltip="Login" [routerLink]="['/login']">
+          <p>Login</p>
+        </button>
+
+        <button class="button" data-tooltip="Register" [routerLink]="['/register']">
+          <p>Need an account?</p>
+        </button>
+
+      </ng-container>
+      </ng-container>
+
+    </div>
+
+  </div>
+
+  <div class="down">
+    <p>© 2023 BinPal. All prices are exclusive of tax</p>
+  </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+

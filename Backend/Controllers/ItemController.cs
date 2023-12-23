@@ -1,10 +1,12 @@
 using Azure.Core;
+using Backend.Data;
 using Backend.Models;
 using Backend.Services;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
 namespace Backend.Controllers;
@@ -14,7 +16,8 @@ namespace Backend.Controllers;
 public class ItemController : ControllerBase
 {
     private ItemAddingService _itemAddingService;
-    
+
+
     public ItemController(ItemAddingService itemAddingService)
     {
         _itemAddingService = itemAddingService;
@@ -30,7 +33,7 @@ public class ItemController : ControllerBase
 
         var newItem = new Item
         {
-            PublisherId = 1, //Should be changed ASAP
+            PublisherId = 1, //Should be changed ASAP (якщо щось не робить то напевно бо в тебе в бд нема юзера з таким id)
             Name = packageInfo.GeneralInfo.Name,
             Price = packageInfo.GeneralInfo.Price ?? 0,
             Description = packageInfo.GeneralInfo.Description,

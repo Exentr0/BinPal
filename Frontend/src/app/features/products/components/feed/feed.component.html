@@ -1,0 +1,68 @@
+<div class="body">
+
+
+  <div class="container">
+
+    <div class="grid">
+
+      <div class="col-12 sm:col-9 md:col-9 lg:col-9 xl:col-9">
+
+        <mc-top
+          class="top"
+          [totalProducts]="(feed$ | async)?.totalCount || 0"
+          [limitProducts]="feedRequest.limit"
+          [currentPage]="currentPage"
+          [selectedSorting]="feedRequest.sorting"
+        ></mc-top>
+
+
+        <mc-loading class="loader" *ngIf="isLoading$ | async"></mc-loading>
+        <mc-error-message class="error" *ngIf="error$ | async" [message]="'Error'"></mc-error-message>
+
+        <div *ngIf="feed$ | async">
+
+          <p-dataView [value]="products" [layout]="'grid'" class="border-0">
+            <ng-template let-product pTemplate="gridItem">
+              <div class="sm:col-6 md:col-6 lg:col-4 xl:col-3 p-2 border-0">
+                <div class="p-2 border-0 border-round product">
+                  <mc-productCard
+                    [productId]="product.id"
+                    [image]="'https://kiinlightroompresets.com/cdn/shop/products/04_KIINpresets_lightroompresets_mobilepresets_influencerpreset_familypreset_naturalpreset_lightroommobilepresets_presetfilter_instagrampreset_outfitpreset_504dfd62-82b8-48cf-8a8b-b2ebcf03e6dc.jpg?v=1619619246&width=1946'"
+                    [seller]="product.username"
+                    [publisherId]="product.publisherId"
+                    [title]="product.name"
+                    [rating]="product.rating"
+                    [ratingCount]="63"
+                    [favoritesCount]="product.likesAmount"
+                    [price]="product.price">
+                  </mc-productCard>
+<!--                  [image]="product.images[1]"-->
+                </div>
+              </div>
+            </ng-template>
+          </p-dataView>
+
+        <div *ngIf='(feed$ | async)!.totalCount > 0'>
+          <mc-pagination
+            class="pagination"
+            [totalProducts]="totalProducts"
+            [limitProducts]="feedRequest.limit"
+            [currentPage]="currentPage"
+          ></mc-pagination>
+        </div>
+        </div>
+
+      </div>
+
+
+      <div class="sm:col-3 md:col-3 lg:col-3 xl:col-3 border-0">
+        <mc-filtering
+          class="filtering"
+          [rangePrice]="rangePrice || [0, 0]"
+        ></mc-filtering>
+      </div>
+
+    </div>
+  </div>
+</div>
+

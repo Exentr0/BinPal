@@ -1,51 +1,58 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { MultiSelectModule } from 'primeng/multiselect';
-import { FormsModule } from '@angular/forms';
-import { CardModule } from 'primeng/card';
-import { CheckboxModule } from 'primeng/checkbox';
+import {NgModule} from "@angular/core";
+import {CommonModule, NgOptimizedImage} from "@angular/common";
+import {RouterModule} from "@angular/router";
+import {ErrorMessageComponent} from "./components/errorMessage/errorMessage.component";
+import {BackendErrorMessagesComponent} from "./components/backendErrorMessages/backendErrorMessages.component";
+import {LoadingComponent} from "./components/loading/loading.component";
+import {PaginationComponent} from "./components/pagination/pagination.component";
+import {PaginatorModule} from "primeng/paginator";
+import {ImageModule} from "primeng/image";
+import {MenubarModule} from "primeng/menubar";
+import {InputTextModule} from "primeng/inputtext";
+import {DividerModule} from "primeng/divider";
+import {AutoFocusModule} from "primeng/autofocus";
+import {ToastModule} from "primeng/toast";
+import {MenuModule} from "primeng/menu";
+import { KeyFilterModule } from 'primeng/keyfilter';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {ProductCardComponent} from "./components/productCard/productCard.component";
+import {RatingStarsComponent} from "./components/ratingStars/ratingStars.component";
 
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { ErrorMessageComponent } from './components/errorMessage/errorMessage.component';
-import { BackendErrorMessagesComponent } from './components/backendErrorMessages/backendErrorMessages.component';
-import { LoadingComponent } from './components/loading/loading.component';
-import { PaginationComponent } from './components/pagination/pagination.component';
-import { ProductComponent } from './components/product/product.component';
-import { SearchBarComponent } from './components/search-bar/search-bar.component';
-import { UtilsService } from '../core/services/utils.service';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
-    MultiSelectModule,
+    NgOptimizedImage,
+    PaginatorModule,
+    ImageModule,
+    MenubarModule,
+    InputTextModule,
+    DividerModule,
+    AutoFocusModule,
+    ToastModule,
+    MenuModule,
+    KeyFilterModule,
     FormsModule,
-    CardModule,
-    CheckboxModule,
+    ReactiveFormsModule,
   ],
   declarations: [
-    NavbarComponent,
-    FooterComponent,
     ErrorMessageComponent,
+    RatingStarsComponent,
     BackendErrorMessagesComponent,
     LoadingComponent,
     PaginationComponent,
-    ProductComponent,
-    SearchBarComponent,
-  ],
+    ProductCardComponent],
   exports: [
-    NavbarComponent,
-    FooterComponent,
     ErrorMessageComponent,
     BackendErrorMessagesComponent,
     LoadingComponent,
     PaginationComponent,
-    ProductComponent,
+    ProductCardComponent,
+    RatingStarsComponent
   ],
-  providers: [
-    UtilsService,
-  ]
+  providers: []
 })
-export class SharedModule { }
+
+export class SharedModule {
+}
